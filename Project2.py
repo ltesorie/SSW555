@@ -9,18 +9,18 @@ filename = "/home/alyson/Downloads/proj02test.ged"
 file = open(filename, "r")
 
 for line in file:
-        print("-->" + line.)
+        print("-->" + line.strip())
         line = (line.rstrip()).split(" ")
 
         validity = "N"
 
         if line[0] == "0":
-            if line[1] == "HEAD" or "NOTE" or "TRLR" or "FAM" or "INDI":
+            if line[1] in ["HEAD", "NOTE", "TRLR", "FAM", "INDI"]:
                 validity = "Y"
 
 
         if line[0] == "1":
-            if line[1] == "NAME" or "SEX" or "BIRT" or "DEAT" or "FAMC" or "FAMS" or "MARR" or "HUSB" or "WIFE" or "CHIL" or "DIV":
+            if line[1] in ["NAME", "SEX", "BIRT", "DEAT", "FAMC", "FAMS", "MARR", "HUSB", "WIFE", "CHIL", "DIV"]:
                 validity = "Y"
 
 
