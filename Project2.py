@@ -9,7 +9,7 @@ filename = "/home/alyson/Downloads/proj02test.ged"
 file = open(filename, "r")
 
 for line in file:
-        print("-->" + line)
+        print("-->" + line.)
         line = (line.rstrip()).split(" ")
 
         validity = "N"
