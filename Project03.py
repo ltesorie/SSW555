@@ -9,13 +9,23 @@ import unittest
 
 
 class Family:
-    def __init__(self, familyid, husbandid="NA", wifeid="NA", childids=[], marriagedate="NA", divorcedate="NA"):
+    def __init__(self, familyid, husband, wife, childids=[], marriagedate="NA", divorcedate="NA"):
         self.FAM = familyid
-        self.HUSB = husbandid
-        self.WIFE = wifeid
+        self.HUSB = husband
+        self.HNAME = 'NA'
+        self.WIFE = wife
+        self.WNAME = 'NA'
         self.CHIL = childids
         self.MARR = marriagedate
         self.DIV = divorcedate
+
+    def get_name_by_id(self, list_of_indis):
+        for indi in list_of_indis:
+            if self.HUSB == indi.INDI:
+                self.HNAME = indi.NAME
+            if self.WIFE == indi.INDI:
+                self.WNAME = indi.NAME
+        return self
 
 
 class Individual:
@@ -32,7 +42,6 @@ class Individual:
             self.ALIV = True
         else:
             self.ALIV = False
-
 
 class Gedcom:
     def __init__(self, level, tag, ged_id="", argument=""):
@@ -121,7 +130,9 @@ def print_family_table(list_of_fams):
             fam.MARR,
             fam.DIV,
             fam.HUSB,
+            fam.HNAME,
             fam.WIFE,
+            fam.WNAME,
             fam.CHIL
         ])
     print("Families\n")
@@ -136,7 +147,8 @@ def main(file):
     ex_indi = Individual(indi=1, name='stacy', gender='f', birth='1', age='11', death='NA', child='NA', spouse='NA')
     indi_list.append(ex_indi)
 
-    ex_fam = Family(familyid=1, husbandid="NA", wifeid="NA", childids=[1], marriagedate="NA", divorcedate="NA")
+    ex_fam = Family(familyid=1, husband=ex_indi.INDI, wife=ex_indi.INDI, childids=[1], marriagedate="NA", divorcedate="NA")
+    ex_fam.get_name_by_id(indi_list)
     fam_list.append(ex_fam)
 
     print_family_table(fam_list)
