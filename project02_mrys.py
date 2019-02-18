@@ -30,7 +30,7 @@ class Gedcom:
 		'BIRT',
 		'DEAT',
 		'FAMC',
-		'FAMS'
+		'FAMS',
 		'FAM',
 		'MARR',
 		'HUSB',
@@ -42,6 +42,7 @@ class Gedcom:
 		'TRLR',
 		'NOTE'
 		]
+		
 		self.validindexes = [
 			'0',
 			'1',
