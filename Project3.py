@@ -118,5 +118,5 @@ f = open("Output.txt", "w")
 f.write(str(output))
 f.close()
 
-filename = "proj02test.ged"
+filename = '/home/alyson/Desktop/CS555_Agile/SSW555/proj02test.ged'
 main(filename)
