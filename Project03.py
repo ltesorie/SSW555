@@ -17,6 +17,7 @@ class Family:
         self.MARR = marriagedate
         self.DIV = divorcedate
 
+
 class Individual:
     def __init__(self, indi, name, gender, birth, age, death='NA', child='NA', spouse='NA'):
         self.INDI = indi
@@ -31,6 +32,7 @@ class Individual:
             self.ALIV = True
         else:
             self.ALIV = False
+
 
 class Gedcom:
     def __init__(self, level, tag, ged_id="", argument=""):
@@ -119,13 +121,12 @@ def print_family_table(list_of_fams):
             fam.MARR,
             fam.DIV,
             fam.HUSB,
-            'Carl',
             fam.WIFE,
-            'Stacy',
             fam.CHIL
         ])
     print("Families\n")
     print(table0)
+
 
 def main(file):
     ged_file = open(file, 'r')
