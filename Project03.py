@@ -17,28 +17,11 @@ class Family:
         self.MARR = marriagedate
         self.DIV = divorcedate
 
-    def print_family_table(list_of_fams):
-        table0 = PrettyTable()
-        table0.field_names = ["ID", "Married", "Divorced", "Husband ID", "Husband Name", "Wife ID", "Wife Name",
-                              "Children"]
-        for fam in list_of_fams:
-            table0.add_row([
-                list_of_fams[fam].FAM,
-                list_of_fams[fam].MARR,
-                list_of_fams[fam].DIV,
-                list_of_fams[fam].HUSB,
-                'Carl',
-                list_of_fams[fam].WIFE,
-                'Stacy',
-                list_of_fams[fam].CHIL
-            ])
-        print("Families\n", table0)
-
-
 class Individual:
-    def __init__(self, indi, name, gender, birth, age, death='NA', child='NA', spouse='NA', alive='Y'):
+    def __init__(self, indi, name, gender, birth, age, death='NA', child='NA', spouse='NA'):
         self.INDI = indi
         self.NAME = name
+        self.SEX = gender
         self.BIRT = birth
         self.AGE = age
         self.DEAT = death
@@ -48,7 +31,6 @@ class Individual:
             self.ALIV = True
         else:
             self.ALIV = False
-
 
 class Gedcom:
     def __init__(self, level, tag, ged_id="", argument=""):
@@ -109,32 +91,54 @@ class Gedcom:
         print('--> %s' % gedcom_line)
         print('<-- %s | %s | %s | %s \n' % (self.level, self.tag, self.is_tag_valid(), self.argument))
 
-    def print_individual_table(list_of_indis):
-        table0 = PrettyTable()
-        table0.field_names = ["ID", "Name", "Gender", "Birthday", "Age", "Alive", "Death", "Child", "Spouse"]
-        for indi in list_of_indis:
-            table0.add_row([
-                list_of_indis[indi].INDI,
-                list_of_indis[indi].NAME,
-                list_of_indis[indi].BIRT,
-                list_of_indis[indi].AGE,
-                list_of_indis[indi].ALIV,
-                list_of_indis[indi].DEAT,
-                list_of_indis[indi].FAMC,
-                list_of_indis[indi].FAMS
-            ])
-        print("Individuals\n", table0)
 
+def print_individual_table(list_of_indis):
+    table0 = PrettyTable()
+    table0.field_names = ["ID", "Name", "Gender", "Birthday", "Age", "Alive", "Death", "Child", "Spouse"]
+    for indi in list_of_indis:
+        table0.add_row([
+            indi.INDI,
+            indi.NAME,
+            indi.SEX,
+            indi.BIRT,
+            indi.AGE,
+            indi.ALIV,
+            indi.DEAT,
+            indi.FAMC,
+            indi.FAMS
+        ])
+    print("Individuals\n")
+    print(table0)
+
+def print_family_table(list_of_fams):
+    table0 = PrettyTable()
+    table0.field_names = ["ID", "Married", "Divorced", "Husband ID", "Husband Name", "Wife ID", "Wife Name", "Children"]
+    for fam in list_of_fams:
+        table0.add_row([
+            fam.FAM,
+            fam.MARR,
+            fam.DIV,
+            fam.HUSB,
+            'Carl',
+            fam.WIFE,
+            'Stacy',
+            fam.CHIL
+        ])
+    print("Families\n")
+    print(table0)
 
 def main(file):
     ged_file = open(file, 'r')
     indi_list = []
     fam_list = []
 
-    ex_indi = Individual(indi=1, name='stacy', gender='f', birth='1', age='11', alive='Y', death='NA', child='NA',
-                         spouse='NA')
+    ex_indi = Individual(indi=1, name='stacy', gender='f', birth='1', age='11', death='NA', child='NA', spouse='NA')
     indi_list.append(ex_indi)
 
+    ex_fam = Family(familyid=1, husbandid="NA", wifeid="NA", childids=[1], marriagedate="NA", divorcedate="NA")
+    fam_list.append(ex_fam)
+
+    print_family_table(fam_list)
     print_individual_table(indi_list)
 
 
