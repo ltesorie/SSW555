@@ -3,7 +3,7 @@ import calendar
 from prettytable import PrettyTable
 
 
-f = open("01_Project_SSW_555.txt")
+f = open("/home/alyson/Downloads/proj02test.ged")
 families = []
 individuals = []
 famChart = PrettyTable()
