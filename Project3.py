@@ -67,14 +67,6 @@ class Gedcom:
         print('--> %s' % gedcom_line)
         print('<-- %s | %s | %s | %s \n' % (self.level, self.tag, self.is_tag_valid(), self.argument))
 
-
-class TestAge(unittest.TestCase):
-
-    def test_utc(self):
-        if is_tag_valid() == 'DATE' is True:
-            self.assertequal(self.argument, date.utcnow())
-
-
 def calculate_age(birth):
     currentDay = date.today()
     return currentDay.year - birth.year - ((currentDay.month, currentDay.day) < (birth.month, birth.day))
