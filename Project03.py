@@ -43,6 +43,7 @@ class Individual:
         else:
             self.ALIV = False
 
+
 class Gedcom:
     def __init__(self, level, tag, ged_id="", argument=""):
         self.level = level
@@ -121,6 +122,7 @@ def print_individual_table(list_of_indis):
     print("Individuals\n")
     print(table0)
 
+
 def print_family_table(list_of_fams):
     table0 = PrettyTable()
     table0.field_names = ["ID", "Married", "Divorced", "Husband ID", "Husband Name", "Wife ID", "Wife Name", "Children"]
@@ -147,7 +149,8 @@ def main(file):
     ex_indi = Individual(indi=1, name='stacy', gender='f', birth='1', age='11', death='NA', child='NA', spouse='NA')
     indi_list.append(ex_indi)
 
-    ex_fam = Family(familyid=1, husband=ex_indi.INDI, wife=ex_indi.INDI, childids=[1], marriagedate="NA", divorcedate="NA")
+    ex_fam = Family(familyid=1, husband=ex_indi.INDI, wife=ex_indi.INDI, childids=[1], marriagedate="NA",
+                  divorcedate="NA")
     ex_fam.get_name_by_id(indi_list)
     fam_list.append(ex_fam)
 
