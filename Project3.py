@@ -114,7 +114,10 @@ def print_family_table():
     table1 = PrettyTable()
     table1.field_names = ["ID", "Married", "Divorced", "Husband ID", "Husband Name", "Wife ID", "Wife Name", "Children"]
     for fam in famList:
-        table1.add_row([])
+        table1.add_row([
+            famList[fam].INDI, famList[fam].NAME, famList[fam].BIRT, famList[fam].AGE, famList[fam].DEAT, famList[fam].FAMC,
+            famList[fam].FAMS
+        ])
     print("Families\n", table1)
 
 
