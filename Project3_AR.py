@@ -6,6 +6,7 @@ import sys
 from datetime import date
 import calendar
 from prettytable import PrettyTable
+import unittest
 
 class Gedcom:
     def __init__(self, level, tag, ged_id = "", argument = ""):
@@ -65,6 +66,11 @@ class Gedcom:
 	    print('--> %s' % gedcom_line)
 	    print('<-- %s | %s | %s | %s \n' % (self.level, self.tag, self.is_tag_valid(), self.argument) )
 
+class testAge(unittest.TestCase):
+
+    def test_utc(self):
+        if  == 'DATE' is True:
+            self.assertequal(self.argument, datetime.utcnow())
 
 
 
@@ -119,13 +125,5 @@ f.write(str(output))
 f.close()
 
 
-filename = "/home/alyson/Downloads/proj02test.ged"
-main(filename);
-
-
-
-
-
-
-
-
+filename = "proj02test.ged"
+main(filename)
