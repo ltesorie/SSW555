@@ -39,6 +39,7 @@ class Individual:
     def __init__(self, indi, name, gender, birth, age, death='NA', child='NA', spouse='NA'):
         self.INDI = indi
         self.NAME = name
+        self.SEX = gender
         self.BIRT = birth
         self.AGE = age
         self.DEAT = death
@@ -48,23 +49,6 @@ class Individual:
             self.ALIV = True
         else:
             self.ALIV = False
-
-    def print_individual_table(list_of_indis):
-        table0 = PrettyTable()
-        table0.field_names = ["ID", "Name", "Gender", "Birthday", "Age", "Alive", "Death", "Child", "Spouse"]
-        for indi in list_of_indis:
-            table0.add_row([
-                list_of_indis[indi].INDI,
-                list_of_indis[indi].NAME,
-                list_of_indis[indi].BIRT,
-                list_of_indis[indi].AGE,
-                list_of_indis[indi].ALIV,
-                list_of_indis[indi].DEAT,
-                list_of_indis[indi].FAMC,
-                list_of_indis[indi].FAMS
-            ])
-        print("Individuals\n", table0)
-
 
 class Gedcom:
     def __init__(self, level, tag, ged_id="", argument=""):
@@ -126,13 +110,30 @@ class Gedcom:
         print('<-- %s | %s | %s | %s \n' % (self.level, self.tag, self.is_tag_valid(), self.argument))
 
 
+def print_individual_table(list_of_indis):
+    table0 = PrettyTable()
+    table0.field_names = ["ID", "Name", "Gender", "Birthday", "Age", "Alive", "Death", "Child", "Spouse"]
+    for indi in list_of_indis:
+        table0.add_row([
+            indi.INDI,
+            indi.NAME,
+            indi.SEX,
+            indi.BIRT,
+            indi.AGE,
+            indi.ALIV,
+            indi.DEAT,
+            indi.FAMC,
+            indi.FAMS
+        ])
+    print("Individuals\n")
+    print(table0)
+
 def main(file):
     ged_file = open(file, 'r')
     indi_list = []
     fam_list = []
 
-    ex_indi = Individual(indi=1, name='stacy', gender='f', birth='1', age='11', alive='Y', death='NA', child='NA',
-                         spouse='NA')
+    ex_indi = Individual(indi=1, name='stacy', gender='f', birth='1', age='11', death='NA', child='NA', spouse='NA')
     indi_list.append(ex_indi)
 
     print_individual_table(indi_list)
