@@ -6,31 +6,33 @@ import sys
 from datetime import date
 import calendar
 from prettytable import PrettyTable
+import unittest
+
 
 class Gedcom:
-    def __init__(self, level, tag, ged_id = "", argument = ""):
+    def __init__(self, level, tag, ged_id="", argument=""):
         self.level = level
         self.id = ged_id
         self.tag = tag
         self.argument = argument
         self.validtags = [
-        'INDI',
-        'NAME',
-        'SEX',
-        'BIRT',
-        'DEAT',
-        'FAMC',
-        'FAMS'
-        'FAM',
-        'MARR',
-        'HUSB',
-        'WIFE',
-        'CHIL',
-        'DIV',
-        'DATE',
-        'HEAD',
-        'TRLR',
-        'NOTE'
+            'INDI',
+            'NAME',
+            'SEX',
+            'BIRT',
+            'DEAT',
+            'FAMC',
+            'FAMS'
+            'FAM',
+            'MARR',
+            'HUSB',
+            'WIFE',
+            'CHIL',
+            'DIV',
+            'DATE',
+            'HEAD',
+            'TRLR',
+            'NOTE'
         ]
         self.validindexes = [
             '0',
@@ -62,10 +64,15 @@ class Gedcom:
             return 'N'
 
     def printged(self, gedcom_line):
-	    print('--> %s' % gedcom_line)
-	    print('<-- %s | %s | %s | %s \n' % (self.level, self.tag, self.is_tag_valid(), self.argument) )
+        print('--> %s' % gedcom_line)
+        print('<-- %s | %s | %s | %s \n' % (self.level, self.tag, self.is_tag_valid(), self.argument))
 
 
+class TestAge(unittest.TestCase):
+
+    def test_utc(self):
+        if is_tag_valid() == 'DATE' is True:
+            self.assertequal(self.argument, date.utcnow())
 
 
 def calculate_age(birth):
@@ -78,16 +85,15 @@ def main(file):
     for line in ged_file:
         line_split = (line.rstrip()).split(' ')
         if len(line_split) > 2:
-        	if( line_split[2] == "INDI" or line_split[2] == "FAM" ):
-        		line_ged = Gedcom(level = line_split[0], tag = line_split[2], argument = line_split[1])
-        		line_ged.printged(line)
-        	else:
-        		line_ged = Gedcom(level = line_split[0], tag = line_split[1], argument = ' '.join(line_split[2:]))
-        		line_ged.printged(line)
+            if (line_split[2] == "INDI" or line_split[2] == "FAM"):
+                line_ged = Gedcom(level=line_split[0], tag=line_split[2], argument=line_split[1])
+                line_ged.printged(line)
+            else:
+                line_ged = Gedcom(level=line_split[0], tag=line_split[1], argument=' '.join(line_split[2:]))
+                line_ged.printged(line)
         else:
-        	line_ged = Gedcom(level = line_split[0], tag = line_split[1], argument = "")
-        	line_ged.printged(line)
-
+            line_ged = Gedcom(level=line_split[0], tag=line_split[1], argument="")
+            line_ged.printged(line)
 
 
 indiList = []
@@ -100,8 +106,7 @@ def print_individual_table():
     for indi in indiList:
         table0.add_row([
 
-
-                        ])
+        ])
     print("Individuals\n", table0)
 
 
@@ -118,14 +123,5 @@ f = open("Output.txt", "w")
 f.write(str(output))
 f.close()
 
-
-filename = "/home/alyson/Downloads/proj02test.ged"
-main(filename);
-
-
-
-
-
-
-
-
+filename = "proj02test.ged"
+main(filename)
