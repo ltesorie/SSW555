@@ -79,6 +79,13 @@ class Gedcom:
         print('--> %s' % gedcom_line)
         print('<-- %s | %s | %s | %s \n' % (self.level, self.tag, self.is_tag_valid(), self.argument))
 
+    def print_individual_table(self):
+        table0 = PrettyTable()
+        table0.field_names = ["ID", "Name", "Gender", "Birthday", "Age", "Alive", "Death", "Child", "Spouse"]
+        for indi in self:
+            table0.add_row([self[indi].INDI, self[indi].NAME, self[indi].BIRT, self[indi].AGE, self[indi].DEAT, self[indi].FAMC, self[indi].FAMS
+            ])
+        print("Individuals\n", table0)
 
 def main(file):
     ged_file = open(file, 'r')
