@@ -17,24 +17,6 @@ class Family:
         self.MARR = marriagedate
         self.DIV = divorcedate
 
-    def print_family_table(list_of_fams):
-        table0 = PrettyTable()
-        table0.field_names = ["ID", "Married", "Divorced", "Husband ID", "Husband Name", "Wife ID", "Wife Name",
-                              "Children"]
-        for fam in list_of_fams:
-            table0.add_row([
-                list_of_fams[fam].FAM,
-                list_of_fams[fam].MARR,
-                list_of_fams[fam].DIV,
-                list_of_fams[fam].HUSB,
-                'Carl',
-                list_of_fams[fam].WIFE,
-                'Stacy',
-                list_of_fams[fam].CHIL
-            ])
-        print("Families\n", table0)
-
-
 class Individual:
     def __init__(self, indi, name, gender, birth, age, death='NA', child='NA', spouse='NA'):
         self.INDI = indi
@@ -128,6 +110,23 @@ def print_individual_table(list_of_indis):
     print("Individuals\n")
     print(table0)
 
+def print_family_table(list_of_fams):
+    table0 = PrettyTable()
+    table0.field_names = ["ID", "Married", "Divorced", "Husband ID", "Husband Name", "Wife ID", "Wife Name", "Children"]
+    for fam in list_of_fams:
+        table0.add_row([
+            fam.FAM,
+            fam.MARR,
+            fam.DIV,
+            fam.HUSB,
+            'Carl',
+            fam.WIFE,
+            'Stacy',
+            fam.CHIL
+        ])
+    print("Families\n")
+    print(table0)
+
 def main(file):
     ged_file = open(file, 'r')
     indi_list = []
@@ -136,6 +135,10 @@ def main(file):
     ex_indi = Individual(indi=1, name='stacy', gender='f', birth='1', age='11', death='NA', child='NA', spouse='NA')
     indi_list.append(ex_indi)
 
+    ex_fam = Family(familyid=1, husbandid="NA", wifeid="NA", childids=[1], marriagedate="NA", divorcedate="NA")
+    fam_list.append(ex_fam)
+
+    print_family_table(fam_list)
     print_individual_table(indi_list)
 
 
