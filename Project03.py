@@ -107,7 +107,7 @@ def main(file):
                  ])
         print("Individuals\n", table0)
 
-output = print_individual_table()
+output = print_individual_table(self)
 f = open("Output_Check.txt", "w")
 f.write(str(output))
 f.close()
