@@ -73,7 +73,7 @@ def print_individual_table(list_of_indis):
     table0.field_names = ["ID", "Name", "Gender", "Birthday", "Age", "Alive", "Death", "Child", "Spouse"]
     for indi in list_of_indis:
         table0.add_row([
-            indi.items,
+            indi.INDI,
             indi.NAME,
             indi.SEX,
             indi.BIRT,
