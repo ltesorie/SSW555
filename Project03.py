@@ -8,20 +8,63 @@ from prettytable import PrettyTable
 import unittest
 
 
-# class Family:
-# 	def __init__(self, familyid, husbandid = "", wifeid = "", childids = [], marriagedate = "", divorcedate = "" ):
-# 		self.fam_id = familyid
-# 		self.husb_id = husbandid
-# 		self.wife_id = wifeid
-# 		self.child_ids = childids
-# 		self.mar_date = marriagedate
-# 		self.div_date = divorcedate
+class Family:
+	def __init__(self, familyid, husbandid = "NA", wifeid = "NA", childids = [], marriagedate = "NA", divorcedate = "NA" ):
+		self.FAM = familyid
+		self.HUSB = husbandid
+		self.WIFE = wifeid
+		self.CHIL = childids
+		self.MARR = marriagedate
+		self.DIV = divorcedate
 
-# class Individual:
-# 	def __init__(self):
+    def print_family_table(list_of_fams):
+        table0 = PrettyTable()
+        table0.field_names = ["ID", "Married", "Divorced", "Husband ID", "Husband Name", "Wife ID", "Wife Name", "Children"]
+        for fam in list_of_fams:
+            table0.add_row([
+                list_of_fams[fam].FAM, 
+                list_of_fams[fam].MARR, 
+                list_of_fams[fam].DIV, 
+                list_of_fams[fam].HUSB,
+                'Carl', 
+                list_of_fams[fam].WIFE,
+                'Stacy', 
+                list_of_fams[fam].CHIL
+            ])
+        print("Families\n", table0)
+
+class Individual:
+	def __init__(self, indi, name, gender, birth, age, death = 'NA', child = 'NA', spouse = 'NA'):
+        self.INDI = indi
+        self.NAME = name
+        self.BIRT = birth
+        self.AGE = age
+        self.DEAT = death
+        self.FAMC = child
+        self.FAMS = spouse
+        if(self.DEAT.upper() == 'NA'):
+            self.ALIV = True
+        else: 
+            self.ALIV = False
+
+
+    def print_individual_table(list_of_indis):
+        table0 = PrettyTable()
+        table0.field_names = ["ID", "Name", "Gender", "Birthday", "Age", "Alive", "Death", "Child", "Spouse"]
+        for indi in list_of_indis:
+            table0.add_row([
+                list_of_indis[indi].INDI, 
+                list_of_indis[indi].NAME, 
+                list_of_indis[indi].BIRT, 
+                list_of_indis[indi].AGE,
+                list_of_indis[indi].ALIV, 
+                list_of_indis[indi].DEAT, 
+                list_of_indis[indi].FAMC,
+                list_of_indis[indi].FAMS 
+            ])
+        print("Individuals\n", table0)
 
 class Gedcom:
-
     def __init__(self, level, tag, ged_id="", argument=""):
         self.level = level
         self.id = ged_id
@@ -83,34 +126,27 @@ class Gedcom:
 
 def main(file):
     ged_file = open(file, 'r')
-    for line in ged_file:
-        line_split = (line.rstrip()).split(' ')
+    indi_list = []
+    fam_list = []
 
-        if len(line_split) > 2:
-            if line_split[2] == "INDI" or line_split[2] == "FAM":
-                line_ged = Gedcom(level=line_split[0], tag=line_split[2], argument=line_split[1])
-                line_ged.printged(line)
-            else:
-                line_ged = Gedcom(level=line_split[0], tag=line_split[1], argument=' '.join(line_split[2:]))
-                line_ged.printged(line)
-        else:
-            line_ged = Gedcom(level=line_split[0], tag=line_split[1], argument="")
-            line_ged.printged(line)
+    ex_indi = Individual(indi=1, name='stacy', gender='f', birth='1', age='11', alive='Y', death = 'NA', child = 'NA', spouse = 'NA')
+    indi_list.append(ex_indi)
 
-    def print_individual_table(self):
-        table0 = PrettyTable()
-        table0.field_names = ["ID", "Name", "Gender", "Birthday", "Age", "Alive", "Death", "Child", "Spouse"]
-        for indi in self:
-            table0.add_row(
-                [self[indi].INDI, self[indi].NAME, self[indi].BIRT, self[indi].AGE, self[indi].DEAT, self[indi].FAMC,
-                 self[indi].FAMS
-                 ])
-        print("Individuals\n", table0)
+    print_individual_table(indi_list)
+    # for line in ged_file:
+    #     line_split = (line.rstrip()).split(' ')
 
-output = print_individual_table()
-f = open("Output_Check.txt", "w")
-f.write(str(output))
-f.close()
+    #     if len(line_split) > 2:
+    #         if line_split[2] == "INDI" or line_split[2] == "FAM":
+    #             line_ged = Gedcom(level=line_split[0], tag=line_split[2], argument=line_split[1])
+    #             line_ged.printged(line)
+    #         else:
+    #             line_ged = Gedcom(level=line_split[0], tag=line_split[1], argument=' '.join(line_split[2:]))
+    #             line_ged.printged(line)
+    #     else:
+    #         line_ged = Gedcom(level=line_split[0], tag=line_split[1], argument="")
+    #         line_ged.printged(line)
 
-filename = 'kardashian-family-tree.ged'
+
+filename = 'proj02test.ged'
 main(filename);
