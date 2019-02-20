@@ -2,7 +2,7 @@
 # Alyson Randall, Laura Tesoriero, Madeline Rys
 # Project 3
 
-import datetime
+from datetime import datetime
 import calendar
 from prettytable import PrettyTable
 import unittest
@@ -13,7 +13,7 @@ list_of_fams = {}
 
 # CREATES A FAMILY BASED OFF OF TAGS
 class Family:
-    def __init__(self, familyid, husband = 'NA', wife = 'NA', childids=[], marriagedate="NA", divorcedate="NA"):
+    def __init__(self, familyid, husband = 'NA', wife = 'NA', childids=[], marriagedate="1 JAN 1970", divorcedate="NA"):
         self.FAM = familyid
         self.HUSB = husband
         self.HNAME = 'NA'
@@ -23,17 +23,17 @@ class Family:
         self.MARR = marriagedate
         self.DIV = divorcedate
 
-        def get_name_by_id(self, list_of_indis):
-            for indi in list_of_indis:
-                if self.HUSB == indi.INDI:
-                    self.HNAME = indi.NAME
-                if self.WIFE == indi.INDI:
-                    self.WNAME = indi.NAME
-            return self
+    def get_name_by_id(self, list_of_indis):
+        for indi in list_of_indis:
+            if self.HUSB == indi.INDI:
+                self.HNAME = indi.NAME
+            if self.WIFE == indi.INDI:
+                self.WNAME = indi.NAME
+        return self
 
 # CREATES AN INDIVIDUAL BASED OFF OF TAGS
 class Individual:
-    def __init__(self, indi, name = 'NA', gender = 'NA', birth = 'NA', age = 0, death='NA', child='NA', spouse='NA'):
+    def __init__(self, indi, name = 'NA', gender = 'NA', birth = '1 JAN 1970', age = 0, death='NA', child='NA', spouse='NA'):
         self.INDI = indi
         self.NAME = name
         self.SEX = gender
@@ -48,7 +48,7 @@ class Individual:
             self.ALIV = False
 
     def get_age (self):
-        if (self.DEAT == False):
+        if (self.DEAT == 'NA'):
             today_date = datetime.today()
             birth_date = datetime.strptime(self.BIRT, '%d %b %Y')
             self.AGE = today_date.year - birth_date.year - ((today_date.month, today_date.day) < (birth_date.month, birth_date.day))
@@ -91,7 +91,8 @@ def print_individual_table(list_of_indis):
             indi.FAMC,
             indi.FAMS
         ])
-    print("Individuals\n", table)
+    print("Individuals\n")
+    print(table)
 
 # PRINT FAMILY TABLE
 def print_family_table(list_of_fams):
@@ -108,7 +109,8 @@ def print_family_table(list_of_fams):
             fam.WNAME,
             fam.CHIL
         ])
-    print("Families\n", table, "\n")
+    print("Families \n")
+    print(table)
 
 # GET LISTS OF INDIVIDUALS AND FAMILIES
 def gedcom(ged_file):
@@ -126,39 +128,58 @@ def gedcom(ged_file):
         if len(line_split) > 2:
             if line_split[2] == "INDI":
                 line_ged = Gedcom(level=line_split[0], tag=line_split[2], ged_id=line_split[1])
-                tempindi = Individual(indi = line_ged.id)
-                list_of_indis = list_of_indis.append(tempindi)
-                curr_indi_ind = curr_indi_ind + 1;
-                on_indi = True
-                on_fam = False
+                if line_ged.is_tag_valid():
+                    tempindi = Individual(indi = line_ged.id)
+                    list_of_indis.append(tempindi)
+                    curr_indi_ind = curr_indi_ind + 1;
+                    on_indi = True
+                    on_fam = False
             
             elif line_split[2] == "FAM":
                 line_ged = Gedcom(level=line_split[0], tag=line_split[2], ged_id=line_split[1])
-                tempindi = Family(familyid = line_ged.id)
-                list_of_fams = list_of_fams.append(tempfam)
-                curr_fam_ind = curr_fam_ind + 1;
-                on_indi = False
-                on_fam = True
+                if line_ged.is_tag_valid():
+                    tempfam = Family(familyid = line_ged.id)
+                    list_of_fams.append(tempfam)
+                    curr_fam_ind = curr_fam_ind + 1;
+                    on_indi = False
+                    on_fam = True
 
             else:
                 line_ged = Gedcom(level=line_split[0], tag=line_split[1], argument=' '.join(line_split[2:]))
                 if line_ged.is_tag_valid():
                     if on_fam:
-                        if line_ged.tag.upper() is 'DATE':
+                        print(line_ged.tag)
+                        print(line_ged.tag.upper() == 'HUSB')
+                        if line_ged.tag.upper() == 'DATE':
                             line_ged.tag = date_type
+                        
                         tag = line_ged.tag
-                        curr_fam = list_of_fams[curr_fam_ind]
-                        if tag.upper() is 'HUSB':
-                            curr_fam.HUSB = line_ged.argument
-                        if tag.upper() is 'WIFE':
-                            curr_fam.WIFE = line_ged.argument
 
-                    elif on_indi:
-                        if line_ged.tag.upper() is 'DATE':
-                            line_get.tag = date_type
-                        tag = line_ged.tag
-                        curr_indi = list_of_indis[curr_indi_ind]
-                        curr_indi.tag = line_ged.argument     
+                        if tag.upper() == 'HUSB':
+                            list_of_fams[curr_fam_ind].HUSB = line_ged.argument
+                            print('hi')
+                        if tag.upper() == 'WIFE':
+                            print('hi')
+                            list_of_fams[curr_fam_ind].WIFE = line_ged.argument
+                        if tag.upper() == 'CHIL':
+                            print('hi')
+                            list_of_fams[curr_fam_ind].CHIL.append(line_ged.argument)
+                            print('hi')
+                        if tag.upper() == 'MARR':
+                            print('hi')
+                            list_of_fams[curr_fam_ind].MARR = line_ged.argument
+                        if tag.upper() == 'DIV':
+                            print('hi')
+                            list_of_fams[curr_fam_ind].DIV = line_ged.argument
+
+                    
+                    # elif on_indi:
+                    #     if line_ged.tag.upper() == 'DATE':
+                    #         line_get.tag = date_type
+                    #     tag = line_ged.tag
+                    #     curr_indi = list_of_indis[curr_indi_ind]
+                        
+                    #     curr_indi.tag = line_ged.argument     
         else:
             line_ged = Gedcom(level=line_split[0], tag=line_split[1], argument="")
             date_type = line_ged.tag
@@ -168,6 +189,7 @@ def gedcom(ged_file):
 
     for fam in list_of_fams:
         fam.get_name_by_id(list_of_indis)
+        print(fam)
 
     print_family_table(list_of_fams)
     print_individual_table(list_of_indis)
