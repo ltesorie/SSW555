@@ -6,6 +6,10 @@ import calendar
 from prettytable import PrettyTable
 import unittest
 
+
+list_of_indis = {}
+list_of_fams = {}
+
 class Family:
     def __init__(self, familyid, husband, wife, childids=[], marriagedate="NA", divorcedate="NA"):
         self.FAM = familyid
@@ -44,7 +48,7 @@ class Individual:
 list_of_indis = {}
 list_of_fams = {}
 
-def gedcom(file):
+class Gedcom:
 
     def __init__(self, level, tag, ged_id="", argument=""):
         self.level = level
@@ -111,12 +115,12 @@ def get_age (birth_date, death_date):
         death_date = datetime.strptime(individual['DEAT'], '%d %b %Y')
         return death_date.year - birth_date.year - ((death_date.month, death_date.day) < (birth_date.month, birth_date.day))
 
-
+# PRINT INDIVIDUALS TABLE
 def print_individual_table(list_of_indis):
-    table0 = PrettyTable()
-    table0.field_names = ["ID", "Name", "Gender", "Birthday", "Age", "Alive", "Death", "Child", "Spouse"]
+    table = PrettyTable()
+    table.field_names = ["ID", "Name", "Gender", "Birthday", "Age", "Alive", "Death", "Child", "Spouse"]
     for indi in list_of_indis:
-        table0.add_row([
+        table.add_row([
             indi.INDI,
             indi.NAME,
             indi.SEX,
@@ -127,14 +131,14 @@ def print_individual_table(list_of_indis):
             indi.FAMC,
             indi.FAMS
         ])
-    print("Individuals\n", table0)
+    print("Individuals\n", table)
 
-
+# PRINT FAMILY TABLE
 def print_family_table(list_of_fams):
-    table0 = PrettyTable()
-    table0.field_names = ["ID", "Married", "Divorced", "Husband ID", "Husband Name", "Wife ID", "Wife Name", "Children"]
+    table = PrettyTable()
+    table.field_names = ["ID", "Married", "Divorced", "Husband ID", "Husband Name", "Wife ID", "Wife Name", "Children"]
     for fam in list_of_fams:
-        table0.add_row([
+        table.add_row([
             fam.FAM,
             fam.MARR,
             fam.DIV,
@@ -144,16 +148,11 @@ def print_family_table(list_of_fams):
             fam.WNAME,
             fam.CHIL
         ])
-    print("Families\n", table0, "\n")
-
-
-list_of_indis = {}
-list_of_fams = {}
+    print("Families\n", table, "\n")
 
 def main(filename):
     ged_file = open(filename, 'r')
     gedcom(ged_file)
-
 
     print_family_table(list_of_fams)
     print_individual_table(list_of_indis)
