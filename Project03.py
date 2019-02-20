@@ -45,7 +45,7 @@ class Individual:
             self.ALIV = False
 
 
-<<<<<<< HEAD
+
 def gedcom(ged_file):
 
     with open(ged_file) as text:

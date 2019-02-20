@@ -5,23 +5,33 @@ from prettytable import PrettyTable
 
 
 class Indi:
-    ID = ''
-    NAME = ''
-    AGE = ''
-    SEX = ''
-    BIRT = ''
-    DEAT = ''
-    FAMC = []
-    FAMS = []
+    def __init__(self):
+            self.ID = ''
+            self.NAME = ''
+            self.AGE = ''
+            self.SEX = ''
+            self.BIRT = ''
+            self.DEAT = ''
+            self.FAMC = []
+            self.FAMS = []
+
+    def get_indi(self):
+        person = [self.ID, self.NAME, self.AGE, self.SEX, self.BIRT, self.DEAT, self.FAMC, self.FAMS]
+        return person
 
 
 class Fam:
-    ID = ''
-    MARR = ''
-    HUSB = ''
-    WIFE = ''
-    CHIL = []
-    DIV = ''
+    def __init__(self):
+        self.ID = ''
+        self.MARR = ''
+        self.HUSB = ''
+        self.WIFE = ''
+        self.CHIL = []
+        self.DIV = ''
+
+    def get_fam(self):
+        family = [self.ID, self.MARR, self.HUSB, self.WIFE, self.CHIL, self.DIV]
+        return family
 
 
 def datefix(date):
@@ -41,8 +51,6 @@ def datefix(date):
 
 
 def gedcom(file):
-    person{}
-    family{}
 
     with open(file) as text:
         for line in text:
@@ -78,13 +86,10 @@ def gedcom(file):
             divorced = False
             temp = ''
 
-            for i, n in enumerate(temp):
-                arguments = arguments + n
-                if i + 1 != len(temp):
-                    arguments = arguments + ' '
-                    print(arguments)
-
-    return person, family
+            if level == 0 and tag == 'INDI':
+                Indi()
+            elif level == 0 and tag == 'FAM':
+                Fam()
 
 
 def print_individual(person):
@@ -132,7 +137,7 @@ def print_family(fam):
 def main():
     gedcom('kardashian-family-tree.ged')
 
-    print_individual(individual)
+    print_individual(person)
     print_family(family)
 
 
