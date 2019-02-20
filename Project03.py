@@ -101,15 +101,16 @@ def gedcom(file):
             return 'N'
 
 # CALCULATE AGE
-def get_age(birth):
+def get_age (birth_date, death_date):
     if ('DEAT' == False):
         today_date = datetime.today()
-        birth_date = datetime.strptime(birth, "%d %b %Y")
-        return today_date.year - birth.year - ((today_date.month, today_date.day) < (birth.month, birth.day))
+        birth_date = datetime.strptime(individual['BIRT'], '%d %b %Y')
+        return today_date.year - birth_date.year - ((today_date.month, today_date.day) < (birth_date.month, birth_date.day))
     else:
         birth_date = datetime.strptime(individual['BIRT'], '%d %b %Y')
         death_date = datetime.strptime(individual['DEAT'], '%d %b %Y')
-        return death_date - birth_date
+        return death_date.year - birth_date.year - ((death_date.month, death_date.day) < (birth_date.month, birth_date.day))
+
 
 def print_individual_table(list_of_indis):
     table0 = PrettyTable()
