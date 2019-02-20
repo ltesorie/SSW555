@@ -1,12 +1,14 @@
-# Author: Madeline Rys
-# CS 555 Project 03
-# I pledge my honor that I have abided by the Stevens Honor System.
+# Alyson Randall, Laura Tesoriero, Madeline Rys
+# Project 3
 
 import datetime
 import calendar
 from prettytable import PrettyTable
 import unittest
 
+
+list_of_indis = {}
+list_of_fams = {}
 
 class Family:
     def __init__(self, familyid, husband, wife, childids=[], marriagedate="NA", divorcedate="NA"):
@@ -19,14 +21,13 @@ class Family:
         self.MARR = marriagedate
         self.DIV = divorcedate
 
-    def get_name_by_id(self, list_of_indis):
-        for indi in list_of_indis:
-            if self.HUSB == indi.INDI:
-                self.HNAME = indi.NAME
-            if self.WIFE == indi.INDI:
-                self.WNAME = indi.NAME
-        return self
-
+        def get_name_by_id(self, list_of_indis):
+            for indi in list_of_indis:
+                if self.HUSB == indi.INDI:
+                    self.HNAME = indi.NAME
+                if self.WIFE == indi.INDI:
+                    self.WNAME = indi.NAME
+            return self
 
 class Individual:
     def __init__(self, indi, name, gender, birth, age, death='NA', child='NA', spouse='NA'):
@@ -44,6 +45,7 @@ class Individual:
             self.ALIV = False
 
 
+<<<<<<< HEAD
 def gedcom(ged_file):
 
     with open(ged_file) as text:
@@ -63,14 +65,84 @@ def gedcom(ged_file):
                     return 'Y'
                 else:
                     return 'N'
+=======
+list_of_indis = {}
+list_of_fams = {}
+
+class Gedcom:
+
+    def __init__(self, level, tag, ged_id="", argument=""):
+        self.level = level
+        self.id = ged_id
+        self.tag = tag
+        self.argument = argument
+        self.validtags = [
+            'INDI',
+            'NAME',
+            'SEX',
+            'BIRT',
+            'DEAT',
+            'FAMC',
+            'FAMS',
+            'FAM',
+            'MARR',
+            'HUSB',
+            'WIFE',
+            'CHIL',
+            'DIV',
+            'DATE',
+            'HEAD',
+            'TRLR',
+            'NOTE'
+        ]
+
+        self.validindexes = [
+            '0',
+            '1',
+            '1',
+            '1',
+            '1',
+            '1',
+            '1',
+            '0',
+            '1',
+            '1',
+            '1',
+            '1',
+            '1',
+            '2',
+            '0',
+            '0',
+            '0'
+        ]
+
+    def is_tag_valid(self):
+        if self.tag.upper() in self.validtags:
+            if self.level == self.validindexes[self.validtags.index(self.tag.upper())]:
+                return 'Y'
+>>>>>>> 741992bb4e2a6a0889ff62ccae0996ccce12e3c1
             else:
                 return 'N'
+        else:
+            return 'N'
 
+# CALCULATE AGE
+def get_age (birth_date, death_date):
+    if ('DEAT' == False):
+        today_date = datetime.today()
+        birth_date = datetime.strptime(individual['BIRT'], '%d %b %Y')
+        return today_date.year - birth_date.year - ((today_date.month, today_date.day) < (birth_date.month, birth_date.day))
+    else:
+        birth_date = datetime.strptime(individual['BIRT'], '%d %b %Y')
+        death_date = datetime.strptime(individual['DEAT'], '%d %b %Y')
+        return death_date.year - birth_date.year - ((death_date.month, death_date.day) < (birth_date.month, birth_date.day))
+
+# PRINT INDIVIDUALS TABLE
 def print_individual_table(list_of_indis):
-    table0 = PrettyTable()
-    table0.field_names = ["ID", "Name", "Gender", "Birthday", "Age", "Alive", "Death", "Child", "Spouse"]
+    table = PrettyTable()
+    table.field_names = ["ID", "Name", "Gender", "Birthday", "Age", "Alive", "Death", "Child", "Spouse"]
     for indi in list_of_indis:
-        table0.add_row([
+        table.add_row([
             indi.INDI,
             indi.NAME,
             indi.SEX,
@@ -81,14 +153,14 @@ def print_individual_table(list_of_indis):
             indi.FAMC,
             indi.FAMS
         ])
-    print("Individuals\n", table0)
+    print("Individuals\n", table)
 
-
+# PRINT FAMILY TABLE
 def print_family_table(list_of_fams):
-    table0 = PrettyTable()
-    table0.field_names = ["ID", "Married", "Divorced", "Husband ID", "Husband Name", "Wife ID", "Wife Name", "Children"]
+    table = PrettyTable()
+    table.field_names = ["ID", "Married", "Divorced", "Husband ID", "Husband Name", "Wife ID", "Wife Name", "Children"]
     for fam in list_of_fams:
-        table0.add_row([
+        table.add_row([
             fam.FAM,
             fam.MARR,
             fam.DIV,
@@ -98,42 +170,15 @@ def print_family_table(list_of_fams):
             fam.WNAME,
             fam.CHIL
         ])
-    print("Families\n", table0, "\n")
-
-
-list_of_indis = {}
-list_of_fams = {}
+    print("Families\n", table, "\n")
 
 def main(filename):
     ged_file = open(filename, 'r')
     gedcom(ged_file)
 
-
-    # ex_indi = Individual(indi=1, name='stacy', gender='f', birth='1', age='11', death='NA', child='NA', spouse='NA')
-    # indi_list.append(ex_indi)
-    #
-    # ex_fam = Family(familyid=1, husband=ex_indi.INDI, wife=ex_indi.INDI, childids=[1], marriagedate="NA",
-    #               divorcedate="NA")
-    # ex_fam.get_name_by_id(indi_list)
-    # fam_list.append(ex_fam)
-
     print_family_table(list_of_fams)
     print_individual_table(list_of_indis)
 
-
-# for line in ged_file:
-#     line_split = (line.rstrip()).split(' ')
-
-#     if len(line_split) > 2:
-#         if line_split[2] == "INDI" or line_split[2] == "FAM":
-#             line_ged = Gedcom(level=line_split[0], tag=line_split[2], argument=line_split[1])
-#             line_ged.printged(line)
-#         else:
-#             line_ged = Gedcom(level=line_split[0], tag=line_split[1], argument=' '.join(line_split[2:]))
-#             line_ged.printged(line)
-#     else:
-#         line_ged = Gedcom(level=line_split[0], tag=line_split[1], argument="")
-#         line_ged.printged(line)
 
 
 filename = 'kardashian-family-tree.ged'
