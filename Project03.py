@@ -57,7 +57,6 @@ class Individual:
             death_date = datetime.strptime(self.DEAT, '%d %b %Y')
             self.AGE = death_date.year - birth_date.year - ((death_date.month, death_date.day) < (birth_date.month, birth_date.day))
 
-# ORGANIZES EACH TAG INTO AN OBJECT
 class Gedcom:
     def __init__(self, level, tag, ged_id="", argument=""):
         self.level = level
