@@ -44,29 +44,27 @@ class Individual:
             self.ALIV = False
 
 
-class Gedcom:
-    def __init__(self, level, tag, ged_id="", argument=""):
-        self.level = level
-        self.id = ged_id
-        self.tag = tag
-        self.argument = argument
-        self.validtags = {"0": ["INDI", "FAM", "HEAD", "TRLR", "NOTE"],
-                          "1": ["NAME", "SEX", "BIRT", "DEAT", "FAMC", "FAMS", "MARR", "HUSB", "WIFE", "CHIL", "DIV"],
-                          "2": ["DATE"]}
+def gedcom(file):
 
-    def is_tag_valid(self):
-        if self.tag.upper() in self.validtags:
-            if self.level == self.validindexes[self.validtags.index(self.tag.upper())]:
-                return 'Y'
+    with open(file) as text:
+        for line in text:
+            line = line.rstrip()
+            piece_line = line.split('')
+            level = piece_line[0]
+            tag = piece_line[1]
+            argument = piece_line[2:]
+            validtags = {"0": ["INDI", "FAM", "HEAD", "TRLR", "NOTE"],
+                        "1": ["NAME", "SEX", "BIRT", "DEAT", "FAMC", "FAMS", "MARR", "HUSB", "WIFE", "CHIL", "DIV"],
+                        "2": ["DATE"]}
+
+    def is_tag_valid(tag):
+            if tag.upper() in validtags:
+                if level == validindexes[validtags.index(tag.upper())]:
+                    return 'Y'
+                else:
+                    return 'N'
             else:
                 return 'N'
-        else:
-            return 'N'
-
-    def printged(self, gedcom_line):
-        print('--> %s' % gedcom_line)
-        print('<-- %s | %s | %s | %s \n' % (self.level, self.tag, self.is_tag_valid(), self.argument))
-
 
 def print_individual_table(list_of_indis):
     table0 = PrettyTable()
@@ -84,6 +82,7 @@ def print_individual_table(list_of_indis):
             indi.FAMS
         ])
     print("Individuals\n", table0)
+
 
 def print_family_table(list_of_fams):
     table0 = PrettyTable()
@@ -105,32 +104,9 @@ def print_family_table(list_of_fams):
 list_of_indis = {}
 list_of_fams = {}
 
-def main(file):
-    ged_file = open(file, 'r')
-
-    info = None
-
-    for line in file:
-        line = line.split()
-
-        if info:
-            if info.get("INDI"):
-                list_of_indis[current.get("INDI")] = info
-            elif info.get("FAM"):
-                list_of_fams[current.get("FAM")] = info
-
-            if tag == "INDI":
-                info = {"INDI": arguments}
-            else:
-                info = {"FAM": arguments}
-        else:
-            tag = line[1].upper()
-            arguments = " ".join(line[2:])
-
-        if info.get("INDI"):
-            list_of_indis[current.get("INDI")] = info
-        elif info.get("FAM"):
-            list_of_fams[info.get("FAM")] = info
+def main(filename):
+    ged_file = open(filename, 'r')
+    gedcom(ged_file)
 
 
     # ex_indi = Individual(indi=1, name='stacy', gender='f', birth='1', age='11', death='NA', child='NA', spouse='NA')
