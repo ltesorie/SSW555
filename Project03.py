@@ -1,12 +1,10 @@
-# Author: Madeline Rys
-# CS 555 Project 03
-# I pledge my honor that I have abided by the Stevens Honor System.
+# Alyson Randall, Laura Tesoriero, Madeline Rys
+# Project 3
 
 import datetime
 import calendar
 from prettytable import PrettyTable
 import unittest
-
 
 class Family:
     def __init__(self, familyid, husband, wife, childids=[], marriagedate="NA", divorcedate="NA"):
@@ -19,14 +17,13 @@ class Family:
         self.MARR = marriagedate
         self.DIV = divorcedate
 
-    def get_name_by_id(self, list_of_indis):
-        for indi in list_of_indis:
-            if self.HUSB == indi.INDI:
-                self.HNAME = indi.NAME
-            if self.WIFE == indi.INDI:
-                self.WNAME = indi.NAME
-        return self
-
+        def get_name_by_id(self, list_of_indis):
+            for indi in list_of_indis:
+                if self.HUSB == indi.INDI:
+                    self.HNAME = indi.NAME
+                if self.WIFE == indi.INDI:
+                    self.WNAME = indi.NAME
+            return self
 
 class Individual:
     def __init__(self, indi, name, gender, birth, age, death='NA', child='NA', spouse='NA'):
@@ -44,27 +41,65 @@ class Individual:
             self.ALIV = False
 
 
+list_of_indis = {}
+list_of_fams = {}
+
 def gedcom(file):
 
-    with open(file) as text:
-        for line in text:
-            line = line.rstrip()
-            piece_line = line.split('')
-            level = piece_line[0]
-            tag = piece_line[1]
-            argument = piece_line[2:]
-            validtags = {"0": ["INDI", "FAM", "HEAD", "TRLR", "NOTE"],
-                        "1": ["NAME", "SEX", "BIRT", "DEAT", "FAMC", "FAMS", "MARR", "HUSB", "WIFE", "CHIL", "DIV"],
-                        "2": ["DATE"]}
+    def __init__(self, level, tag, ged_id="", argument=""):
+        self.level = level
+        self.id = ged_id
+        self.tag = tag
+        self.argument = argument
+        self.validtags = [
+            'INDI',
+            'NAME',
+            'SEX',
+            'BIRT',
+            'DEAT',
+            'FAMC',
+            'FAMS',
+            'FAM',
+            'MARR',
+            'HUSB',
+            'WIFE',
+            'CHIL',
+            'DIV',
+            'DATE',
+            'HEAD',
+            'TRLR',
+            'NOTE'
+        ]
 
-    def is_tag_valid(tag):
-            if tag.upper() in validtags:
-                if level == validindexes[validtags.index(tag.upper())]:
-                    return 'Y'
-                else:
-                    return 'N'
+        self.validindexes = [
+            '0',
+            '1',
+            '1',
+            '1',
+            '1',
+            '1',
+            '1',
+            '0',
+            '1',
+            '1',
+            '1',
+            '1',
+            '1',
+            '2',
+            '0',
+            '0',
+            '0'
+        ]
+
+    def is_tag_valid(self):
+        if self.tag.upper() in self.validtags:
+            if self.level == self.validindexes[self.validtags.index(self.tag.upper())]:
+                return 'Y'
             else:
                 return 'N'
+        else:
+            return 'N'
+
 
 def print_individual_table(list_of_indis):
     table0 = PrettyTable()
@@ -109,31 +144,9 @@ def main(filename):
     gedcom(ged_file)
 
 
-    # ex_indi = Individual(indi=1, name='stacy', gender='f', birth='1', age='11', death='NA', child='NA', spouse='NA')
-    # indi_list.append(ex_indi)
-    #
-    # ex_fam = Family(familyid=1, husband=ex_indi.INDI, wife=ex_indi.INDI, childids=[1], marriagedate="NA",
-    #               divorcedate="NA")
-    # ex_fam.get_name_by_id(indi_list)
-    # fam_list.append(ex_fam)
-
     print_family_table(list_of_fams)
     print_individual_table(list_of_indis)
 
-
-# for line in ged_file:
-#     line_split = (line.rstrip()).split(' ')
-
-#     if len(line_split) > 2:
-#         if line_split[2] == "INDI" or line_split[2] == "FAM":
-#             line_ged = Gedcom(level=line_split[0], tag=line_split[2], argument=line_split[1])
-#             line_ged.printged(line)
-#         else:
-#             line_ged = Gedcom(level=line_split[0], tag=line_split[1], argument=' '.join(line_split[2:]))
-#             line_ged.printged(line)
-#     else:
-#         line_ged = Gedcom(level=line_split[0], tag=line_split[1], argument="")
-#         line_ged.printged(line)
 
 
 filename = 'kardashian-family-tree.ged'
