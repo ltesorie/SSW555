@@ -66,9 +66,6 @@ def gedcom(file):
                     arguments = arguments + ' '
                     print(arguments)
 
-            if arguments == 'INDI' or arguments == 'FAM':
-                tag, arguments = arguments, tag
-
             if level == 0:
                 if individual == True:
                     individual[individual.ID] = individual
