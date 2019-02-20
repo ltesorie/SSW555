@@ -1,5 +1,6 @@
 #Laura Tesoriero
 
+from datetime import datetime
 from prettytable import PrettyTable
 
 class Indi:
@@ -70,6 +71,18 @@ def gedcom(file):
                 if individual == True:
                     individual[individual.ID] = individual
 
+            if (tag == 'INDI' and family == False):
+                individual = True
+                indi = Indi()
+                indi.FAMC = []
+                indi.FAMS = []
+            if (tag == 'FAM' and family == False):
+                family = True
+                fam = Fam()
+                fam.CHIL = []
+                continue
+
+
 
 
     return individual, family
@@ -116,7 +129,7 @@ def print_family(fam):
 
 
 def main():
-    gedcom('01_Project_SSW_555.txt')
+    gedcom('kardashian-family-tree.ged')
 
     print_individual(individual)
     print_family(family)
