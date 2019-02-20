@@ -44,9 +44,9 @@ class Individual:
             self.ALIV = False
 
 
-def gedcom(file):
+def gedcom(ged_file):
 
-    with open(file) as text:
+    with open(ged_file) as text:
         for line in text:
             line = line.rstrip()
             piece_line = line.split('')
