@@ -7,10 +7,6 @@ import calendar
 from prettytable import PrettyTable
 import unittest
 
-
-list_of_indis = {}
-list_of_fams = {}
-
 # CREATES A FAMILY BASED OFF OF TAGS
 class Family:
     def __init__(self, familyid, husband = 'NA', wife = 'NA', childids=[], marriagedate="1 JAN 1970", divorcedate="NA"):
@@ -142,7 +138,7 @@ def gedcom(ged_file):
             elif line_split[2] == "FAM":
                 line_ged = Gedcom(level=line_split[0], tag=line_split[2], ged_id=line_split[1])
                 if line_ged.is_tag_valid():
-                    tempfam = Family(familyid = line_ged.id)
+                    tempfam = Family(familyid = line_ged.id, childids = [])
                     list_of_fams.append(tempfam)
                     curr_fam_ind = curr_fam_ind + 1;
                     on_indi = False
@@ -164,6 +160,8 @@ def gedcom(ged_file):
                         if tag.upper() == 'CHIL':
                             if line_ged.argument not in list_of_fams[curr_fam_ind].CHIL:
                                 list_of_fams[curr_fam_ind].CHIL.append(line_ged.argument)
+                            else:
+                                print('yikes')
                         if tag.upper() == 'MARR':
                             list_of_fams[curr_fam_ind].MARR = line_ged.argument
                         if tag.upper() == 'DIV':
@@ -204,5 +202,5 @@ def main(filename):
     ged_file = open(filename, 'r')
     gedcom(ged_file)
 
-filename = 'proj02test.ged'
+filename = 'My_Family.ged'
 main(filename);
