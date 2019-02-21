@@ -160,8 +160,6 @@ def gedcom(ged_file):
                         if tag.upper() == 'CHIL':
                             if line_ged.argument not in list_of_fams[curr_fam_ind].CHIL:
                                 list_of_fams[curr_fam_ind].CHIL.append(line_ged.argument)
-                            else:
-                                print('yikes')
                         if tag.upper() == 'MARR':
                             list_of_fams[curr_fam_ind].MARR = line_ged.argument
                         if tag.upper() == 'DIV':
