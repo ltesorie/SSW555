@@ -162,7 +162,8 @@ def gedcom(ged_file):
                         if tag.upper() == 'WIFE':
                             list_of_fams[curr_fam_ind].WIFE = line_ged.argument
                         if tag.upper() == 'CHIL':
-                            list_of_fams[curr_fam_ind].CHIL.append(line_ged.argument)
+                            if line_ged.argument not in list_of_fams[curr_fam_ind].CHIL:
+                                list_of_fams[curr_fam_ind].CHIL.append(line_ged.argument)
                         if tag.upper() == 'MARR':
                             list_of_fams[curr_fam_ind].MARR = line_ged.argument
                         if tag.upper() == 'DIV':
