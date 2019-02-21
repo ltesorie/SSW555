@@ -6,14 +6,14 @@ from prettytable import PrettyTable
 
 class Indi:
     def __init__(self):
-            self.ID = ''
-            self.NAME = ''
-            self.AGE = ''
-            self.SEX = ''
-            self.BIRT = ''
-            self.DEAT = ''
-            self.FAMC = []
-            self.FAMS = []
+        self.ID = ''
+        self.NAME = ''
+        self.AGE = ''
+        self.SEX = ''
+        self.BIRT = ''
+        self.DEAT = ''
+        self.FAMC = []
+        self.FAMS = []
 
     def get_indi(self):
         person = [self.ID, self.NAME, self.AGE, self.SEX, self.BIRT, self.DEAT, self.FAMC, self.FAMS]
@@ -34,24 +34,39 @@ class Fam:
         return family
 
 
-def datefix(date):
-    word_to_number = {'JAN': 1,
-                      'FEB': 2,
-                      'MAR': 3,
-                      'APR': 4,
-                      'MAY': 5,
-                      'JUN': 6,
-                      'JUL': 7,
-                      'AUG': 8,
-                      'SEP': 9,
-                      'OCT': 10,
-                      'NOV': 11,
-                      'DEC': 12
-                      }
+# Story01
+
+def reformat_date(date):
+    month_to_num = {'JAN': 1,
+                    'FEB': 2,
+                    'MAR': 3,
+                    'APR': 4,
+                    'MAY': 5,
+                    'JUN': 6,
+                    'JUL': 7,
+                    'AUG': 8,
+                    'SEP': 9,
+                    'OCT': 10,
+                    'NOV': 11,
+                    'DEC': 12
+                    }
+    mdy = date.split(' ')
+    year = mdy[2]
+    month = month_to_num[mdy[1]]
+    day = mdy[0]
+    fixed_date = datetime.date(year, month, day)
+    return fixed_date
+
+
+def date_before_now(date):
+    today = datetime.date.today()
+    tbv_date = reformat_date(date)
+    if tbv_date > today:
+        print("Error:" + date + "is after current date" + today)
+    return tbv_date < today
 
 
 def gedcom(file):
-
     with open(file) as text:
         for line in text:
             line = line.rstrip()
