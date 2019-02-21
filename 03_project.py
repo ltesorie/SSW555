@@ -1,31 +1,56 @@
-#Laura Tesoriero
+# Laura Tesoriero
 
 from datetime import datetime
 from prettytable import PrettyTable
 
+
 class Indi:
-    ID = ''
-    NAME = ''
-    AGE = ''
-    SEX =''
-    BIRT = ''
-    DEAT = ''
-    FAMC = []
-    FAMS = []
+    def __init__(self):
+            self.ID = ''
+            self.NAME = ''
+            self.AGE = ''
+            self.SEX = ''
+            self.BIRT = ''
+            self.DEAT = ''
+            self.FAMC = []
+            self.FAMS = []
+
+    def get_indi(self):
+        person = [self.ID, self.NAME, self.AGE, self.SEX, self.BIRT, self.DEAT, self.FAMC, self.FAMS]
+        return person
+
 
 class Fam:
-    ID = ''
-    MARR = ''
-    HUSB = ''
-    WIFE  = ''
-    CHIL = []
-    DIV = ''
+    def __init__(self):
+        self.ID = ''
+        self.MARR = ''
+        self.HUSB = ''
+        self.WIFE = ''
+        self.CHIL = []
+        self.DIV = ''
+
+    def get_fam(self):
+        family = [self.ID, self.MARR, self.HUSB, self.WIFE, self.CHIL, self.DIV]
+        return family
+
+
+def datefix(date):
+    word_to_number = {'JAN': 1,
+                      'FEB': 2,
+                      'MAR': 3,
+                      'APR': 4,
+                      'MAY': 5,
+                      'JUN': 6,
+                      'JUL': 7,
+                      'AUG': 8,
+                      'SEP': 9,
+                      'OCT': 10,
+                      'NOV': 11,
+                      'DEC': 12
+                      }
 
 
 def gedcom(file):
-
-  #  individual[]
-   # family[]
 
     with open(file) as text:
         for line in text:
@@ -36,67 +61,47 @@ def gedcom(file):
             arguments = piece[2:]
 
             validtags = {0: ["INDI",
-                        "FAM",
-                        "HEAD",
-                        "TRLR",
-                        "NOTE"],
-                        1: ["NAME",
-                        "SEX",
-                        "BIRT",
-                        "DEAT",
-                        "FAMC",
-                        "FAMS",
-                        "MARR",
-                        "HUSB",
-                        "WIFE",
-                        "CHIL",
-                        "DIV"],
-                        2: ["DATE"]}
-            #presets
-            individual = False
-            family = False
+                             "FAM",
+                             "HEAD",
+                             "TRLR",
+                             "NOTE"],
+                         1: ["NAME",
+                             "SEX",
+                             "BIRT",
+                             "DEAT",
+                             "FAMC",
+                             "FAMS",
+                             "MARR",
+                             "HUSB",
+                             "WIFE",
+                             "CHIL",
+                             "DIV"],
+                         2: ["DATE"]}
+            # presets
+            individual_create = False
+            family_create = False
             born = False
             died = False
             married = False
             divorced = False
             temp = ''
 
-            for i, n in enumerate(temp):
-                arguments = arguments + n
-                if i + 1 != len(temp):
-                    arguments = arguments + ' '
-                    print(arguments)
+            if level == 0 and tag == 'INDI':
+                Indi()
+            elif level == 0 and tag == 'FAM':
+                Fam()
 
-            if level == 0:
-                if individual == True:
-                    individual[individual.ID] = individual
-
-            if (tag == 'INDI' and family == False):
-                individual = True
-                indi = Indi()
-                indi.FAMC = []
-                indi.FAMS = []
-            if (tag == 'FAM' and family == False):
-                family = True
-                fam = Fam()
-                fam.CHIL = []
-                continue
-
-
-
-
-    return individual, family
 
 def print_individual(person):
     table00 = PrettyTable()
     table00.field_names = ['ID',
-                         'NAME',
-                         'SEX',
-                         'BIRTHDAY',
-                         'AGE',
-                         'DEATH',
-                         'FAMC',
-                         'FAMS']
+                           'NAME',
+                           'SEX',
+                           'BIRTHDAY',
+                           'AGE',
+                           'DEATH',
+                           'FAMC',
+                           'FAMS']
     for key in person:
         table00.add_row(person[key].ID,
                         person[key].NAME,
@@ -108,14 +113,15 @@ def print_individual(person):
                         person[key].FAMS)
         print(table00)
 
+
 def print_family(fam):
     table01 = PrettyTable()
     table01.field_names = ['ID',
-                            'MARRIED',
-                            'DIVORCED',
-                            'HUSBAND_ID',
-                            'WIFE_ID',
-                            'CHILDREN']
+                           'MARRIED',
+                           'DIVORCED',
+                           'HUSBAND_ID',
+                           'WIFE_ID',
+                           'CHILDREN']
     for key in fam:
         table01.add_row(fam[key].ID,
                         fam[key].NAME,
@@ -131,7 +137,7 @@ def print_family(fam):
 def main():
     gedcom('kardashian-family-tree.ged')
 
-    print_individual(individual)
+    print_individual(person)
     print_family(family)
 
 
