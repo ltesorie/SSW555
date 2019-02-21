@@ -7,9 +7,10 @@ import calendar
 from prettytable import PrettyTable
 import unittest
 
+
 # CREATES A FAMILY BASED OFF OF TAGS
 class Family:
-    def __init__(self, familyid, husband = 'NA', wife = 'NA', childids=[], marriagedate="1 JAN 1970", divorcedate="NA"):
+    def __init__(self, familyid, husband='NA', wife='NA', childids=[], marriagedate="1 JAN 1970", divorcedate="NA"):
         self.FAM = familyid
         self.HUSB = husband
         self.HNAME = 'NA'
@@ -27,9 +28,10 @@ class Family:
                 self.WNAME = indi.NAME
         return self
 
+
 # CREATES AN INDIVIDUAL BASED OFF OF TAGS
 class Individual:
-    def __init__(self, indi, name = 'NA', gender = 'NA', birth = '1 JAN 1970', age = 0, death='NA', child='NA', spouse='NA'):
+    def __init__(self, indi, name='NA', gender='NA', birth='1 JAN 1970', age=0, death='NA', child='NA', spouse='NA'):
         self.INDI = indi
         self.NAME = name
         self.SEX = gender
@@ -43,15 +45,18 @@ class Individual:
         else:
             self.ALIV = False
 
-    def get_age (self):
+    def get_age(self):
         if (self.DEAT == 'NA'):
             today_date = datetime.today()
             birth_date = datetime.strptime(self.BIRT, '%d %b %Y')
-            self.AGE = today_date.year - birth_date.year - ((today_date.month, today_date.day) < (birth_date.month, birth_date.day))
+            self.AGE = today_date.year - birth_date.year - (
+                        (today_date.month, today_date.day) < (birth_date.month, birth_date.day))
         else:
             birth_date = datetime.strptime(self.BIRT, '%d %b %Y')
             death_date = datetime.strptime(self.DEAT, '%d %b %Y')
-            self.AGE = death_date.year - birth_date.year - ((death_date.month, death_date.day) < (birth_date.month, birth_date.day))
+            self.AGE = death_date.year - birth_date.year - (
+                        (death_date.month, death_date.day) < (birth_date.month, birth_date.day))
+
 
 class Gedcom:
     def __init__(self, level, tag, ged_id="", argument=""):
@@ -60,10 +65,10 @@ class Gedcom:
         self.tag = tag
         self.argument = argument
         self.validtags = validtags = {
-                        "0": ["INDI", "FAM", "HEAD", "TRLR", "NOTE"],
-                        "1": ["NAME", "SEX", "BIRT", "DEAT", "FAMC", "FAMS", "MARR", "HUSB", "WIFE", "CHIL", "DIV"],
-                        "2": ["DATE"]
-                        }
+            "0": ["INDI", "FAM", "HEAD", "TRLR", "NOTE"],
+            "1": ["NAME", "SEX", "BIRT", "DEAT", "FAMC", "FAMS", "MARR", "HUSB", "WIFE", "CHIL", "DIV"],
+            "2": ["DATE"]
+        }
 
     def is_tag_valid(self):
         try:
@@ -94,6 +99,7 @@ def print_individual_table(list_of_indis):
     print("Individuals\n")
     print(table)
 
+
 # PRINT FAMILY TABLE
 def print_family_table(list_of_fams):
     table = PrettyTable()
@@ -112,6 +118,7 @@ def print_family_table(list_of_fams):
     print("Families \n")
     print(table)
 
+
 # GET LISTS OF INDIVIDUALS AND FAMILIES
 def gedcom(ged_file):
     list_of_indis = []
@@ -121,7 +128,7 @@ def gedcom(ged_file):
     on_fam = False
     on_indi = False
     date_type = ''
-    
+
     for line in ged_file:
         line_split = (line.rstrip()).split(' ')
 
@@ -129,16 +136,16 @@ def gedcom(ged_file):
             if line_split[2] == "INDI":
                 line_ged = Gedcom(level=line_split[0], tag=line_split[2], ged_id=line_split[1])
                 if line_ged.is_tag_valid():
-                    tempindi = Individual(indi = line_ged.id)
+                    tempindi = Individual(indi=line_ged.id)
                     list_of_indis.append(tempindi)
                     curr_indi_ind = curr_indi_ind + 1;
                     on_indi = True
                     on_fam = False
-            
+
             elif line_split[2] == "FAM":
                 line_ged = Gedcom(level=line_split[0], tag=line_split[2], ged_id=line_split[1])
                 if line_ged.is_tag_valid():
-                    tempfam = Family(familyid = line_ged.id, childids = [])
+                    tempfam = Family(familyid=line_ged.id, childids=[])
                     list_of_fams.append(tempfam)
                     curr_fam_ind = curr_fam_ind + 1;
                     on_indi = False
@@ -150,7 +157,7 @@ def gedcom(ged_file):
                     if on_fam:
                         if line_ged.tag.upper() == 'DATE':
                             line_ged.tag = date_type
-                        
+
                         tag = line_ged.tag
 
                         if tag.upper() == 'HUSB':
@@ -198,9 +205,11 @@ def gedcom(ged_file):
     print_family_table(list_of_fams)
     print_individual_table(list_of_indis)
 
+
 def main(filename):
     ged_file = open(filename, 'r')
     gedcom(ged_file)
 
-filename = 'My_Family.ged'
+
+filename = 'myfamily.ged'
 main(filename);
