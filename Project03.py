@@ -70,10 +70,14 @@ class Gedcom:
                         }
 
     def is_tag_valid(self):
-        if self.tag.upper() in self.validtags[self.level]:
-            return True
-        else:
+        try:
+            if self.tag.upper() in self.validtags[self.level]:
+                return True
+            else:
+                return False
+        except:
             return False
+
 
 # PRINT INDIVIDUALS TABLE
 def print_individual_table(list_of_indis):
@@ -148,8 +152,6 @@ def gedcom(ged_file):
                 line_ged = Gedcom(level=line_split[0], tag=line_split[1], argument=' '.join(line_split[2:]))
                 if line_ged.is_tag_valid():
                     if on_fam:
-                        print(line_ged.tag)
-                        print(line_ged.tag.upper() == 'HUSB')
                         if line_ged.tag.upper() == 'DATE':
                             line_ged.tag = date_type
                         
@@ -157,29 +159,33 @@ def gedcom(ged_file):
 
                         if tag.upper() == 'HUSB':
                             list_of_fams[curr_fam_ind].HUSB = line_ged.argument
-                            print('hi')
                         if tag.upper() == 'WIFE':
-                            print('hi')
                             list_of_fams[curr_fam_ind].WIFE = line_ged.argument
                         if tag.upper() == 'CHIL':
-                            print('hi')
                             list_of_fams[curr_fam_ind].CHIL.append(line_ged.argument)
-                            print('hi')
                         if tag.upper() == 'MARR':
-                            print('hi')
                             list_of_fams[curr_fam_ind].MARR = line_ged.argument
                         if tag.upper() == 'DIV':
-                            print('hi')
                             list_of_fams[curr_fam_ind].DIV = line_ged.argument
 
-                    
-                    # elif on_indi:
-                    #     if line_ged.tag.upper() == 'DATE':
-                    #         line_get.tag = date_type
-                    #     tag = line_ged.tag
-                    #     curr_indi = list_of_indis[curr_indi_ind]
-                        
-                    #     curr_indi.tag = line_ged.argument     
+                    elif on_indi:
+                        if line_ged.tag.upper() == 'DATE':
+                            line_ged.tag = date_type
+                        tag = line_ged.tag
+
+                        if tag.upper() == 'NAME':
+                            list_of_indis[curr_indi_ind].NAME = line_ged.argument
+                        if tag.upper() == 'SEX':
+                            list_of_indis[curr_indi_ind].SEX = line_ged.argument
+                        if tag.upper() == 'BIRT':
+                            list_of_indis[curr_indi_ind].BIRT = line_ged.argument
+                        if tag.upper() == 'DEAT':
+                            list_of_indis[curr_indi_ind].DEAT = line_ged.argument
+                        if tag.upper() == 'FAMC':
+                            list_of_indis[curr_indi_ind].FAMC = line_ged.argument
+                        if tag.upper() == 'FAMS':
+                            list_of_indis[curr_indi_ind].FAMS = line_ged.argument
+
         else:
             line_ged = Gedcom(level=line_split[0], tag=line_split[1], argument="")
             date_type = line_ged.tag
@@ -189,7 +195,6 @@ def gedcom(ged_file):
 
     for fam in list_of_fams:
         fam.get_name_by_id(list_of_indis)
-        print(fam)
 
     print_family_table(list_of_fams)
     print_individual_table(list_of_indis)
@@ -198,5 +203,5 @@ def main(filename):
     ged_file = open(filename, 'r')
     gedcom(ged_file)
 
-filename = 'kardashian-family-tree.ged'
+filename = 'proj02test.ged'
 main(filename);
