@@ -1,5 +1,5 @@
 from datetime import datetime
-from dateutil.relativedelta import relativedelta
+#from dateutil.relativedelta import relativedelta
 
 
 def reformat_date(date):
@@ -43,12 +43,12 @@ def US03(birth_date, death_date):
     return death > birth
 
 # User Story 06 - Alyson Randall: checks that divorce date occurs before death date
-def US06(divorce_date, death_date):
-    divorce = datetime.strptime(divorce_date, '%d %b %Y')
-    death = datetime.strptime(death_date, '%d %b %Y')
-    if death > divorce:
-        print("Error - US06: Divorce date", str(divorce_date), " occurs after death date ", str(death_date), ".")
-    return death < divorce
+def US06(divorcedate, deathdate):
+    divorce = datetime.strptime(divorcedate, '%d %b %Y')
+    death = datetime.strptime(deathdate, '%d %b %Y')
+    if death < divorce:
+        print("Error - US06: Divorce date", str(divorcedate), " occurs after death date ", str(deathdate), ".")
+    return death > divorce
 
 
 # User Story 08 - Madeline Rys: checks birth date of child to ensure it is after marriage of parents

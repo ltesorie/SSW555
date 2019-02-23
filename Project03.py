@@ -47,7 +47,9 @@ class Individual:
             self.ALIV = False
 
     def get_age(self):
-        if (self.DEAT == 'NA'):
+        if (self.BIRT == 'NA'):
+            self.AGE = 0
+        elif (self.DEAT == 'NA'):
             today_date = datetime.today()
             birth_date = datetime.strptime(self.BIRT, '%d %b %Y')
             self.AGE = today_date.year - birth_date.year - (
@@ -200,6 +202,14 @@ def gedcom(ged_file):
                             list_of_indis[curr_indi_ind].BIRT = line_ged.argument
                         if tag.upper() == 'DEAT':
                             list_of_indis[curr_indi_ind].DEAT = line_ged.argument
+                            if not US03(list_of_indis[curr_indi_ind].BIRT, list_of_indis[curr_indi_ind].DEAT):
+                                list_of_indis[curr_indi_ind].DEAT ='NA'
+                                list_of_indis[curr_indi_ind].BIRT = 'NA'
+                                list_of_indis[curr_indi_ind].NAME = "US03 ERROR"
+                            if not US06(list_of_fams[curr_fam_ind].DIV, list_of_indis[curr_indi_ind].DEAT):
+                                list_of_indis[curr_indi_ind].DEAT = 'NA'
+                                list_of_indis[curr_indi_ind].DIV = 'NA'
+                                list_of_indis[curr_indi_ind].NAME = "US06 ERROR"
                         if tag.upper() == 'FAMC':
                             list_of_indis[curr_indi_ind].FAMC = line_ged.argument
                         if tag.upper() == 'FAMS':
@@ -214,6 +224,7 @@ def gedcom(ged_file):
         parmar = indi.get_parents_marriage_by_id(list_of_fams)
         if parmar != '':
             birth_before_marriage(birthdate=indi.BIRT, marrdate=parmar)
+
 
     for fam in list_of_fams:
         fam.get_name_by_id(list_of_indis, )
