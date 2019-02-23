@@ -64,7 +64,7 @@ class Individual:
             self.BIRT = 'US07 Error'
             self.DEAT = 'US07 Error'
             self.AGE = 'XX'
-            print("US07 Error")
+            print("Error - US07 Error: Individual is over 150 years old")
 
     def get_parents_marriage_by_id(self, list_of_fams):
         marr = ''
