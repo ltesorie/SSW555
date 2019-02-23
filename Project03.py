@@ -6,6 +6,7 @@ from datetime import datetime
 import calendar
 from prettytable import PrettyTable
 import unittest
+from Functions import *
 
 
 # CREATES A FAMILY BASED OFF OF TAGS
@@ -142,6 +143,9 @@ def gedcom(ged_file):
                     on_indi = True
                     on_fam = False
 
+                    if line_split[2] == "DATE":
+                        date_before_now(line_ged);
+
             elif line_split[2] == "FAM":
                 line_ged = Gedcom(level=line_split[0], tag=line_split[2], ged_id=line_split[1])
                 if line_ged.is_tag_valid():
@@ -209,5 +213,5 @@ def main(filename):
     gedcom(ged_file)
 
 
-filename = 'myfamily.ged'
+filename = 'My_Family.ged'
 main(filename);
