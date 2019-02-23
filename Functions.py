@@ -25,8 +25,10 @@ def reformat_date(date):
 
 # User Story 1 - Laura T: checks dates to make sure it has occurred
 def date_before_now(date):
-    today = datetime.date.today()
-    tbv_date = reformat_date(date)
+    date = datetime.strptime(date, '%d %b %Y')
+    today = datetime.now()
+    tbv_date = date
+#    tbv_date = reformat_date(date)
     if tbv_date > today:
-        print("Error:" + date + "is after current date" + today)
+        print("Error:" + str(date) + "is after current date" + str(today))
     return tbv_date < today

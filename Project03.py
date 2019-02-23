@@ -143,8 +143,6 @@ def gedcom(ged_file):
                     on_indi = True
                     on_fam = False
 
-                    if line_split[2] == "DATE":
-                        date_before_now(line_ged);
 
             elif line_split[2] == "FAM":
                 line_ged = Gedcom(level=line_split[0], tag=line_split[2], ged_id=line_split[1])
@@ -179,6 +177,7 @@ def gedcom(ged_file):
                     elif on_indi:
                         if line_ged.tag.upper() == 'DATE':
                             line_ged.tag = date_type
+                            date_before_now(line_ged.argument)
                         tag = line_ged.tag
 
                         if tag.upper() == 'NAME':
@@ -213,5 +212,5 @@ def main(filename):
     gedcom(ged_file)
 
 
-filename = 'My_Family.ged'
+filename = 'proj02test.ged'
 main(filename);
