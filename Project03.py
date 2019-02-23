@@ -29,6 +29,11 @@ class Family:
                 self.WNAME = indi.NAME
         return self
 
+    def get_death_by_id(self, list_of_indis):
+        for indi in list_of_indis:
+            if self.HUSB == indi.INDI or self.WIFE == indi.INDI:
+                return indi.DEAT
+
 
 # CREATES AN INDIVIDUAL BASED OFF OF TAGS
 class Individual:
@@ -76,6 +81,21 @@ class Individual:
                 marr = fam.MARR
 
         return marr
+
+    def get_parents_death_by_id(self, list_of_fams, list_of_indis):
+        mom = ''
+        dad = ''
+        if self.FAMC == 'NA':
+            mom = 'NA'
+            dad = 'NA'
+
+        for fam in list_of_fams:
+            if fam.FAM == self.FAMC:
+                mom = fam.get_death_by_id(list_of_indis)
+                dad = fam.get_death_by_id(list_of_indis)
+        
+        return [mom,dad]
+
 
 
 class Gedcom:
@@ -231,6 +251,8 @@ def gedcom(ged_file):
         parmar = indi.get_parents_marriage_by_id(list_of_fams)
         if parmar != '':
             birth_before_marriage(birthdate=indi.BIRT, marrdate=parmar)
+        pardeaths = indi.get_parents_death_by_id(list_of_fams, list_of_indis)
+        birth_before_death(birthdate = indi.BIRT, momdeath = pardeaths[0], daddeath = pardeaths[1])
 
     for fam in list_of_fams:
         fam.get_name_by_id(list_of_indis, )
