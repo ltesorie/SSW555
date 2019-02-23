@@ -59,9 +59,10 @@ class Individual:
             death_date = datetime.strptime(self.DEAT, '%d %b %Y')
             self.AGE = death_date.year - birth_date.year - (
                     (death_date.month, death_date.day) < (birth_date.month, birth_date.day))
-            #US07 Story
-            if self.AGE >= 150:
-                self.AGE = 'US07 Error' 
+        # US07 Story
+        if self.AGE >= 150:
+            self.BIRT = 'US07 Error'
+            self.AGE = 'XX'
 
     def get_parents_marriage_by_id(self, list_of_fams):
         marr = ''
@@ -206,7 +207,7 @@ def gedcom(ged_file):
                         if tag.upper() == 'DEAT':
                             list_of_indis[curr_indi_ind].DEAT = line_ged.argument
                             if not US03(list_of_indis[curr_indi_ind].BIRT, list_of_indis[curr_indi_ind].DEAT):
-                                list_of_indis[curr_indi_ind].DEAT ='NA'
+                                list_of_indis[curr_indi_ind].DEAT = 'NA'
                                 list_of_indis[curr_indi_ind].BIRT = 'NA'
                                 list_of_indis[curr_indi_ind].NAME = "US03 ERROR"
                             if tag.upper() == 'DIV':
@@ -229,13 +230,11 @@ def gedcom(ged_file):
         if parmar != '':
             birth_before_marriage(birthdate=indi.BIRT, marrdate=parmar)
 
-
     for fam in list_of_fams:
         fam.get_name_by_id(list_of_indis, )
 
     print_individual_table(list_of_indis)
     print_family_table(list_of_fams)
-
 
 
 def main(filename):
