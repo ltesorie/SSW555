@@ -24,7 +24,7 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/SSW555$project02_mrys.coverage" NAME="project02_mrys Coverage Results" MODIFIED="1550450653133" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/SSW555$Project03__1_.coverage" NAME="Project03 (1) Coverage Results" MODIFIED="1550769009434" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../../SSW555" />
-    <SUITE FILE_PATH="coverage/SSW555$Project03.coverage" NAME="Project03 Coverage Results" MODIFIED="1550943835988" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/SSW555$Project03.coverage" NAME="Project03 Coverage Results" MODIFIED="1550959410924" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/SSW555$Project3.coverage" NAME="Project3 Coverage Results" MODIFIED="1550781702169" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/SSW555$03_project.coverage" NAME="03_project Coverage Results" MODIFIED="1550705350611" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
@@ -56,12 +56,12 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="Python Console" value="1" />
-          <entry key="py" value="2617" />
+          <entry key="py" value="2633" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="2618" />
+          <entry key="Python" value="2634" />
         </counts>
       </usages-collector>
     </session>
@@ -71,7 +71,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Project03.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2788">
+            <state relative-caret-position="238">
               <caret line="191" column="56" selection-start-line="191" selection-start-column="56" selection-end-line="191" selection-end-column="56" />
               <folding>
                 <element signature="e#128#157#0" expanded="true" />
@@ -83,8 +83,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Functions.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="39" column="53" lean-forward="true" selection-start-line="39" selection-start-column="53" selection-end-line="39" selection-end-column="53" />
+            <state relative-caret-position="255">
+              <caret line="42" column="17" lean-forward="true" selection-start-line="42" selection-start-column="17" selection-end-line="42" selection-end-column="17" />
+              <folding>
+                <element signature="e#0#29#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -130,8 +133,8 @@
         <option value="$PROJECT_DIR$/UnitTests_LT.py" />
         <option value="$PROJECT_DIR$/../../SSW555/Project03.py" />
         <option value="$PROJECT_DIR$/03_project.py" />
-        <option value="$PROJECT_DIR$/Functions.py" />
         <option value="$PROJECT_DIR$/Project03.py" />
+        <option value="$PROJECT_DIR$/Functions.py" />
       </list>
     </option>
   </component>
@@ -335,7 +338,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.22392212" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.22358176" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -418,7 +421,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Project03.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2788">
+        <state relative-caret-position="238">
           <caret line="191" column="56" selection-start-line="191" selection-start-column="56" selection-end-line="191" selection-end-column="56" />
           <folding>
             <element signature="e#128#157#0" expanded="true" />
@@ -428,8 +431,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Functions.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="39" column="53" lean-forward="true" selection-start-line="39" selection-start-column="53" selection-end-line="39" selection-end-column="53" />
+        <state relative-caret-position="255">
+          <caret line="42" column="17" lean-forward="true" selection-start-line="42" selection-start-column="17" selection-end-line="42" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
