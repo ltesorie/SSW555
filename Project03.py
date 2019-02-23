@@ -177,7 +177,8 @@ def gedcom(ged_file):
                     elif on_indi:
                         if line_ged.tag.upper() == 'DATE':
                             line_ged.tag = date_type
-                            date_before_now(line_ged.argument)
+                            if not date_before_now(line_ged.argument):
+                                line_ged.argument = "NA"
                         tag = line_ged.tag
 
                         if tag.upper() == 'NAME':
