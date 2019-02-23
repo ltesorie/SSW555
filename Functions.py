@@ -39,14 +39,14 @@ def US03(birth_date, death_date):
     birth = datetime.strptime(birth_date, '%d %b %Y')
     death = datetime.strptime(death_date, '%d %b %Y')
     if death < birth:
-        print(" Error - US03: ", indi.NAME, "'s birth date ", str(birth_date), " occurs after death date ", str(death_date), ".")
-    return death < birth
+        print(" Error - US03: ", "individuals's birth date ", str(birth_date), " occurs after death date ", str(death_date), ".")
+    return death > birth
 
 # User Story 06 - Alyson Randall: checks that divorce date occurs before death date
 def US06(divorce_date, death_date):
     divorce = datetime.strptime(divorce_date, '%d %b %Y')
     death = datetime.strptime(death_date, '%d %b %Y')
-    if death < divorce:
+    if death > divorce:
         print("Error - US06: Divorce date", str(divorce_date), " occurs after death date ", str(death_date), ".")
     return death < divorce
 
