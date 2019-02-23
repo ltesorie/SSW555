@@ -34,11 +34,20 @@ def date_before_now(date):
     return tbv_date < today
 
 # User Story 03 - Alyson Randall: checks that birth date occurs before death date
-def US03(birth, death):
-    birth = datetime.strptime(birth, '%d %b %Y')
-    death = datetime.strptime(death, '%d %b %Y')
+def US03(birth_date, death_date):
+    birth = datetime.strptime(birth_date, '%d %b %Y')
+    death = datetime.strptime(death_date, '%d %b %Y')
     if death < birth:
-        print(" Error - US03: ", indi.NAME, "'s death date ", str(death), " occurs before birth date ", str(birth), ".")
+        print(" Error - US03: ", indi.NAME, "'s birth date ", str(birth_date), " occurs after death date ", str(death_date), ".")
+    return death < birth
+
+# User Story 06 - Alyson Randall: checks that divorce date occurs before death date
+def US06(divorce_date, death_date):
+    divorce = datetime.strptime(divorce_date, '%d %b %Y')
+    death = datetime.strptime(death_date, '%d %b %Y')
+    if death < divorce:
+        print("Error - US06: Divorce date", str(divorce_date), " occurs after death date ", str(death_date), ".")
+    return death < divorce
 
 
 # User Story 8 - Madeline Rys: checks birth date of child to ensure it is before marriage of parents
