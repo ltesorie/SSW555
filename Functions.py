@@ -1,4 +1,5 @@
 from datetime import datetime
+from dateutil.relativedelta import relativedelta
 
 
 def reformat_date(date):
@@ -50,12 +51,35 @@ def US06(divorce_date, death_date):
     return death < divorce
 
 
-# User Story 8 - Madeline Rys: checks birth date of child to ensure it is before marriage of parents
+# User Story 08 - Madeline Rys: checks birth date of child to ensure it is after marriage of parents
 def birth_before_marriage(birthdate, marrdate):
     birth = datetime.strptime(birthdate, '%d %b %Y')
     marr = datetime.strptime(marrdate, '%d %b %Y')
 
     if birth < marr:
-        print("US08 Error: child's birth date ", str(birthdate) + " is before parents' marriage date ", str(marrdate))
+        print("Error - US08: child's birth date ", str(birthdate) + " is before parents' marriage date ", str(marrdate))
 
     return birth < marr
+
+# User Story 09 - Madeline Rys: checks birth date of child to ensure it is before death of either parent
+def birth_before_death(birthdate, momdeath, daddeath):
+    result = True
+
+    birth = datetime.strptime(birthdate, '%d %b %Y')
+    
+    if momdeath == 'NA' and daddeath == 'NA':
+        result = True
+    elif momdeath == 'NA':
+        dad = datetime.strptime(daddeath, '%d %b %Y')
+        dad9months = dad - relativedelta(months=9)
+        if dad9months > birth:
+            print("Error - US09: child's birth date ", str(birthdate) + " is after father's death date ", str(daddeath))
+            result = False
+    elif daddeath == 'NA':
+        mom = datetime.strptime(momdeath, '%d %b %Y')
+        if mom > birth:
+            result = False
+            print("Error - US09: child's birth date ", str(birthdate) + " is before mother's death date ", str(mom))
+    # else:
+
+    return result
