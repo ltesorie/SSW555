@@ -28,18 +28,18 @@ def date_before_now(date):
     date = datetime.strptime(date, '%d %b %Y')
     today = datetime.now()
     tbv_date = date
-#    tbv_date = reformat_date(date)
+    #    tbv_date = reformat_date(date)
     if tbv_date > today:
         print("Error:" + str(date) + "is after current date" + str(today))
     return tbv_date < today
 
 
-#User Story 8 - Madeline Rys: checks birth date of child to ensure it is before marriage of parents
+# User Story 8 - Madeline Rys: checks birth date of child to ensure it is before marriage of parents
 def birth_before_marriage(birthdate, marrdate):
     birth = datetime.strptime(birthdate, '%d %b %Y')
     marr = datetime.strptime(marrdate, '%d %b %Y')
 
     if birth < marr:
-        print("US08 Error: child's birthdate ", str(birthdate) + " is before parents' marriage date ", str(marrdate))
+        print("US08 Error: child's birth date ", str(birthdate) + " is before parents' marriage date ", str(marrdate))
 
     return birth < marr

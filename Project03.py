@@ -51,24 +51,23 @@ class Individual:
             today_date = datetime.today()
             birth_date = datetime.strptime(self.BIRT, '%d %b %Y')
             self.AGE = today_date.year - birth_date.year - (
-                        (today_date.month, today_date.day) < (birth_date.month, birth_date.day))
+                    (today_date.month, today_date.day) < (birth_date.month, birth_date.day))
         else:
             birth_date = datetime.strptime(self.BIRT, '%d %b %Y')
             death_date = datetime.strptime(self.DEAT, '%d %b %Y')
             self.AGE = death_date.year - birth_date.year - (
-                        (death_date.month, death_date.day) < (birth_date.month, birth_date.day))
+                    (death_date.month, death_date.day) < (birth_date.month, birth_date.day))
 
     def get_parents_marriage_by_id(self, list_of_fams):
         marr = ''
         if self.FAMC == 'NA':
             marr = ''
-        
+
         for fam in list_of_fams:
             if fam.FAM == self.FAMC:
-                marr = fam.MARR  
-        
-        return marr
+                marr = fam.MARR
 
+        return marr
 
 
 class Gedcom:
@@ -213,12 +212,11 @@ def gedcom(ged_file):
     for indi in list_of_indis:
         indi.get_age()
         parmar = indi.get_parents_marriage_by_id(list_of_fams)
-        if parmar != '': 
-            birth_before_marriage(birthdate = indi.BIRT, marrdate = parmar)
-
+        if parmar != '':
+            birth_before_marriage(birthdate=indi.BIRT, marrdate=parmar)
 
     for fam in list_of_fams:
-        fam.get_name_by_id(list_of_indis,)
+        fam.get_name_by_id(list_of_indis, )
 
     print_family_table(list_of_fams)
     print_individual_table(list_of_indis)
