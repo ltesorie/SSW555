@@ -33,6 +33,13 @@ def date_before_now(date):
         print("Error:" + str(date) + "is after current date" + str(today))
     return tbv_date < today
 
+# User Story 03 - Alyson Randall: checks that birth date occurs before death date
+def US03(birth, death):
+    birth = datetime.strptime(birth, '%d %b %Y')
+    death = datetime.strptime(death, '%d %b %Y')
+    if death < birth:
+        print(" Error - US03: ", indi.NAME, "'s death date ", str(death), " occurs before birth date ", str(birth), ".")
+
 
 # User Story 8 - Madeline Rys: checks birth date of child to ensure it is before marriage of parents
 def birth_before_marriage(birthdate, marrdate):

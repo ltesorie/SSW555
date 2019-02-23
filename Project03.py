@@ -218,8 +218,9 @@ def gedcom(ged_file):
     for fam in list_of_fams:
         fam.get_name_by_id(list_of_indis, )
 
-    print_family_table(list_of_fams)
     print_individual_table(list_of_indis)
+    print_family_table(list_of_fams)
+
 
 
 def main(filename):
