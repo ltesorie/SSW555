@@ -62,6 +62,7 @@ class Individual:
         # US07 Story
         if self.AGE >= 150:
             self.BIRT = 'US07 Error'
+            self.DEAT = 'US07 Error'
             self.AGE = 'XX'
             print("US07 Error")
 
