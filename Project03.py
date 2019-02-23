@@ -8,7 +8,6 @@ from prettytable import PrettyTable
 import unittest
 from Functions import *
 
-
 # CREATES A FAMILY BASED OFF OF TAGS
 class Family:
     def __init__(self, familyid, husband='NA', wife='NA', childids=[], marriagedate="1 JAN 1970", divorcedate="NA"):
