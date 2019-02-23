@@ -1,5 +1,5 @@
 from datetime import datetime
-#from dateutil.relativedelta import relativedelta
+from dateutil.relativedelta import relativedelta
 
 
 def reformat_date(date):
@@ -79,7 +79,14 @@ def birth_before_death(birthdate, momdeath, daddeath):
         mom = datetime.strptime(momdeath, '%d %b %Y')
         if mom > birth:
             result = False
-            print("Error - US09: child's birth date ", str(birthdate) + " is before mother's death date ", str(mom))
-    # else:
+            print("Error - US09: child's birth date ", str(birthdate) + " is after mother's death date ", str(momdeath))
+    else:
+        dad = datetime.strptime(daddeath, '%d %b %Y')
+        dad9months = dad - relativedelta(months=9)
+        mom = datetime.strptime(momdeath, '%d %b %Y')
+        if birth < mom and birth < dad9months:
+            result = False
+            print("Error - US09: child's birth date ", str(birthdate) + " is after parents' death dates ", str(momdeath), str(daddeath))
+
 
     return result
