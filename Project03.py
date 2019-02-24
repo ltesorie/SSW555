@@ -268,8 +268,12 @@ def main(filename):
     gedcom(ged_file)
 
 
+<<<<<<< HEAD
 
 filename = 'My_Family.ged'
+=======
+filename = 'proj02test.ged'
+>>>>>>> 6b1d57e6d6d8ba77efdb713171f5e324bc525034
 main(filename);
 
 
