@@ -3,44 +3,26 @@
 # test US01
 
 import unittest
-import datetime
 from Project03 import *
+from Functions import date_before_now
+from datetime import datetime
 
 
-class TestDateStructure(unittest.TestCase):
+class TestDatesBeforeNow(unittest.TestCase):
 
-    def test_date_structure(self):
-        self.assertTrue(date_before_now(self))
+    def test_valid_date(self):
+        # valid date input
+        self.assertTrue(date_before_now('4 JAN 2016'))
 
+    def test_invalid_date(self):
+        self.assertFalse(date_before_now('4 JAN 2025'))
 
-#class TestExistence(unittest.TestCase):
+    def test_invalid_date_today(self):
+        self.assertTrue(date_before_now('23 FEB 2019'))
 
-#    def test_existence(self):
-#        if self.validtags == 'DATE' is True:
-#            self.assertequal(self.argument, datetime.utcnow())
+    def test_types(self):
+        self.assertRaises(TypeError, date_before_now, datetime.today())
 
-
-# class TestBadDate(unittest.TestCase):
-
-#    def test_bdate(self):
-#        if self.validtags == 'DATE' is True:
-#            self.assertequal(self.argument, datetime.utcnow())
-
-
-# class TestGoodDate(unittest.TestCase):
-
-#    def test_gdate(self):
-#        if self.validtags == 'DATE' is True:
-#            self.assertequal(self.argument, datetime.utcnow())
-
-
-# class TestDateToday(unittest.TestCase):
-
-#    def test_Today(self):
-#        if self.validtags == 'DATE' is True:
-#            self.assertequal(self.argument, datetime.utcnow())
-
-
-if __name__ == '__main__':
-    unittest.main()
+    def test_invalid_no_input(self):
+        self.assertRaises(ValueError, date_before_now, 'NA')
 

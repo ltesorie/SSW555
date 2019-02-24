@@ -30,7 +30,7 @@ def date_before_now(date):
     today = datetime.now()
     tbv_date = date
     #    tbv_date = reformat_date(date)
-    if tbv_date > today:
+    if tbv_date > today or tbv_date == today:
         print("Error:" + str(date) + "is after current date" + str(today))
     return tbv_date < today
 
