@@ -54,7 +54,7 @@ class Individual:
     def get_age(self):
         if (self.BIRT == 'NA'):
             self.AGE = 0
-        elif self.BIRT == 'US03 ERROR':
+        elif self.BIRT == 'US03 ERROR' or 'US06 ERROR':
             self.AGE = 0
         elif (self.DEAT == 'NA'):
             today_date = datetime.today()
@@ -214,6 +214,10 @@ def gedcom(ged_file):
                             list_of_fams[curr_fam_ind].MARR = line_ged.argument
                         if tag.upper() == 'DIV':
                             list_of_fams[curr_fam_ind].DIV = line_ged.argument
+                            if not US06(list_of_fams[curr_fam_ind].DIV, list_of_indis[curr_indi_ind].DEAT):
+                                list_of_indis[curr_indi_ind].DEAT = 'US06 ERROR'
+                                list_of_indis[curr_indi_ind].DIV = 'US06 ERROR'
+                                list_of_indis[curr_indi_ind].NAME = " US06 ERROR: " + list_of_indis[curr_indi_ind].NAME
 
                     elif on_indi:
                         if line_ged.tag.upper() == 'DATE':
@@ -234,11 +238,11 @@ def gedcom(ged_file):
                                 list_of_indis[curr_indi_ind].DEAT = 'US03 ERROR'
                                 list_of_indis[curr_indi_ind].BIRT = 'US03 ERROR'
                                 list_of_indis[curr_indi_ind].NAME = "US03 ERROR: " + list_of_indis[curr_indi_ind].NAME
-                            if tag.upper() == 'DIV':
-                                if not US06(list_of_indis[curr_indi_ind].DEAT, list_of_fams[curr_fam_ind].DIV):
-                                    list_of_indis[curr_indi_ind].DEAT = 'US06 ERROR'
-                                    list_of_indis[curr_indi_ind].DIV = 'US06 ERROR'
-                                    list_of_indis[curr_indi_ind].NAME = " US06 ERROR: " + list_of_indis[curr_indi_ind].NAME
+                            # if tag.upper() == 'DIV':
+                            #     if not US06(list_of_indis[curr_indi_ind].DEAT, list_of_fams[curr_fam_ind].DIV):
+                            #         list_of_indis[curr_indi_ind].DEAT = 'US06 ERROR'
+                            #         list_of_indis[curr_indi_ind].DIV = 'US06 ERROR'
+                            #         list_of_indis[curr_indi_ind].NAME = " US06 ERROR: " + list_of_indis[curr_indi_ind].NAME
                         if tag.upper() == 'FAMC':
                             list_of_indis[curr_indi_ind].FAMC = line_ged.argument
                         if tag.upper() == 'FAMS':
