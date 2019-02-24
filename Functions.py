@@ -51,7 +51,7 @@ def US04(marr_date, div_date):
         divorce = datetime.strptime(div_date, '%d %b %Y')
     if divorce < marriage:
         print("Error - US04: Marriage date ", str(marr_date), " occurs after divorce date ", str(div_date))
-        marriage > divorce
+    return divorce > marriage
 
 
 # User Story 06 - Alyson Randall: checks that divorce date occurs before death date

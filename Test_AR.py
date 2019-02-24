@@ -28,7 +28,7 @@ class test(unittest.TestCase):
         self.assertEqual(US04(date2, date1), False)
         self.assertEqual(US04(date3, date4), False)
         self.assertEqual(US04(date4, date3), True)
-        self.assertEqual(US04(date1, date1), False)
+        self.assertEqual(US04(date4, date1), True)
 
 if __name__ == '__main__':
     unittest.main()
