@@ -43,6 +43,14 @@ def US03(birth_date, death_date):
         print(" Error - US03: Individuals's birth date ", str(birth_date), " occurs after death date ", str(death_date))
     return death > birth
 
+# User Story 04 - Alyson Randall: checks that a couple is married before getting a divorce
+def US04(marr_date, div_date):
+    if marr_date and div_date != 'NA':
+        marriage = datetime.strptime(marr_date, '%d %b %Y')
+        divorce = datetime.strptime(div_date, '%d %b %Y')
+        if divorce > marriage:
+            print("Error - US04: Marriage date ", str(marr_date), " occurs after divorce date ", str(div_date))
+        marr > divorce
 
 # User Story 06 - Alyson Randall: checks that divorce date occurs before death date
 def US06(death_date, divorce_date):

@@ -213,9 +213,12 @@ def gedcom(ged_file):
                                 list_of_fams[curr_fam_ind].CHIL.append(line_ged.argument)
                         if tag.upper() == 'MARR':
                             list_of_fams[curr_fam_ind].MARR = line_ged.argument
-
+                            if tag.upper() == 'DIV':
+                                if not US04(list_of_fams[curr_fam_ind].MARR, list_of_fams[curr_fam_ind].DIV):
+                                    list_of_fams[curr_fam_ind].DIV = 'NA'
                         if tag.upper() == 'DIV':
                             list_of_fams[curr_fam_ind].DIV = line_ged.argument
+
 
 
                     elif on_indi:
@@ -237,16 +240,16 @@ def gedcom(ged_file):
                                 list_of_indis[curr_indi_ind].DEAT = 'US03 ERROR'
                                 list_of_indis[curr_indi_ind].BIRT = 'US03 ERROR'
                                 list_of_indis[curr_indi_ind].NAME = "US03 ERROR: " + list_of_indis[curr_indi_ind].NAME
-                            if line_ged.argument != 'NA':
-                                if list_of_fams[curr_fam_ind].DIV != 'NA':
-                                    if US06(list_of_indis[curr_indi_ind].DEAT, list_of_fams[curr_fam_ind].DIV):
-                                        print('WORKS')
-                                        list_of_indis[curr_indi_ind].DEAT = 'US06 ERROR'
-                                        list_of_fams[curr_fam_ind].DIV = 'US06 ERROR'
-                                        list_of_indis[curr_indi_ind].NAME = " US06 ERROR: " + list_of_indis[curr_indi_ind].NAME
-                                        list_of_indis[curr_indi_ind].NAME = " US06 ERROR: " + list_of_indis[curr_indi_ind].NAME
-                                        list_of_fams[curr_fam_ind].HUSB = "US06 ERROR"
-                                        list_of_fams[curr_fam_ind].WIFE = "US06 ERROR"
+                            # if line_ged.argument != 'NA':
+                            #     if list_of_fams[curr_fam_ind].DIV != 'NA':
+                            #         if US06(list_of_indis[curr_indi_ind].DEAT, list_of_fams[curr_fam_ind].DIV):
+                            #             print('WORKS')
+                            #             list_of_indis[curr_indi_ind].DEAT = 'US06 ERROR'
+                            #             list_of_fams[curr_fam_ind].DIV = 'US06 ERROR'
+                            #             list_of_indis[curr_indi_ind].NAME = " US06 ERROR: " + list_of_indis[curr_indi_ind].NAME
+                            #             list_of_indis[curr_indi_ind].NAME = " US06 ERROR: " + list_of_indis[curr_indi_ind].NAME
+                            #             list_of_fams[curr_fam_ind].HUSB = "US06 ERROR"
+                            #             list_of_fams[curr_fam_ind].WIFE = "US06 ERROR"
                         if tag.upper() == 'FAMC':
                             list_of_indis[curr_indi_ind].FAMC = line_ged.argument
                         if tag.upper() == 'FAMS':
