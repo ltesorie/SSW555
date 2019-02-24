@@ -50,7 +50,7 @@ def US04(marr_date, div_date):
         marriage = datetime.strptime(marr_date, '%d %b %Y')
         divorce = datetime.strptime(div_date, '%d %b %Y')
     if divorce < marriage:
-        print("Error - US04: Marriage date ", str(marriage), " occurs after divorce date ", str(divorce))
+        print("Error - US04: Marriage date ", str(marr_date), " occurs after divorce date ", str(div_date))
         marriage > divorce
 
 
