@@ -39,27 +39,29 @@ def US03(birth_date, death_date):
     birth = datetime.strptime(birth_date, '%d %b %Y')
     death = datetime.strptime(death_date, '%d %b %Y')
     if death < birth:
-        print(" Error - US03: ", "individuals's birth date ", str(birth_date), " occurs after death date ", str(death_date), ".")
+        print(" Error - US03: Individuals's birth date ", str(birth_date), " occurs after death date ", str(death_date))
     return death > birth
 
 # User Story 06 - Alyson Randall: checks that divorce date occurs before death date
-def US06(divorcedate, deathdate):
-    divorce = datetime.strptime(divorcedate, '%d %b %Y')
-    death = datetime.strptime(deathdate, '%d %b %Y')
-    if death < divorce:
-        print("Error - US06: Divorce date", str(divorcedate), " occurs after death date ", str(deathdate), ".")
-    return death > divorce
+def US06(death_date, divorce_date):
+    divorce = datetime.strptime(divorce_date, '%d %b %Y')
+    if death_date != 'NA':
+        death = datetime.strptime(death_date, '%d %b %Y')
+        if death < divorce:
+            print("Error - US06: Divorce date", str(divorce_date), " occurs after death date ", str(death_date))
+        return death > divorce
 
 
 # User Story 08 - Madeline Rys: checks birth date of child to ensure it is after marriage of parents
 def birth_before_marriage(birthdate, marrdate):
     birth = datetime.strptime(birthdate, '%d %b %Y')
-    marr = datetime.strptime(marrdate, '%d %b %Y')
+    if marrdate != 'NA':
+        marr = datetime.strptime(marrdate, '%d %b %Y')
 
-    if birth < marr:
-        print("Error - US08: child's birth date ", str(birthdate) + " is before parents' marriage date ", str(marrdate))
+        if birth < marr:
+            print("Error - US08: child's birth date ", str(birthdate) + " is before parents' marriage date ", str(marrdate))
 
-    return birth < marr
+        return birth < marr
 
 # User Story 09 - Madeline Rys: checks birth date of child to ensure it is before death of either parent
 def birth_before_death(birthdate, momdeath, daddeath):

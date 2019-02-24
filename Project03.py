@@ -10,7 +10,7 @@ from Functions import *
 
 # CREATES A FAMILY BASED OFF OF TAGS
 class Family:
-    def __init__(self, familyid, husband='NA', wife='NA', childids=[], marriagedate="1 JAN 1970", divorcedate="NA"):
+    def __init__(self, familyid, husband='NA', wife='NA', childids=[], marriagedate='NA', divorcedate="NA"):
         self.FAM = familyid
         self.HUSB = husband
         self.HNAME = 'NA'
@@ -34,6 +34,7 @@ class Family:
                 return indi.DEAT
 
 
+
 # CREATES AN INDIVIDUAL BASED OFF OF TAGS
 class Individual:
     def __init__(self, indi, name='NA', gender='NA', birth='1 JAN 1970', age=0, death='NA', child='NA', spouse='NA'):
@@ -52,6 +53,8 @@ class Individual:
 
     def get_age(self):
         if (self.BIRT == 'NA'):
+            self.AGE = 0
+        elif self.BIRT == 'US03 ERROR':
             self.AGE = 0
         elif (self.DEAT == 'NA'):
             today_date = datetime.today()
@@ -135,8 +138,8 @@ def print_individual_table(list_of_indis):
             indi.FAMC,
             indi.FAMS
         ])
-    print("Individuals\n")
-    print(table)
+    print("\nIndividuals")
+    print(table, "\n")
 
 
 # PRINT FAMILY TABLE
@@ -154,7 +157,7 @@ def print_family_table(list_of_fams):
             fam.WNAME,
             fam.CHIL
         ])
-    print("Families \n")
+    print("Families")
     print(table)
 
 
@@ -228,14 +231,14 @@ def gedcom(ged_file):
                         if tag.upper() == 'DEAT':
                             list_of_indis[curr_indi_ind].DEAT = line_ged.argument
                             if not US03(list_of_indis[curr_indi_ind].BIRT, list_of_indis[curr_indi_ind].DEAT):
-                                list_of_indis[curr_indi_ind].DEAT = 'NA'
-                                list_of_indis[curr_indi_ind].BIRT = 'NA'
-                                list_of_indis[curr_indi_ind].NAME = "US03 ERROR"
+                                list_of_indis[curr_indi_ind].DEAT = 'US03 ERROR'
+                                list_of_indis[curr_indi_ind].BIRT = 'US03 ERROR'
+                                list_of_indis[curr_indi_ind].NAME = "US03 ERROR: " + list_of_indis[curr_indi_ind].NAME
                             if tag.upper() == 'DIV':
-                                if not US06(list_of_fams[curr_fam_ind].DIV, list_of_indis[curr_indi_ind].DEAT):
-                                    list_of_indis[curr_indi_ind].DEAT = 'NA'
-                                    list_of_indis[curr_indi_ind].DIV = 'NA'
-                                    list_of_indis[curr_indi_ind].NAME = "US06 ERROR"
+                                if not US06(list_of_indis[curr_indi_ind].DEAT, list_of_fams[curr_fam_ind].DIV):
+                                    list_of_indis[curr_indi_ind].DEAT = 'US06 ERROR'
+                                    list_of_indis[curr_indi_ind].DIV = 'US06 ERROR'
+                                    list_of_indis[curr_indi_ind].NAME = " US06 ERROR: " + list_of_indis[curr_indi_ind].NAME
                         if tag.upper() == 'FAMC':
                             list_of_indis[curr_indi_ind].FAMC = line_ged.argument
                         if tag.upper() == 'FAMS':
@@ -251,7 +254,7 @@ def gedcom(ged_file):
         if parmar != '':
             birth_before_marriage(birthdate=indi.BIRT, marrdate=parmar)
         pardeaths = indi.get_parents_death_by_id(list_of_fams, list_of_indis)
-        birth_before_death(birthdate = indi.BIRT, momdeath = pardeaths[0], daddeath = pardeaths[1])
+       # birth_before_death(birthdate = indi.BIRT, momdeath = pardeaths[0], daddeath = pardeaths[1])
 
     for fam in list_of_fams:
         fam.get_name_by_id(list_of_indis, )
@@ -265,5 +268,8 @@ def main(filename):
     gedcom(ged_file)
 
 
+
 filename = 'My_Family.ged'
 main(filename);
+
+
