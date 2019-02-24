@@ -58,6 +58,8 @@ class Individual:
             self.AGE = 0
         elif self.BIRT == 'US06 ERROR':
             self.AGE = 0
+        elif self.BIRT == 'US07 Error':
+            self.AGE = 0
         elif (self.DEAT == 'NA'):
             today_date = datetime.today()
             birth_date = datetime.strptime(self.BIRT, '%d %b %Y')
@@ -264,7 +266,7 @@ def gedcom(ged_file):
         if parmar != '':
             birth_before_marriage(birthdate=indi.BIRT, marrdate=parmar)
         pardeaths = indi.get_parents_death_by_id(list_of_fams, list_of_indis)
-        # birth_before_death(birthdate = indi.BIRT, momdeath = pardeaths[0], daddeath = pardeaths[1])
+        birth_before_death(birthdate = indi.BIRT, momdeath = pardeaths[0], daddeath = pardeaths[1])
 
     for fam in list_of_fams:
         fam.get_name_by_id(list_of_indis, )
