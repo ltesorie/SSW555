@@ -142,7 +142,7 @@ def print_individual_table(list_of_indis):
             indi.FAMS
         ])
     print("\nIndividuals")
-    print(table, "\n")
+    print(table)
 
 
 # PRINT FAMILY TABLE
