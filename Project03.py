@@ -243,7 +243,12 @@ def gedcom(ged_file):
                                         print('WORKS')
                                         list_of_indis[curr_indi_ind].DEAT = 'US06 ERROR'
                                         list_of_fams[curr_fam_ind].DIV = 'US06 ERROR'
+<<<<<<< HEAD
                                         list_of_indis[curr_indi_ind].NAME = " US06 ERROR: " + list_of_indis[curr_indi_ind].NAME
+=======
+                                        list_of_indis[curr_indi_ind].NAME = " US06 ERROR: " + list_of_indis[
+                                            curr_indi_ind].NAME
+>>>>>>> 662a8f7fd4bd7a27dc1117b53bf4324d39743a34
                                         list_of_fams[curr_fam_ind].HUSB = "US06 ERROR"
                                         list_of_fams[curr_fam_ind].WIFE = "US06 ERROR"
                         if tag.upper() == 'FAMC':
@@ -277,4 +282,8 @@ def main(filename):
 
 filename = 'My_Family.ged'
 
+<<<<<<< HEAD
 main(filename);
+=======
+main(filename);
+>>>>>>> 662a8f7fd4bd7a27dc1117b53bf4324d39743a34

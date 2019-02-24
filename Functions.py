@@ -34,6 +34,7 @@ def date_before_now(date):
         print("Error:" + str(date) + "is after current date" + str(today))
     return tbv_date < today
 
+
 # User Story 03 - Alyson Randall: checks that birth date occurs before death date
 def US03(birth_date, death_date):
     birth = datetime.strptime(birth_date, '%d %b %Y')
@@ -41,6 +42,7 @@ def US03(birth_date, death_date):
     if death < birth:
         print(" Error - US03: Individuals's birth date ", str(birth_date), " occurs after death date ", str(death_date))
     return death > birth
+
 
 # User Story 06 - Alyson Randall: checks that divorce date occurs before death date
 def US06(death_date, divorce_date):
@@ -59,16 +61,18 @@ def birth_before_marriage(birthdate, marrdate):
         marr = datetime.strptime(marrdate, '%d %b %Y')
 
         if birth < marr:
-            print("Error - US08: child's birth date ", str(birthdate) + " is before parents' marriage date ", str(marrdate))
+            print("Error - US08: child's birth date ", str(birthdate) + " is before parents' marriage date ",
+                  str(marrdate))
 
         return birth < marr
+
 
 # User Story 09 - Madeline Rys: checks birth date of child to ensure it is before death of either parent
 def birth_before_death(birthdate, momdeath, daddeath):
     result = True
 
     birth = datetime.strptime(birthdate, '%d %b %Y')
-    
+
     if momdeath == 'NA' and daddeath == 'NA':
         result = True
     elif momdeath == 'NA':
@@ -88,7 +92,7 @@ def birth_before_death(birthdate, momdeath, daddeath):
         mom = datetime.strptime(momdeath, '%d %b %Y')
         if birth < mom and birth < dad9months:
             result = False
-            print("Error - US09: child's birth date ", str(birthdate) + " is after parents' death dates ", str(momdeath), str(daddeath))
-
+            print("Error - US09: child's birth date ", str(birthdate) + " is after parents' death dates ",
+                  str(momdeath), str(daddeath))
 
     return result
