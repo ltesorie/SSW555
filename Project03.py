@@ -54,7 +54,9 @@ class Individual:
     def get_age(self):
         if (self.BIRT == 'NA'):
             self.AGE = 0
-        elif self.BIRT == 'US03 ERROR' or 'US06 ERROR':
+        elif self.BIRT == 'US03 ERROR':
+            self.AGE = 0
+        elif self.BIRT == 'US06 ERROR':
             self.AGE = 0
         elif (self.DEAT == 'NA'):
             today_date = datetime.today()
@@ -212,12 +214,19 @@ def gedcom(ged_file):
                                 list_of_fams[curr_fam_ind].CHIL.append(line_ged.argument)
                         if tag.upper() == 'MARR':
                             list_of_fams[curr_fam_ind].MARR = line_ged.argument
+                            if line_ged.argument != 'NA':
+                                if tag.upper() == 'DIV' and tag.upper() != 'NA':
+                                    if not US06(list_of_fams[curr_fam_ind].DIV, list_of_indis[curr_indi_ind].DEAT):
+                                        list_of_indis[curr_indi_ind].DEAT = 'US06 ERROR'
+                                        list_of_indis[curr_indi_ind].DIV = 'US06 ERROR'
+                                        list_of_indis[curr_indi_ind].NAME = " US06 ERROR: " + list_of_indis[curr_indi_ind].NAME
+
                         if tag.upper() == 'DIV':
                             list_of_fams[curr_fam_ind].DIV = line_ged.argument
-                            if not US06(list_of_fams[curr_fam_ind].DIV, list_of_indis[curr_indi_ind].DEAT):
-                                list_of_indis[curr_indi_ind].DEAT = 'US06 ERROR'
-                                list_of_indis[curr_indi_ind].DIV = 'US06 ERROR'
-                                list_of_indis[curr_indi_ind].NAME = " US06 ERROR: " + list_of_indis[curr_indi_ind].NAME
+                            # if not US06(list_of_fams[curr_fam_ind].DIV, list_of_indis[curr_indi_ind].DEAT):
+                            #     list_of_indis[curr_indi_ind].DEAT = 'US06 ERROR'
+                            #     list_of_indis[curr_indi_ind].DIV = 'US06 ERROR'
+                            #     list_of_indis[curr_indi_ind].NAME = " US06 ERROR: " + list_of_indis[curr_indi_ind].NAME
 
                     elif on_indi:
                         if line_ged.tag.upper() == 'DATE':
@@ -258,7 +267,7 @@ def gedcom(ged_file):
         if parmar != '':
             birth_before_marriage(birthdate=indi.BIRT, marrdate=parmar)
         pardeaths = indi.get_parents_death_by_id(list_of_fams, list_of_indis)
-       # birth_before_death(birthdate = indi.BIRT, momdeath = pardeaths[0], daddeath = pardeaths[1])
+        # birth_before_death(birthdate = indi.BIRT, momdeath = pardeaths[0], daddeath = pardeaths[1])
 
     for fam in list_of_fams:
         fam.get_name_by_id(list_of_indis, )
