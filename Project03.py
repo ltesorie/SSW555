@@ -213,12 +213,11 @@ def gedcom(ged_file):
                                 list_of_fams[curr_fam_ind].CHIL.append(line_ged.argument)
                         if tag.upper() == 'MARR':
                             list_of_fams[curr_fam_ind].MARR = line_ged.argument
-                            if tag.upper() == 'DIV':
-                                if not US04(list_of_fams[curr_fam_ind].MARR, list_of_fams[curr_fam_ind].DIV):
-                                    list_of_fams[curr_fam_ind].DIV = 'NA'
                         if tag.upper() == 'DIV':
                             list_of_fams[curr_fam_ind].DIV = line_ged.argument
-
+                            if line_ged.argument != 'NA' and list_of_fams[curr_fam_ind].MARR != 'NA':
+                                if not US04(list_of_fams[curr_fam_ind].MARR, list_of_fams[curr_fam_ind].DIV):
+                                    list_of_fams[curr_fam_ind].DIV = 'US04 ERROR'
 
 
                     elif on_indi:
@@ -281,6 +280,4 @@ def main(filename):
 
 filename = 'My_Family.ged'
 
-
 main(filename);
-
