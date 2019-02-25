@@ -89,19 +89,19 @@ def birth_before_death(birthdate, momdeath, daddeath):
         elif momdeath == 'NA':
             dad = datetime.strptime(daddeath, '%d %b %Y')
             dad9months = dad - relativedelta(months=9)
-            if dad9months > birth:
+            if dad9months < birth:
                 print("Error - US09: child's birth date ", str(birthdate) + " is after father's death date ", str(daddeath))
                 result = False
         elif daddeath == 'NA':
             mom = datetime.strptime(momdeath, '%d %b %Y')
-            if mom > birth:
+            if mom < birth:
                 result = False
                 print("Error - US09: child's birth date ", str(birthdate) + " is after mother's death date ", str(momdeath))
         else:
             dad = datetime.strptime(daddeath, '%d %b %Y')
             dad9months = dad - relativedelta(months=9)
             mom = datetime.strptime(momdeath, '%d %b %Y')
-            if birth < mom and birth < dad9months:
+            if birth > mom and birth > dad9months:
                 result = False
                 print("Error - US09: child's birth date ", str(birthdate) + " is after parents' death dates ",
                       str(momdeath), str(daddeath))
