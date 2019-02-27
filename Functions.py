@@ -1,13 +1,11 @@
 from datetime import datetime
-from datetime import date
 from dateutil.relativedelta import relativedelta
 
 
 # User Story 1 - Laura T: checks dates to make sure it has occurred
 def date_before_now(date):
-    date = datetime.strptime(date, '%d %b %Y')
+    tbv_date = datetime.strptime(date, '%d %b %Y')
     today = datetime.now()
-    tbv_date = date
     if not tbv_date <= today:
         print("Error:" + str(date) + "is after current date" + str(today))
     return tbv_date < today

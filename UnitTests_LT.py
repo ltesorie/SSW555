@@ -18,7 +18,7 @@ class TestDatesBeforeNow(unittest.TestCase):
         self.assertFalse(date_before_now('4 JAN 2025'))
 
     def test_invalid_date_today(self):
-        self.assertFalse(date_before_now('27 FEB 2019'))
+        self.assertTrue(date_before_now('27 FEB 2019'))
 
     def test_types(self):
         self.assertRaises(TypeError, date_before_now, datetime.today())
