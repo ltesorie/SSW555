@@ -13,11 +13,12 @@ def date_before_now(date):
 
 # User Story 03 - Alyson Randall: checks that birth date occurs before death date
 def US03(birth_date, death_date):
-    birth = datetime.strptime(birth_date, '%d %b %Y')
-    death = datetime.strptime(death_date, '%d %b %Y')
-    if death < birth:
-        print(" Error - US03: Individuals's birth date ", str(birth_date), " occurs after death date ", str(death_date))
-    return death > birth
+    if birth_date and death_date != 'NA':
+        birth = datetime.strptime(birth_date, '%d %b %Y')
+        death = datetime.strptime(death_date, '%d %b %Y')
+        if death < birth:
+            print(" Error - US03: Individuals's birth date ", str(birth_date), " occurs after death date ", str(death_date))
+        return death > birth
 
 
 # User Story 04 - Alyson Randall: checks that a couple is married before getting a divorce
@@ -49,7 +50,6 @@ def birth_before_marriage(birthdate, marrdate):
         if birth < marr:
             print("Error - US08: child's birth date ", str(birthdate) + " is before parents' marriage date ",
                   str(marrdate))
-
         return birth < marr
 
 
