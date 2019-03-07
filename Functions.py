@@ -50,7 +50,9 @@ def birth_before_marriage(birthdate, marrdate):
         if birth < marr:
             print("Error - US08: child's birth date ", str(birthdate) + " is before parents' marriage date ",
                   str(marrdate))
-        return birth < marr
+        return birth > marr
+    else:
+        return False
 
 
 # User Story 09 - Madeline Rys: checks birth date of child to ensure it is before death of either parent
