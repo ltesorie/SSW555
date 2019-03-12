@@ -212,8 +212,12 @@ def gedcom(ged_file):
                         if tag.upper() == 'CHIL':
                             if line_ged.argument not in list_of_fams[curr_fam_ind].CHIL:
                                 list_of_fams[curr_fam_ind].CHIL.append(line_ged.argument)
+                            # if US18(list_of_indis[curr_indi_ind].FAMC, list_of_fams[curr_fam_ind].HUSB, list_of_fams[curr_fam_ind].WIFE):
+                            #     list_of_fams[curr_fam_ind].HUSB = list_of_fams[curr_fam_ind].HUSB
+                            #     list_of_fams[curr_fam_ind].WIFE = list_of_fams[curr_fam_ind].WIFE
                         if tag.upper() == 'MARR':
                             list_of_fams[curr_fam_ind].MARR = line_ged.argument
+
                         if tag.upper() == 'DIV':
                             list_of_fams[curr_fam_ind].DIV = line_ged.argument
                             if line_ged.argument != 'NA' and list_of_fams[curr_fam_ind].MARR != 'NA':
@@ -267,8 +271,22 @@ def gedcom(ged_file):
         pardeaths = indi.get_parents_death_by_id(list_of_fams, list_of_indis)
         birth_before_death(birthdate = indi.BIRT, momdeath = pardeaths[0], daddeath = pardeaths[1])
 
+
     for fam in list_of_fams:
         fam.get_name_by_id(list_of_indis, )
+
+    # User Story 18 - Alyson Randall: Siblings should not marry
+    def US18(sibDad, sibMom):
+        if sibDad != 'NA':
+            husband_fam = indi.FAMC
+            if sibMom != 'NA':
+                wife_fam = indi.FAMC
+                if husband_fam == wife_fam:
+                    print("Error - US18: Siblings,", str(sibDad), "and", str(sibMom), ", should not be married.")
+                return husband_fam != wife_fam
+
+    US18(fam.HUSB, fam.WIFE)
+
 
     print_individual_table(list_of_indis)
     print_family_table(list_of_fams)
