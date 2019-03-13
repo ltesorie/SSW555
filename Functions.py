@@ -42,6 +42,7 @@ def US06(death_date, divorce_date):
         return True
 
 
+
 # User Story 08 - Madeline Rys: checks birth date of child to ensure it is after marriage of parents
 def birth_before_marriage(birthdate, marrdate):
     birth = datetime.strptime(birthdate, '%d %b %Y')
@@ -101,6 +102,6 @@ def US18(sibDad, sibMom, list_of_fams):
         if sibMom in fam.CHIL:
             wife_fam = fam
             if husband_fam == wife_fam:
-                print("Error - US18: Siblings,", sibDad, "and", sibMom, ", should not be married.")
+                print("Error - US18: Siblings", sibDad, "and", sibMom, "should not be married.")
                 return True
             return False

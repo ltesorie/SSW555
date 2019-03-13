@@ -102,6 +102,9 @@ class Individual:
         return [mom, dad]
 
 
+
+
+
 class Gedcom:
     def __init__(self, level, tag, ged_id="", argument=""):
         self.level = level
@@ -258,7 +261,7 @@ def gedcom(ged_file):
 
     for indi in list_of_indis:
         for fam in list_of_fams:
-            US06(indi.DEAT, fam.DIV)
+            US06(husbDeath=indi.DEAT, wifeDeath=indi.DEAT, divorce_date=fam.DIV, list_of_indis=list_of_indis)
 
     US18(fam.HUSB, fam.WIFE, list_of_fams)
 
