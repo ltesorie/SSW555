@@ -71,8 +71,8 @@ class Individual:
                     (death_date.month, death_date.day) < (birth_date.month, birth_date.day))
         # US07 Story
         if self.AGE >= 150:
-            self.BIRT = 'US07 Error'
-            self.DEAT = 'US07 Error'
+            # self.BIRT = 'US07 Error'
+            # self.DEAT = 'US07 Error'
             self.AGE = 'XX'
             print("Error - US07 Error: Individual is over 150 years old")
 
@@ -211,13 +211,10 @@ def gedcom(ged_file):
                         if tag.upper() == 'CHIL':
                             if line_ged.argument not in list_of_fams[curr_fam_ind].CHIL:
                                 list_of_fams[curr_fam_ind].CHIL.append(line_ged.argument)
-                            # US18(list_of_indis[curr_indi_ind].FAMC, list_of_fams[curr_fam_ind].HUSB, list_of_fams[curr_fam_ind].WIFE)
                         if tag.upper() == 'MARR':
                             list_of_fams[curr_fam_ind].MARR = line_ged.argument
                         if tag.upper() == 'DIV':
                             list_of_fams[curr_fam_ind].DIV = line_ged.argument
-                            if line_ged.argument != 'NA' and list_of_fams[curr_fam_ind].MARR != 'NA':
-                                US04(list_of_fams[curr_fam_ind].MARR, list_of_fams[curr_fam_ind].DIV)
 
 
 
@@ -236,9 +233,6 @@ def gedcom(ged_file):
                             list_of_indis[curr_indi_ind].BIRT = line_ged.argument
                         if tag.upper() == 'DEAT':
                             list_of_indis[curr_indi_ind].DEAT = line_ged.argument
-                            if not US03(list_of_indis[curr_indi_ind].BIRT, list_of_indis[curr_indi_ind].DEAT):
-                                list_of_indis[curr_indi_ind].NAME = "US03 ERROR: " + list_of_indis[curr_indi_ind].NAME
-                            US06(list_of_indis[curr_indi_ind].DEAT, list_of_fams[curr_fam_ind].DIV)
                         if tag.upper() == 'FAMC':
                             list_of_indis[curr_indi_ind].FAMC = line_ged.argument
                         if tag.upper() == 'FAMS':
@@ -249,29 +243,24 @@ def gedcom(ged_file):
             date_type = line_ged.tag
 
     for indi in list_of_indis:
+        US03(indi.BIRT, indi.DEAT)
         indi.get_age()
         parmar = indi.get_parents_marriage_by_id(list_of_fams)
         if parmar != '':
             birth_before_marriage(birthdate=indi.BIRT, marrdate=parmar)
         pardeaths = indi.get_parents_death_by_id(list_of_fams, list_of_indis)
-        birth_before_death(birthdate = indi.BIRT, momdeath = pardeaths[0], daddeath = pardeaths[1])
+        birth_before_death(birthdate=indi.BIRT, momdeath=pardeaths[0], daddeath=pardeaths[1])
 
 
     for fam in list_of_fams:
         fam.get_name_by_id(list_of_indis, )
-    #
-    # # User Story 18 - Alyson Randall: Siblings should not marry
-    # def US18(sibDad, sibMom, fam):
-    #     if sibDad != 'NA':
-    #         husband_fam = indi.FAMC
-    #         if sibMom != 'NA':
-    #             wife_fam = indi.FAMC
-    #             if husband_fam == wife_fam:
-    #                 print("Error - US18: Siblings,", sibDad, "and", sibMom, ", should not be married.")
-    #             return husband_fam != wife_fam
-    #
-    # US18(fam.HUSB, fam.WIFE)
+        US04(fam.MARR, fam.DIV)
 
+    for indi in list_of_indis:
+        for fam in list_of_fams:
+            US06(indi.DEAT, fam.DIV)
+
+    US18(fam.HUSB, fam.WIFE, list_of_fams)
 
     print_individual_table(list_of_indis)
     print_family_table(list_of_fams)

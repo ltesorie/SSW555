@@ -26,9 +26,9 @@ def US04(marr_date, div_date):
     if marr_date and div_date != 'NA':
         marriage = datetime.strptime(marr_date, '%d %b %Y')
         divorce = datetime.strptime(div_date, '%d %b %Y')
-    if divorce < marriage:
-        print("Error - US04: Marriage date ", str(marr_date), " occurs after divorce date ", str(div_date))
-    return divorce > marriage
+        if divorce < marriage:
+            print("Error - US04: Marriage date ", str(marr_date), " occurs after divorce date ", str(div_date))
+        return divorce > marriage
 
 
 # User Story 06 - Alyson Randall: checks that divorce date occurs before death date
@@ -38,7 +38,8 @@ def US06(death_date, divorce_date):
         death = datetime.strptime(death_date, '%d %b %Y')
         if death < divorce:
             print("Error - US06: Divorce date", str(divorce_date), " occurs after death date ", str(death_date))
-        return death > divorce
+            return False
+        return True
 
 
 # User Story 08 - Madeline Rys: checks birth date of child to ensure it is after marriage of parents
@@ -91,13 +92,15 @@ def birth_before_death(birthdate, momdeath, daddeath):
     finally:
         return result
 
+
 # User Story 18 - Alyson Randall: Siblings should not marry
-def US18(fam, sibDad, sibMom):
-    if sibDad != 'NA':
-        husband_fam = fam
-        if sibMom != 'NA':
+def US18(sibDad, sibMom, list_of_fams):
+    for fam in list_of_fams:
+        if sibDad in fam.CHIL:
+            husband_fam = fam
+        if sibMom in fam.CHIL:
             wife_fam = fam
             if husband_fam == wife_fam:
                 print("Error - US18: Siblings,", sibDad, "and", sibMom, ", should not be married.")
-            return husband_fam != wife_fam
-
+                return True
+            return False
