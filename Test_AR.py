@@ -2,7 +2,7 @@
 # User Story Tests
 
 import unittest
-from Functions import US03, US04
+from Functions import US03, US04, US06, US18
 
 
 class test(unittest.TestCase):
@@ -29,6 +29,22 @@ class test(unittest.TestCase):
         self.assertEqual(US04(date3, date4), False)
         self.assertEqual(US04(date4, date3), True)
         self.assertEqual(US04(date4, date1), True)
+
+    def test_US06(self):
+        husbDeath1 = "24 FEB 2019"
+        husbDeath2 = "13 MAY 2032"
+        husbDeath3 = "9 NOV 2011"
+        wifeDeath1 = "01 NOV 1995"
+        wifeDeath2 = "17 DEC 1996"
+        wifeDeath3 = "26 MAR 2013"
+        divorceDate1 = "01 JAN 2018"
+        divorceDate2 = "02 FEB 2035"
+        divorceDate3 = "01 NOV 1990"
+        divorceDate4 = "19 DEC 2000"
+
+        self.assertEqual(US06(husbDeath1, wifeDeath1, divorceDate1), False)
+        self.assertEqual(US06(husbDeath2, wifeDeath2, divorceDate2), False)
+        self.assertEqual(US06(husbDeath3, wifeDeath3, divorceDate3), True)
 
 if __name__ == '__main__':
     unittest.main()
