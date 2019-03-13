@@ -91,5 +91,13 @@ def birth_before_death(birthdate, momdeath, daddeath):
     finally:
         return result
 
-
+# User Story 18 - Alyson Randall: Siblings should not marry
+def US18(fam, sibDad, sibMom):
+    if sibDad != 'NA':
+        husband_fam = fam
+        if sibMom != 'NA':
+            wife_fam = fam
+            if husband_fam == wife_fam:
+                print("Error - US18: Siblings,", sibDad, "and", sibMom, ", should not be married.")
+            return husband_fam != wife_fam
 

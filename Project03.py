@@ -202,7 +202,6 @@ def gedcom(ged_file):
                     if on_fam:
                         if line_ged.tag.upper() == 'DATE':
                             line_ged.tag = date_type
-
                         tag = line_ged.tag
 
                         if tag.upper() == 'HUSB':
@@ -212,12 +211,9 @@ def gedcom(ged_file):
                         if tag.upper() == 'CHIL':
                             if line_ged.argument not in list_of_fams[curr_fam_ind].CHIL:
                                 list_of_fams[curr_fam_ind].CHIL.append(line_ged.argument)
-                            # if US18(list_of_indis[curr_indi_ind].FAMC, list_of_fams[curr_fam_ind].HUSB, list_of_fams[curr_fam_ind].WIFE):
-                            #     list_of_fams[curr_fam_ind].HUSB = list_of_fams[curr_fam_ind].HUSB
-                            #     list_of_fams[curr_fam_ind].WIFE = list_of_fams[curr_fam_ind].WIFE
+                            # US18(list_of_indis[curr_indi_ind].FAMC, list_of_fams[curr_fam_ind].HUSB, list_of_fams[curr_fam_ind].WIFE)
                         if tag.upper() == 'MARR':
                             list_of_fams[curr_fam_ind].MARR = line_ged.argument
-
                         if tag.upper() == 'DIV':
                             list_of_fams[curr_fam_ind].DIV = line_ged.argument
                             if line_ged.argument != 'NA' and list_of_fams[curr_fam_ind].MARR != 'NA':
@@ -241,19 +237,14 @@ def gedcom(ged_file):
                         if tag.upper() == 'DEAT':
                             list_of_indis[curr_indi_ind].DEAT = line_ged.argument
                             if not US03(list_of_indis[curr_indi_ind].BIRT, list_of_indis[curr_indi_ind].DEAT):
-                                list_of_indis[curr_indi_ind].DEAT = 'US03 ERROR'
-                                list_of_indis[curr_indi_ind].BIRT = 'US03 ERROR'
                                 list_of_indis[curr_indi_ind].NAME = "US03 ERROR: " + list_of_indis[curr_indi_ind].NAME
-                            # if line_ged.argument != 'NA':
-                            #     if list_of_fams[curr_fam_ind].DIV != 'NA':
-                            #         if US06(list_of_indis[curr_indi_ind].DEAT, list_of_fams[curr_fam_ind].DIV):
-                            #             print('WORKS')
-                            #             list_of_indis[curr_indi_ind].DEAT = 'US06 ERROR'
-                            #             list_of_fams[curr_fam_ind].DIV = 'US06 ERROR'
-                            #             list_of_indis[curr_indi_ind].NAME = " US06 ERROR: " + list_of_indis[curr_indi_ind].NAME
-                            #             list_of_indis[curr_indi_ind].NAME = " US06 ERROR: " + list_of_indis[curr_indi_ind].NAME
-                            #             list_of_fams[curr_fam_ind].HUSB = "US06 ERROR"
-                            #             list_of_fams[curr_fam_ind].WIFE = "US06 ERROR"
+                            if line_ged.argument != 'NA':
+                                if not US06(list_of_indis[curr_indi_ind].DEAT, list_of_fams[curr_fam_ind].DIV):
+                                    print('WORKS')
+                                    list_of_indis[curr_indi_ind].DEAT = 'US06 ERROR'
+                                    list_of_fams[curr_fam_ind].DIV = 'US06 ERROR'
+                                    list_of_indis[curr_indi_ind].NAME = " US06 ERROR: " + list_of_indis[curr_indi_ind].NAME
+                                    list_of_indis[curr_indi_ind].NAME = " US06 ERROR: " + list_of_indis[curr_indi_ind].NAME
                         if tag.upper() == 'FAMC':
                             list_of_indis[curr_indi_ind].FAMC = line_ged.argument
                         if tag.upper() == 'FAMS':
@@ -274,18 +265,18 @@ def gedcom(ged_file):
 
     for fam in list_of_fams:
         fam.get_name_by_id(list_of_indis, )
-
-    # User Story 18 - Alyson Randall: Siblings should not marry
-    def US18(sibDad, sibMom):
-        if sibDad != 'NA':
-            husband_fam = indi.FAMC
-            if sibMom != 'NA':
-                wife_fam = indi.FAMC
-                if husband_fam == wife_fam:
-                    print("Error - US18: Siblings,", str(sibDad), "and", str(sibMom), ", should not be married.")
-                return husband_fam != wife_fam
-
-    US18(fam.HUSB, fam.WIFE)
+    #
+    # # User Story 18 - Alyson Randall: Siblings should not marry
+    # def US18(sibDad, sibMom, fam):
+    #     if sibDad != 'NA':
+    #         husband_fam = indi.FAMC
+    #         if sibMom != 'NA':
+    #             wife_fam = indi.FAMC
+    #             if husband_fam == wife_fam:
+    #                 print("Error - US18: Siblings,", sibDad, "and", sibMom, ", should not be married.")
+    #             return husband_fam != wife_fam
+    #
+    # US18(fam.HUSB, fam.WIFE)
 
 
     print_individual_table(list_of_indis)
