@@ -17,7 +17,7 @@ def US03(birth_date, death_date):
         birth = datetime.strptime(birth_date, '%d %b %Y')
         death = datetime.strptime(death_date, '%d %b %Y')
         if death < birth:
-            print(" Error - US03: Individuals's birth date ", str(birth_date), " occurs after death date ", str(death_date))
+            print("Error - US03: Individuals's birth date ", str(birth_date), " occurs after death date ", str(death_date))
         return death > birth
 
 

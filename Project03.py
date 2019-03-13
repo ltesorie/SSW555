@@ -217,8 +217,8 @@ def gedcom(ged_file):
                         if tag.upper() == 'DIV':
                             list_of_fams[curr_fam_ind].DIV = line_ged.argument
                             if line_ged.argument != 'NA' and list_of_fams[curr_fam_ind].MARR != 'NA':
-                                if not US04(list_of_fams[curr_fam_ind].MARR, list_of_fams[curr_fam_ind].DIV):
-                                    list_of_fams[curr_fam_ind].DIV = 'US04 ERROR'
+                                US04(list_of_fams[curr_fam_ind].MARR, list_of_fams[curr_fam_ind].DIV)
+
 
 
                     elif on_indi:
@@ -238,13 +238,7 @@ def gedcom(ged_file):
                             list_of_indis[curr_indi_ind].DEAT = line_ged.argument
                             if not US03(list_of_indis[curr_indi_ind].BIRT, list_of_indis[curr_indi_ind].DEAT):
                                 list_of_indis[curr_indi_ind].NAME = "US03 ERROR: " + list_of_indis[curr_indi_ind].NAME
-                            if line_ged.argument != 'NA':
-                                if not US06(list_of_indis[curr_indi_ind].DEAT, list_of_fams[curr_fam_ind].DIV):
-                                    print('WORKS')
-                                    list_of_indis[curr_indi_ind].DEAT = 'US06 ERROR'
-                                    list_of_fams[curr_fam_ind].DIV = 'US06 ERROR'
-                                    list_of_indis[curr_indi_ind].NAME = " US06 ERROR: " + list_of_indis[curr_indi_ind].NAME
-                                    list_of_indis[curr_indi_ind].NAME = " US06 ERROR: " + list_of_indis[curr_indi_ind].NAME
+                            US06(list_of_indis[curr_indi_ind].DEAT, list_of_fams[curr_fam_ind].DIV)
                         if tag.upper() == 'FAMC':
                             list_of_indis[curr_indi_ind].FAMC = line_ged.argument
                         if tag.upper() == 'FAMS':
