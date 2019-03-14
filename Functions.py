@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 
 
@@ -105,3 +105,21 @@ def US18(sibDad, sibMom, list_of_fams):
                 print("Error - US18: Siblings", sibDad, "and", sibMom, "should not be married.")
                 return True
             return False
+
+# User Story 10 - Madeline Rys: People should not marry before age 14
+def marriage_after_14(name, marrdate, birthdate):
+    # Known Bug: Does not account for Leap years!
+    result = True
+    try:
+        birth = datetime.strptime(birthdate, '%d %b %Y')
+        marr = datetime.strptime(marrdate, '%d %b %Y')
+        marr_age = marr - birth
+        result = marr_age > (timedelta(days=365) * 14)
+        if result == False:
+            print("Error - US10: ", name, " was married before age 14! ")
+    except:
+        print("Error - US10: One or both dates were entered in incorrect format")
+        result = False
+    finally:
+        return result
+
