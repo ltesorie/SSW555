@@ -37,14 +37,20 @@ class test(unittest.TestCase):
         wifeDeath1 = "01 NOV 1995"
         wifeDeath2 = "17 DEC 1996"
         wifeDeath3 = "26 MAR 2013"
+        wifeDeath4 = "26 MAR 2019"
         divorceDate1 = "01 JAN 2018"
         divorceDate2 = "02 FEB 2035"
         divorceDate3 = "01 NOV 1990"
-        divorceDate4 = "19 DEC 2000"
 
-        self.assertEqual(US06(husbDeath1, wifeDeath1, divorceDate1), False)
-        self.assertEqual(US06(husbDeath2, wifeDeath2, divorceDate2), False)
-        self.assertEqual(US06(husbDeath3, wifeDeath3, divorceDate3), True)
+        self.assertEqual(US06(husbDeath1, wifeDeath1, divorceDate1), True)
+        self.assertEqual(US06(husbDeath2, wifeDeath2, divorceDate2), True)
+        self.assertEqual(US06(husbDeath3, wifeDeath3, divorceDate3), False)
+        self.assertEqual(US06(husbDeath3, wifeDeath4, divorceDate1), True)
+
+    # def test_US18(self):
+
+
+
 
 if __name__ == '__main__':
     unittest.main()

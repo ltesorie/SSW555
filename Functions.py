@@ -32,14 +32,21 @@ def US04(marr_date, div_date):
 
 
 # User Story 06 - Alyson Randall: checks that divorce date occurs before death date
-def US06(death_date, divorce_date):
-    if divorce_date != 'NA' and death_date != 'NA':
+def US06(husband, wife, divorce_date):
+    if divorce_date != 'NA':
         divorce = datetime.strptime(divorce_date, '%d %b %Y')
-        death = datetime.strptime(death_date, '%d %b %Y')
-        if death < divorce:
-            print("Error - US06: Divorce date", str(divorce_date), " occurs after death date ", str(death_date))
-            return False
-        return True
+        husband_death = datetime.strptime(husband, '%d %b %Y')
+        wife_death = datetime.strptime(wife, '%d %b %Y')
+        if husband_death < divorce and wife_death < divorce:
+            print("Error - US06: Divorce date", str(divorce_date), " occurs after husband and wife's death dates", str(husband), "and", str(wife), "respectively")
+            return True
+        if husband_death < divorce:
+            print("Error - US06: Divorce date", str(divorce_date), " occurs after husband's death date ", str(husband))
+            return True
+        if wife_death < divorce:
+            print("Error - US06: Divorce date", str(divorce_date), " occurs after wife's death date ", str(wife))
+            return True
+        return False
 
 
 

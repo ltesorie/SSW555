@@ -33,6 +33,15 @@ class Family:
             if self.HUSB == indi.INDI or self.WIFE == indi.INDI:
                 return indi.DEAT
 
+    def is_spouse_dead(self, list_of_indis):
+        for indi in list_of_indis:
+            if self.HUSB == indi.INDI and indi.DEAT != 'NA':
+                husbandDeath = indi.DEAT
+                return husbandDeath
+            elif self.WIFE == indi.INDI and indi.DEAT != 'NA':
+                wifeDeath = indi.DEAT
+                return wifeDeath
+
 
 # CREATES AN INDIVIDUAL BASED OFF OF TAGS
 class Individual:
@@ -258,10 +267,9 @@ def gedcom(ged_file):
     for fam in list_of_fams:
         fam.get_name_by_id(list_of_indis, )
         US04(fam.MARR, fam.DIV)
+        deaths = fam.is_spouse_dead(list_of_indis)
+        US06(husband=deaths, wife=deaths, divorce_date=fam.DIV)
 
-    for indi in list_of_indis:
-        for fam in list_of_fams:
-            US06(husbDeath=indi.DEAT, wifeDeath=indi.DEAT, divorce_date=fam.DIV, list_of_indis=list_of_indis)
 
     US18(fam.HUSB, fam.WIFE, list_of_fams)
 
