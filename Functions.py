@@ -162,11 +162,11 @@ def parents_not_too_old(child_age, mom_age, dad_age):
         dad_diff = dad_age - child_age
         if mom_diff > 60:
             result = False
-            print("US 12 Error - Mom's age of ", mom_age, " is more than 60 years older than her child's age of ", child_age, " making it impossible!")
+            print("Error - US12: Mom's age of ", mom_age, " is more than 60 years older than her child's age of ", child_age, " making it impossible!")
 
         if dad_diff > 80:
             result = False
-            print("US 12 Error - Dad's age of ", dad_age, " is more than 80 years older than his child's age of ", child_age, " making it impossible!")
+            print("Error - US12: Dad's age of ", dad_age, " is more than 80 years older than his child's age of ", child_age, " making it impossible!")
     
     except:
         # Will return false due to error in format
