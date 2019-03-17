@@ -143,6 +143,60 @@ class TestsMarriageBefore14(unittest.TestCase):
 		# should return true since they were not married before 14
 		self.assertTrue(marriage_after_14(name='Unmarried', marrdate='NA', birthdate='1 JAN 2000'))
 
+# Test US12
+from temp import parents_not_too_old
+class TestParentsNotTooOld(unittest.TestCase):
+	# def parents_not_too_old(child_age, mom_age, dad_age):
+	# 	try:
+	# 		result = true
+	# 		mom_diff = mom_age - child_age
+	# 		dad_diff = dad_age - child_age
+	# 		if mom_diff > 60:
+	# 			result = false
+	# 			print("US 12 Error - Mom's age of ", mom_age, " is more than 60 years older than her child's age of ", child_age, " making it impossible!")
+
+	# 		if dad_diff > 80:
+	# 			result = false
+	# 			print("US 12 Error - Dad's age of ", dad_age, " is more than 80 years older than his child's age of ", child_age, " making it impossible!")
+		
+	# 	except:
+	# 		# Will return false due to error in format
+	# 		result = false
+		
+	# 	finally:
+	# 		return result
+
+	def test_valid_ages(self):
+		# valid dates
+		# parents are reasonable ages older than their child
+		self.assertTrue(parents_not_too_old(child_age = 20, mom_age = 50, dad_age = 50))
+
+	def test_both_invalid_ages(self):
+		# invalid ages
+		# parents both too much older than child
+		self.assertFalse(parents_not_too_old(child_age = 20, mom_age = 100, dad_age = 110))
+
+	def test_mom_invalid(self):
+		# invalid ages
+		# mom too much older than child
+		self.assertFalse(parents_not_too_old(child_age = 20, mom_age = 100, dad_age = 50))
+
+	def test_dad_invalid(self):
+		# invalid ages
+		# dad too much older than child
+		self.assertFalse(parents_not_too_old(child_age = 20, mom_age = 50, dad_age = 110))
+
+	def test_cusp_ages(self):
+		# valid ages
+		# parents both on cusp of being too much older than child, should still return true
+		self.assertTrue(parents_not_too_old(child_age = 20, mom_age = 80, dad_age = 100))
+
+	def test_bad_format(self):
+		# invalid ages
+		# should return false since arguments are not subtractable
+		self.assertFalse(parents_not_too_old(child_age = 'Hi', mom_age = "Bye", dad_age = 'Bad'))
+
+
 
 # RUN TESTS
 
