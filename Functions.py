@@ -123,11 +123,11 @@ def marriage_after_14(name, marrdate, birthdate):
             marr = datetime.strptime(marrdate, '%d %b %Y')
             marr_age = marr - birth
             result = marr_age > (timedelta(days=5114))
+            if result == False:
+                print("Error - US10: ", name, " was married before age 14! ")
     except:
         result = False
     finally:
-        if result == False:
-            print("Error - US10: ", name, " was married before age 14! ")
         return result
 
 
@@ -151,3 +151,26 @@ def children_limit(family_list):
     for kids in family_list:
         if len(kids.CHIL) >= 15:
             print("Error - US15: Family " + kids + " has 15 or more children.")
+
+# User Story 12 - Madeline Rys: Parents not too old
+# Mother should be less than 60 years older than her children and father should be less than 80 years older than his children
+# Returns true if parents are not too old, false if they are
+def parents_not_too_old(child_age, mom_age, dad_age):
+    result = True
+    try:
+        mom_diff = mom_age - child_age
+        dad_diff = dad_age - child_age
+        if mom_diff > 60:
+            result = False
+            print("US 12 Error - Mom's age of ", mom_age, " is more than 60 years older than her child's age of ", child_age, " making it impossible!")
+
+        if dad_diff > 80:
+            result = False
+            print("US 12 Error - Dad's age of ", dad_age, " is more than 80 years older than his child's age of ", child_age, " making it impossible!")
+    
+    except:
+        # Will return false due to error in format
+        result = False
+    
+    finally:
+        return result

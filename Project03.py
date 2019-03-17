@@ -107,6 +107,19 @@ class Individual:
 
         return marr
 
+    def get_parents_ages_by_id(self, list_of_fams, list_of_indis):
+        mom_age = 0
+        dad_age = 0
+        for fam in list_of_fams:
+            if fam.FAM == self.FAMC:
+                for indi in list_of_indis:
+                    if indi.INDI == fam.WIFE:
+                        mom_age = indi.AGE
+                    if indi.INDI == fam.HUSB:
+                        dad_age = indi.AGE
+        return [mom_age, dad_age]
+
+
     def get_parents_death_by_id(self, list_of_fams, list_of_indis):
         mom = ''
         dad = ''
@@ -278,9 +291,13 @@ def gedcom(ged_file):
         pardeaths = indi.get_parents_death_by_id(list_of_fams, list_of_indis)
         birth_before_death(birthdate=indi.BIRT, momdeath=pardeaths[0], daddeath=pardeaths[1])
         
-        #check that individual is not married before age 14
+        # check that individual is not married before age 14
         indimar = indi.get_marriage_by_id(list_of_fams)
         marriage_after_14(name=indi.NAME, marrdate=indimar, birthdate=indi.BIRT)
+
+        # check that individuals parents are not too old
+        par_ages = indi.get_parents_ages_by_id(list_of_fams, list_of_indis)
+        parents_not_too_old(child_age=indi.AGE, mom_age=par_ages[0], dad_age=par_ages[1])
 
 
 
@@ -294,6 +311,8 @@ def gedcom(ged_file):
     US18(fam.HUSB, fam.WIFE, list_of_fams)
     correct_gender_role(indi.SEX, fam.HUSB, fam.WIFE)
     children_limit(list_of_fams)
+    
+    # Prints out tables for individuals and families
     print_individual_table(list_of_indis)
     print_family_table(list_of_fams)
 
