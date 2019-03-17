@@ -46,3 +46,11 @@ class TestAge150(unittest.TestCase):
         self.assertRaises(ValueError, date_before_now, 'NA')
 
 
+class TestChildren(unittest.TestCase):
+    def test_input_children(self):
+        self.assertTrue(children_limit('@I6000000086676587147@, @F6000000086677299999@')
+
+
+class TestHUSBandWife(unittest.TestCase):
+    def test_input_husb(self):
+        self.assertTrue()
