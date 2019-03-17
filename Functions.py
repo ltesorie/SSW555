@@ -119,14 +119,14 @@ def marriage_after_14(name, marrdate, birthdate):
     result = True
     try:
         birth = datetime.strptime(birthdate, '%d %b %Y')
-        if marr != 'NA':
+        if marrdate != 'NA':
             marr = datetime.strptime(marrdate, '%d %b %Y')
             marr_age = marr - birth
-            result = marr_age > (timedelta(days=365) * 14)
-        if result == False:
-            print("Error - US10: ", name, " was married before age 14! ")
+            result = marr_age > (timedelta(days=5114))
     except:
         result = False
     finally:
+        if result == False:
+            print("Error - US10: ", name, " was married before age 14! ")
         return result
 
