@@ -96,6 +96,17 @@ class Individual:
 
         return marr
 
+    def get_marriage_by_id(self, list_of_fams):
+        marr = ''
+        if self.FAMS == 'NA':
+            marr = ''
+
+        for fam in list_of_fams:
+            if fam.FAM == self.FAMS:
+                marr = fam.MARR
+
+        return marr
+
     def get_parents_death_by_id(self, list_of_fams, list_of_indis):
         mom = ''
         dad = ''
@@ -257,11 +268,20 @@ def gedcom(ged_file):
     for indi in list_of_indis:
         US03(indi.BIRT, indi.DEAT)
         indi.get_age()
+        
+        # check that parents are married before birth of individual
         parmar = indi.get_parents_marriage_by_id(list_of_fams)
         if parmar != '':
             birth_before_marriage(birthdate=indi.BIRT, marrdate=parmar)
+        
+        # check that parents were alive for birth of individual
         pardeaths = indi.get_parents_death_by_id(list_of_fams, list_of_indis)
         birth_before_death(birthdate=indi.BIRT, momdeath=pardeaths[0], daddeath=pardeaths[1])
+        
+        #check that individual is not married before age 14
+        indimar = indi.get_marriage_by_id(list_of_fams)
+        marriage_after_14(name=indi.NAME, marrdate=indimar, birthdate=indi.BIRT)
+
 
 
     for fam in list_of_fams:
