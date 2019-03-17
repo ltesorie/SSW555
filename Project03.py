@@ -292,10 +292,10 @@ def gedcom(ged_file):
 
 
     US18(fam.HUSB, fam.WIFE, list_of_fams)
-
+    correct_gender_role(indi.SEX, fam.HUSB, fam.WIFE)
+    children_limit(list_of_fams)
     print_individual_table(list_of_indis)
     print_family_table(list_of_fams)
-
 
 def main(filename):
     ged_file = open(filename, 'r')
