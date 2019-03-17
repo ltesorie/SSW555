@@ -130,3 +130,14 @@ def marriage_after_14(name, marrdate, birthdate):
             print("Error - US10: ", name, " was married before age 14! ")
         return result
 
+
+
+# US 21 - correct gender role
+def correct_gender_role(individual, family):
+    if individual.SEX == "F":
+        if individual._id != family.WIFE:
+            print("US21 Error - Incorrect gender for husb/wife")
+    if individual.SEX == "M":
+        if individual._id != family.HUSB:
+            print("US21 Error - Incorrect gender for husb/wife")
+
