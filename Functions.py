@@ -119,14 +119,25 @@ def marriage_after_14(name, marrdate, birthdate):
     result = True
     try:
         birth = datetime.strptime(birthdate, '%d %b %Y')
-        marr = datetime.strptime(marrdate, '%d %b %Y')
-        marr_age = marr - birth
-        result = marr_age > (timedelta(days=365) * 14)
+        if marr != 'NA':
+            marr = datetime.strptime(marrdate, '%d %b %Y')
+            marr_age = marr - birth
+            result = marr_age > (timedelta(days=365) * 14)
         if result == False:
             print("Error - US10: ", name, " was married before age 14! ")
     except:
-        print("Error - US10: One or both dates were entered in incorrect format")
         result = False
     finally:
         return result
+
+
+
+# US 21 - correct gender role
+def correct_gender_role(individual, family):
+    if individual.SEX == "F":
+        if individual._id != family.WIFE:
+            print("US21 Error - Incorrect gender for husb/wife")
+    if individual.SEX == "M":
+        if individual._id != family.HUSB:
+            print("US21 Error - Incorrect gender for husb/wife")
 
