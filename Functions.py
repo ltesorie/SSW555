@@ -137,11 +137,13 @@ def correct_gender_role(gender, husb, wife):
         if indi == "F":
             if wife != "WIFE":
                 print("Error - US21: Incorrect gender for :" + wife + "please correct")
+                return False
             elif wife == "NA":
                 pass
         if indi == "M":
             if husb != "HUSB":
                 print("Error - US21: Incorrect gender for :" + husb + "please correct")
+                return False
             elif husb == "NA":
                 pass
 
