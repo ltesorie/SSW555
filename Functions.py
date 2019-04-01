@@ -152,7 +152,7 @@ def correct_gender_role(gender, husb, wife):
 def children_limit(family_list):
     for kids in family_list:
         if len(kids.CHIL) >= 15:
-            print("Error - US15: Family " + kids + " has 15 or more children.")
+            print("Error - US15: Family ", kids, " has 15 or more children.")
 
 # User Story 12 - Madeline Rys: Parents not too old
 # Mother should be less than 60 years older than her children and father should be less than 80 years older than his children
