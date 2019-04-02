@@ -37,9 +37,9 @@ def US06(husband, wife, divorce_date):
         divorce = datetime.strptime(divorce_date, '%d %b %Y')
         husband_death = datetime.strptime(husband, '%d %b %Y')
         wife_death = datetime.strptime(wife, '%d %b %Y')
-        if husband_death < divorce and wife_death < divorce:
-            print("Error - US06: Divorce date", str(divorce_date), " occurs after husband and wife's death dates", str(husband), "and", str(wife), "respectively")
-            return True
+        # if husband_death < divorce and wife_death < divorce:
+        #     print("Error - US06: Divorce date", str(divorce_date), " occurs after husband and wife's death dates", str(husband), "and", str(wife), "respectively")
+        #     return True
         if husband_death < divorce:
             print("Error - US06: Divorce date", str(divorce_date), " occurs after husband's death date ", str(husband))
             return True
