@@ -176,3 +176,39 @@ def parents_not_too_old(child_age, mom_age, dad_age):
     
     finally:
         return result
+
+# User Story 28 - Madeline Rys: Order siblings by age
+# List siblings in families by decreasing age, i.e. oldest siblings first
+# Returns Siblings in a list ordered by age
+def order_siblings_by_age(list_of_children, list_of_indis):
+    siblings_in_order = []
+    try:
+        # code goes here
+        children_and_ages = []
+        for chil in list_of_children:
+            for indi in list_of_indis:
+                if indi.INDI == chil:
+                    children_and_ages.append((chil, indi.AGE))
+        #sort children_and_ages by age
+        for child in children_and_ages:
+            siblings_in_order.append(child[0])
+    except:
+        print("Error when sorting siblings")
+    finally:
+        return siblings_in_order
+
+# User Story 31 - Madeline Rys: List Living Single
+# List all living people over 30 who have never been married in a GEDCOM file
+# Returns a list of the INDI ids of all those living single
+def list_living_single(list_of_indis):
+    living_single = []
+    try:
+        # code goes here
+        for indi in list_of_indis:
+            if indi.AGE > 30:
+                if indi.FAMS == 'NA':
+                    living_single.append(indi.INDI)
+    except:
+        print("Error while trying to list living single")
+    finally:
+        return living_single
