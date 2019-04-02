@@ -190,12 +190,21 @@ def order_siblings_by_age(list_of_children, list_of_indis):
                 if indi.INDI == chil:
                     children_and_ages.append((chil, indi.AGE))
         #sort children_and_ages by age
+        children_and_ages.sort(key=mySort)
         for child in children_and_ages:
             siblings_in_order.append(child[0])
     except:
         print("Error when sorting siblings")
     finally:
         return siblings_in_order
+
+def mySort(tup1, tup2):
+    if tup1[1] > tup2[1]:
+        return 1
+    elif tup1[1] < tup2[1]:
+        return -1
+    else:
+        return 0
 
 # User Story 31 - Madeline Rys: List Living Single
 # List all living people over 30 who have never been married in a GEDCOM file
