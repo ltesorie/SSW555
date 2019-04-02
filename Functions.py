@@ -203,7 +203,6 @@ def order_siblings_by_age(list_of_children, list_of_indis):
 def list_living_single(list_of_indis):
     living_single = []
     try:
-        # code goes here
         for indi in list_of_indis:
             if indi.AGE > 30:
                 if indi.FAMS == 'NA':
