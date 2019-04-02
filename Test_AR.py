@@ -3,10 +3,11 @@
 
 import unittest
 from Functions import US03, US04, US06, US18
-
+import Project03 as p3
 
 class test(unittest.TestCase):
     def test_US03(self):
+        print("**************TESTING US03**************")
         date1 = "24 FEB 2019"
         date2 = "13 MAY 2032"
         date3 = "9 NOV 2011"
@@ -19,6 +20,7 @@ class test(unittest.TestCase):
         self.assertEqual(US03(date4, date1), True)
 
     def test_US04(self):
+        print("**************TESTING US04**************")
         date1 = "24 FEB 2019"
         date2 = "13 MAY 2032"
         date3 = "9 NOV 2011"
@@ -31,6 +33,7 @@ class test(unittest.TestCase):
         self.assertEqual(US04(date4, date1), True)
 
     def test_US06(self):
+        print("**************TESTING US06**************")
         husbDeath1 = "24 FEB 2019"
         husbDeath2 = "13 MAY 2032"
         husbDeath3 = "9 NOV 2011"
@@ -47,8 +50,8 @@ class test(unittest.TestCase):
         self.assertEqual(US06(husbDeath3, wifeDeath3, divorceDate3), False)
         self.assertEqual(US06(husbDeath3, wifeDeath4, divorceDate1), True)
 
-    # def test_US18(self):
-
+    def test_US18(self):
+        print("**************TESTING US18**************")
 
 
 
