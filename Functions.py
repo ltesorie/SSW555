@@ -225,8 +225,6 @@ def order_siblings_by_age(list_of_children, list_of_indis):
                     children_and_ages.append((chil, indi.AGE))
         #sort children_and_ages by age
         children_and_ages.sort(reverse= True, key=mySort)
-        # sort children_and_ages by age
-        children_and_ages.sort(key=mySort)
         for child in children_and_ages:
             siblings_in_order.append(child[0])
     except error as e:
