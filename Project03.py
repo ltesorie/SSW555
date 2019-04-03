@@ -311,7 +311,8 @@ def gedcom(ged_file):
     US18(fam.HUSB, fam.WIFE, list_of_fams)
     correct_gender_role(indi.SEX, fam.HUSB, fam.WIFE)
     children_limit(list_of_fams)
-    
+
+    US29(list_of_indis)
     # Prints out tables for individuals and families
     print_individual_table(list_of_indis)
     print_family_table(list_of_fams)

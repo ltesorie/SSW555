@@ -113,6 +113,29 @@ def US18(sibDad, sibMom, list_of_fams):
                 return True
             return False
 
+# User Story 29 - Alyson Randall: List Deceased
+def US29(list_of_indis):
+    deceased_list = []
+    try:
+        for indi in list_of_indis:
+            if indi.DEAT != 'NA' and indi.DEAT != "":
+                deceased_list.append(indi.INDI)
+                # need to fix repetitive printing
+        print("US29 - List of the deceased: " + str(deceased_list))
+    except:
+        print("Error: There are no deceased persons")
+    finally:
+        return deceased_list
+
+# # User Story 36 - Alyson Randall: list recent deaths
+# def US36(death, list_of_indis):
+#     recently_deceased = []
+#     try:
+#         for indi in list_of_indis:
+#             if indi.DEAT != "NA" and indi.DEAT != '':
+#                 death_date= datetime.strptime(death, '%d %b %Y')
+#                 if death_date >
+
 # User Story 10 - Madeline Rys: People should not marry before age 14
 def marriage_after_14(name, marrdate, birthdate):
     # Known Bug: Does not account for Leap years!
@@ -200,7 +223,7 @@ def order_siblings_by_age(list_of_children, list_of_indis):
 # User Story 31 - Madeline Rys: List Living Single
 # List all living people over 30 who have never been married in a GEDCOM file
 # Returns a list of the INDI ids of all those living single
-def list_living_single(list_of_indis):
+def list_living_single(death, list_of_indis):
     living_single = []
     try:
         # code goes here
