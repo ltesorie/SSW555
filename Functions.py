@@ -115,7 +115,6 @@ def US18(sibDad, sibMom, list_of_fams):
                 return True
             return False
 
-<<<<<<< HEAD
 # User Story 29 - Alyson Randall: List Deceased
 def US29(list_of_indis):
     deceased_list = []
@@ -130,14 +129,22 @@ def US29(list_of_indis):
     finally:
         return deceased_list
 
-# # User Story 36 - Alyson Randall: list recent deaths
-# def US36(death, list_of_indis):
-#     recently_deceased = []
-#     try:
-#         for indi in list_of_indis:
-#             if indi.DEAT != "NA" and indi.DEAT != '':
-#                 death_date= datetime.strptime(death, '%d %b %Y')
-#                 if death_date >
+# User Story 36 - Alyson Randall: list recent deaths
+def US36(list_of_indis):
+    recently_deceased = []
+    try:
+        for indi in list_of_indis:
+            if indi.DEAT != "NA" and indi.DEAT != '':
+                death_date = datetime.strptime(indi.DEAT, '%d %b %Y')
+                today = datetime.today()
+                if (today - death_date).days <= 365:
+                    recently_deceased.append(indi.INDI)
+        print("US36 - Recently Deceased (Within past year): " + str(recently_deceased))
+    except:
+        print("Error: There are no recently deceased persons")
+    finally:
+        return recently_deceased
+
 
 
 # User Story 10 - Madeline Rys: People should not marry before age 14
@@ -259,14 +266,14 @@ def list_living_single(death, list_of_indis):
     finally:
         return living_single
 
-def recent_births(list_of_indis):
-    recent_birth = []
-    try:
-        for indi in list_of_indis:
-            if indi.BIRT
-
-def upcoming_birthdays(list_of_indis):
-    upcoming_birth = []
-    try:
-        for indi in list_of_indis:
-            if indi.BIRT
+# def recent_births(list_of_indis):
+#     recent_birth = []
+#     try:
+#         for indi in list_of_indis:
+#             if indi.BIRT:
+#
+# def upcoming_birthdays(list_of_indis):
+#     upcoming_birth = []
+#     try:
+#         for indi in list_of_indis:
+#             if indi.BIRT:

@@ -2,7 +2,7 @@
 # User Story Tests
 
 import unittest
-from Functions import US03, US04, US06, US18
+from Functions import US03, US04, US06, US18, US29, US36
 import Project03 as p3
 
 class test(unittest.TestCase):
@@ -52,6 +52,12 @@ class test(unittest.TestCase):
 
     def test_US18(self):
         print("**************TESTING US18**************")
+
+    def test_US29(self):
+        print("**************TESTING US29**************")
+
+    def test_US36(self):
+        print("**************TESTING US36**************")
 
 
 

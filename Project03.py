@@ -305,13 +305,13 @@ def gedcom(ged_file):
     correct_gender_role(indi.SEX, fam.HUSB, fam.WIFE)
     children_limit(list_of_fams)
 
-<<<<<<< HEAD
     US29(list_of_indis)
-=======
->>>>>>> 19a1249af7c8cea736b3262c83865e145f6114d2
+    US36(list_of_indis)
     # Prints out tables for individuals and families
     print_individual_table(list_of_indis)
     print_family_table(list_of_fams)
+
+
 
 
 def main(filename):
