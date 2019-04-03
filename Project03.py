@@ -325,6 +325,6 @@ def main(filename):
     gedcom(ged_file)
 
 
-filename = 'acceptancetest.ged'
+filename = 'myfamily.ged'
 
 main(filename);

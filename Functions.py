@@ -184,10 +184,11 @@ def correct_gender_role(gender, husb, wife):
 
 
 # US 15 Children Check
-def children_limit(family_list):
-    for kids in family_list:
-        if len(kids.CHIL) >= 15:
-            print("Error - US15: Family ", kids, " has 15 or more children.")
+def children_limit(fam):
+    for indi in fam:
+        if len(indi.CHIL) >= 15:
+            indi.CHIL = "US 15 Error"
+            print("Error - US15: Family  has 15 or more children.")
 
 
 # User Story 12 - Madeline Rys: Parents not too old
