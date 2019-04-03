@@ -306,3 +306,43 @@ def upcoming_birthdays(list_of_indis):
     finally:
         return upcoming_birth
 
+def US30(list_of_indis,list_of_fams):
+    living_married = []
+    living = []
+    married = []
+    try:
+        for indi in list_of_indis:
+            if indi.DEAT == 'NA' or indi.DEAT == ' ':
+                living.append(indi.INDI)
+        for fam in list_of_fams:
+            if fam.MARR != "NA" and fam.DIV == "NA":
+                married.append(fam.HUSB)
+                married.append(fam.WIFE)
+        for key in married:
+            if key in living:
+                living_married.append(key)
+        print("US 30 - List of living & married people:" + str(living_married))
+    except:
+        print("Error while trying to list living married")
+    finally:
+        return living_married
+
+def US27alive(date):
+    today_date = datetime.today()
+    birth_date = datetime.strptime(date, '%d %b %Y')
+    age = today_date.year - birth_date.year - ((today_date.month, today_date.day) < (birth_date.month, birth_date.day))
+    #US07
+    if age >= 150:
+        age = 'XX'
+        print("Error - US07 Error: Individual is over 150 years old")
+    return age
+
+def US27dead(BIRT,DEAT):
+    birth_date = datetime.strptime(BIRT, '%d %b %Y')
+    death_date = datetime.strptime(DEAT, '%d %b %Y')
+    age = death_date.year - birth_date.year - ((death_date.month, death_date.day) < (birth_date.month, birth_date.day))
+    if age >= 150:
+        age = 'XX'
+        print("Error - US07 Error: Individual is over 150 years old")
+    return age
+

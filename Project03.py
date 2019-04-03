@@ -69,21 +69,9 @@ class Individual:
         elif self.BIRT == 'US07 Error':
             self.AGE = 0
         elif (self.DEAT == 'NA'):
-            today_date = datetime.today()
-            birth_date = datetime.strptime(self.BIRT, '%d %b %Y')
-            self.AGE = today_date.year - birth_date.year - (
-                    (today_date.month, today_date.day) < (birth_date.month, birth_date.day))
+            self.AGE = US27alive(self.BIRT)
         else:
-            birth_date = datetime.strptime(self.BIRT, '%d %b %Y')
-            death_date = datetime.strptime(self.DEAT, '%d %b %Y')
-            self.AGE = death_date.year - birth_date.year - (
-                    (death_date.month, death_date.day) < (birth_date.month, birth_date.day))
-        # US07 Story
-        if self.AGE >= 150:
-            # self.BIRT = 'US07 Error'
-            # self.DEAT = 'US07 Error'
-            self.AGE = 'XX'
-            print("Error - US07 Error: Individual is over 150 years old")
+            self.AGE = US27dead(self.BIRT,self.DEAT)
 
     def get_parents_marriage_by_id(self, list_of_fams):
         marr = ''
@@ -310,6 +298,7 @@ def gedcom(ged_file):
     US36(list_of_indis)
     recent_births(list_of_indis)
     upcoming_birthdays(list_of_indis)
+    US30(list_of_indis, list_of_fams)
     print("US31 - List of all those living under age 30 who are unmarried: %s" % str(list_living_single(list_of_indis)))
     
 
@@ -325,6 +314,6 @@ def main(filename):
     gedcom(ged_file)
 
 
-filename = 'myfamily.ged'
+filename = 'acceptancetest.ged'
 
 main(filename);
