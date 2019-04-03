@@ -31,7 +31,7 @@ class TestAge150(unittest.TestCase):
 
     def test_valid_date(self):
         # valid date input
-        self.assertTrue(getage('4 JAN 2016'))
+        self.assertTrue(date_before_now('4 JAN 2016'))
 
     def test_invalid_date(self):
         self.assertFalse(date_before_now('4 JAN 2025'))
@@ -59,15 +59,67 @@ class TestHUSBandWife(unittest.TestCase):
         f2 = "WIFE"
         f4 = "NA"
 
-        self.assertFalse(correct_gender_role(p1, f2, f4))
-        self.assertTrue(correct_gender_role(p2, f1, f4))
-        self.assertFalse(correct_gender_role(p2, f4, f2))
-        self.assertTrue(correct_gender_role(p1, f4, f2))
+        self.assertFalse(correct_gender_role(p1, f2, f1))
+        self.assertFalse(correct_gender_role(p2, f1, f2))
+        self.assertFalse(correct_gender_role(p2, f1, f2))
+        self.assertFalse(correct_gender_role(p1, f1, f2))
 
 
 class TestRecentBirth(unittest.TestCase):
-    def test_input(self):
+    def test_norecentbirth(self):
+        list_of_indis = [Individual(indi='01', age=29, birth='15 APR 1990', death=' '),
+                         Individual(indi='02', age=49, birth='1 MAY 2018', death=' '),
+                         Individual(indi='03', age=19, birth='1 JAN 2000', death=' ')]
+        self.assertListEqual(recent_births(list_of_indis), [])
 
+    def test_recentbirth(self):
+        list_of_indis = [Individual(indi='01', age=29, birth='15 APR 1990', death=' '),
+                         Individual(indi='02', age=49, birth='1 APR 2019', death=' '),
+                         Individual(indi='03', age=19, birth='1 JAN 2000', death=' ')]
+        self.assertListEqual(recent_births(list_of_indis), ['02'])
+
+    def test_recentbirth_empty(self):
+        list_of_indis = []
+        self.assertListEqual(recent_births(list_of_indis), [])
+
+    def test_recentbirth_multiple(self):
+        list_of_indis = [Individual(indi='01', age=29, birth='30 MAR 2019', death=' '),
+                         Individual(indi='02', age=49, birth='1 APR 2019', death=' '),
+                         Individual(indi='03', age=19, birth='16 MAR 2019', death=' ')]
+        self.assertListEqual(recent_births(list_of_indis), ['01','02','03'])
+
+    def test_recentbirth_none(self):
+        list_of_indis = [Individual(indi='01', age=29, birth='30 MAR 1997', death=' '),
+                         Individual(indi='02', age=49, birth='1 APR 2013', death=' '),
+                         Individual(indi='03', age=19, birth='16 MAR 2014', death=' ')]
+        self.assertListEqual(recent_births(list_of_indis), [])
 
 class TestUpcomingBirths(unittest.TestCase):
-    def test_input(self):
+    def test_noupcomingbirth(self):
+        list_of_indis = [Individual(indi='01', age=29, birth='15 JUN 1990', death=' '),
+                         Individual(indi='02', age=49, birth='16 MAY 2018', death=' '),
+                         Individual(indi='03', age=19, birth='1 JAN 2000', death=' ')]
+        self.assertListEqual(upcoming_birthdays(list_of_indis), [])
+
+    def test_upcomingbirth(self):
+        list_of_indis = [Individual(indi='01', age=29, birth='15 MAY 1990', death=' '),
+                         Individual(indi='02', age=49, birth='16 APR 1996', death=' '),
+                         Individual(indi='03', age=19, birth='1 JAN 2000', death=' ')]
+        self.assertListEqual(upcoming_birthdays(list_of_indis), ['02'])
+
+    def test_upcomingbirth_empty(self):
+        list_of_indis = []
+        self.assertListEqual(upcoming_birthdays(list_of_indis), [])
+
+    def test_upcomingbirth_multiple(self):
+        list_of_indis = [Individual(indi='01', age=29, birth='29 APR 1993', death=' '),
+                         Individual(indi='02', age=49, birth='13 APR 1985', death=' '),
+                         Individual(indi='03', age=19, birth='1 MAY 1992', death=' ')]
+        self.assertListEqual(upcoming_birthdays(list_of_indis), ['01','02','03'])
+
+    def test_upcomingbirth_none(self):
+        list_of_indis = [Individual(indi='01', age=29, birth='30 MAY 1997', death=' '),
+                         Individual(indi='02', age=49, birth='1 JUN 2013', death=' '),
+                         Individual(indi='03', age=19, birth='16 JUL 2014', death=' ')]
+        self.assertListEqual(upcoming_birthdays(list_of_indis), [])
+
