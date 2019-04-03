@@ -119,7 +119,6 @@ class Individual:
                         dad_age = indi.AGE
         return [mom_age, dad_age]
 
-
     def get_parents_death_by_id(self, list_of_fams, list_of_indis):
         mom = ''
         dad = ''
@@ -133,9 +132,6 @@ class Individual:
                 dad = fam.get_death_by_id(list_of_indis)
 
         return [mom, dad]
-
-
-
 
 
 class Gedcom:
@@ -281,16 +277,16 @@ def gedcom(ged_file):
     for indi in list_of_indis:
         US03(indi.BIRT, indi.DEAT)
         indi.get_age()
-        
+
         # check that parents are married before birth of individual
         parmar = indi.get_parents_marriage_by_id(list_of_fams)
         if parmar != '':
             birth_before_marriage(birthdate=indi.BIRT, marrdate=parmar)
-        
+
         # check that parents were alive for birth of individual
         pardeaths = indi.get_parents_death_by_id(list_of_fams, list_of_indis)
         birth_before_death(birthdate=indi.BIRT, momdeath=pardeaths[0], daddeath=pardeaths[1])
-        
+
         # check that individual is not married before age 14
         indimar = indi.get_marriage_by_id(list_of_fams)
         marriage_after_14(name=indi.NAME, marrdate=indimar, birthdate=indi.BIRT)
@@ -299,23 +295,24 @@ def gedcom(ged_file):
         par_ages = indi.get_parents_ages_by_id(list_of_fams, list_of_indis)
         parents_not_too_old(child_age=indi.AGE, mom_age=par_ages[0], dad_age=par_ages[1])
 
-
-
     for fam in list_of_fams:
         fam.get_name_by_id(list_of_indis, )
         US04(fam.MARR, fam.DIV)
         deaths = fam.is_spouse_dead(list_of_indis)
         US06(husband=deaths, wife=deaths, divorce_date=fam.DIV)
 
-
     US18(fam.HUSB, fam.WIFE, list_of_fams)
     correct_gender_role(indi.SEX, fam.HUSB, fam.WIFE)
     children_limit(list_of_fams)
 
+<<<<<<< HEAD
     US29(list_of_indis)
+=======
+>>>>>>> 19a1249af7c8cea736b3262c83865e145f6114d2
     # Prints out tables for individuals and families
     print_individual_table(list_of_indis)
     print_family_table(list_of_fams)
+
 
 def main(filename):
     ged_file = open(filename, 'r')
