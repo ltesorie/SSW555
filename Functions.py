@@ -282,14 +282,22 @@ def upcoming_birthdays(list_of_indis):
     try:
         for indi in list_of_indis:
             if indi.BIRT != 'NA' or indi.BIRT != ' ':
+                print(indi.BIRT)
                 birth_date = datetime.strptime(indi.BIRT, '%d %b %Y')
-                today = datetime.today
-                today = datetime.strptime(today, '%d %b %Y')
+                print(birth_date)
+                today = datetime.today()
+                print(today.month)
                 if today.month == birth_date.month:
                     upcoming_birth.append(indi.INDI)
-        print("US 38: Upcoming Birthday") + str(upcoming_birth)
-    except:
-        print("Error while trying to list upcoming birthdays")
+                    print("US 38: Upcoming Birthday") + str(upcoming_birth)
+                else:
+                    continue
+            else:
+                continue
+#    except:
+#        print("Error while trying to list upcoming birthdays")
+#    else:
+#        print("no birthdays")
     finally:
         return upcoming_birth
 

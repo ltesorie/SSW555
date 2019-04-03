@@ -63,3 +63,11 @@ class TestHUSBandWife(unittest.TestCase):
         self.assertTrue(correct_gender_role(p2, f1, f4))
         self.assertFalse(correct_gender_role(p2, f4, f2))
         self.assertTrue(correct_gender_role(p1, f4, f2))
+
+
+class TestRecentBirth(unittest.TestCase):
+    def test_input(self):
+
+
+class TestUpcomingBirths(unittest.TestCase):
+    def test_input(self):
