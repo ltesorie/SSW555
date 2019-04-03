@@ -264,12 +264,15 @@ def recent_births(list_of_indis):
     recent_birth = []
     try:
         for indi in list_of_indis:
-            if indi.BIRT != 'NA' or indi.BIRT != ' ':
+            if indi.BIRT != 'NA' and indi.BIRT != ' ':
                 birth_date = datetime.strptime(indi.BIRT, '%d %b %Y')
-                today = datetime.today
-                if abs((today - birth_date).days) <= 30 & abs((today - birth_date).years) < 1:
+                today = datetime.today()
+                past = today + timedelta(days=-30)
+                if past <= birth_date <= today:
                     recent_birth.append(indi.INDI)
-        print(("US 35: Recent Birth") + str(recent_birth))
+            else:
+                continue
+        print("US 35: Recent Birth" + str(recent_birth))
     except:
         print("Error while trying to list recent births")
     finally:
@@ -281,7 +284,7 @@ def upcoming_birthdays(list_of_indis):
     upcoming_birth = []
     try:
         for indi in list_of_indis:
-            if indi.DEAT != 'NA' and indi.DEAT != ' ':
+            if indi.DEAT != 'NA' or indi.DEAT != ' ':
                 if indi.BIRT != 'NA' and indi.BIRT != ' ':
                     birth_date = datetime.strptime(indi.BIRT, '%d %b %Y')
                     today = datetime.today()
