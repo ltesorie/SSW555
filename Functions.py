@@ -229,3 +229,15 @@ def list_living_single(list_of_indis):
         print("Error while trying to list living single")
     finally:
         return living_single
+
+def recent_births(list_of_indis):
+    recent_birth = []
+    try:
+        for indi in list_of_indis:
+            if indi.BIRT
+
+def upcoming_birthdays(list_of_indis):
+    upcoming_birth = []
+    try:
+        for indi in list_of_indis:
+            if indi.BIRT
