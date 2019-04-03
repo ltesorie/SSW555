@@ -197,6 +197,7 @@ class TestParentsNotTooOld(unittest.TestCase):
 		self.assertFalse(parents_not_too_old(child_age = 'Hi', mom_age = "Bye", dad_age = 'Bad'))
 
 from Functions import order_siblings_by_age
+from Project03 import Individual
 class TestOrderSiblingsByAge(unittest.TestCase):
 	 # def order_siblings_by_age(list_of_children, list_of_indis):
 	 #    siblings_in_order = []
@@ -214,6 +215,35 @@ class TestOrderSiblingsByAge(unittest.TestCase):
 	 #        print("Error when sorting siblings")
 	 #    finally:
 	 #        return siblings_in_order
+	 def testOneChild(self):
+	 	list_of_children = ['OnlyChild']
+	 	list_of_indis = [Individual(indi='OnlyChild', age=11, child='F01')]
+	 	desired_result = ['OnlyChild']
+	 	actual = order_siblings_by_age(list_of_children, list_of_indis)
+	 	self.assertListEqual(actual, desired_result)
+
+	 def testManyChildren(self):
+	 	list_of_children = ['1', '2', '3', '4', '5']
+	 	list_of_indis = [Individual(indi='1', age=1), Individual(indi='2', age=2), Individual(indi='3', age=3), Individual(indi='4', age=4), Individual(indi='5', age=5)]
+	 	desired_result = ['5', '4', '3', '2', '1']
+	 	self.assertListEqual(order_siblings_by_age(list_of_children, list_of_indis), desired_result)
+
+	 def testNoChildren(self):
+	 	list_of_children = []
+	 	list_of_indis = [Individual(indi='01', age=49)]
+	 	self.assertListEqual(order_siblings_by_age(list_of_children, list_of_indis), [])
+
+	 def testNoIndisOrChildren(self):
+	 	list_of_children = []
+	 	list_of_indis = []
+	 	self.assertListEqual(order_siblings_by_age(list_of_children, list_of_indis), [])
+
+	 def testChildrenWithoutIndis(self):
+	 	list_of_children = ['Oldest', 'Fake', 'Youngest']
+	 	list_of_indis = [Individual(indi='Oldest', age=11), Individual(indi='Youngest', age=2)]
+	 	desired_result = ['Oldest', 'Youngest']
+	 	self.assertListEqual(order_siblings_by_age(list_of_children, list_of_indis), desired_result)
+
 
 from Functions import list_living_single
 class TestListLivingSingle(unittest.TestCase):
@@ -228,6 +258,16 @@ class TestListLivingSingle(unittest.TestCase):
 	 #        print("Error while trying to list living single")
 	 #    finally:
 	 #        return living_single
+	 def testNoLivingSingle(self):
+	 	pass
+	 def testAllLivingSingle(self):
+	 	pass
+	 def testSomeLivingSingle(self):
+	 	pass
+	 def testEmpty(self):
+	 	pass
+	 def testNoLiving(self):
+	 	pass
 
 
 
