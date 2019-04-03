@@ -123,3 +123,24 @@ class TestUpcomingBirths(unittest.TestCase):
                          Individual(indi='03', age=19, birth='16 JUL 2014', death=' ')]
         self.assertListEqual(upcoming_birthdays(list_of_indis), [])
 
+
+class TestUS27(unittest.TestCase):
+    def test_age(self):
+        self.assertTrue(US27dead('28 JUN 2010','27 FEB 2019'))
+
+    def test_notdead(self):
+        self.assertFalse(US27dead('28 JUN 2010', 'NA'))
+
+    def test_age(self):
+        self.assertTrue(US27alive('28 JUN 2010'))
+
+    def test_150(self):
+        self.assertFalse(US27alive('28 JUN 1850'))
+
+
+class TestUS30(unittest.TestCase):
+    def testEmpty(self):
+        list_of_indis = []
+        list_of_fams = []
+        self.assertListEqual(US30(list_of_indis,list_of_fams), [])
+    

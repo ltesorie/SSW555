@@ -335,14 +335,19 @@ def US27alive(date):
     if age >= 150:
         age = 'XX'
         print("Error - US07 Error: Individual is over 150 years old")
+        return
     return age
 
 def US27dead(BIRT,DEAT):
-    birth_date = datetime.strptime(BIRT, '%d %b %Y')
-    death_date = datetime.strptime(DEAT, '%d %b %Y')
-    age = death_date.year - birth_date.year - ((death_date.month, death_date.day) < (birth_date.month, birth_date.day))
-    if age >= 150:
-        age = 'XX'
-        print("Error - US07 Error: Individual is over 150 years old")
+    if DEAT == "NA":
+        return
+    else:
+        birth_date = datetime.strptime(BIRT, '%d %b %Y')
+        death_date = datetime.strptime(DEAT, '%d %b %Y')
+        age = death_date.year - birth_date.year - ((death_date.month, death_date.day) < (birth_date.month, birth_date.day))
+        if age >= 150:
+            age = 'XX'
+            print("Error - US07 Error: Individual is over 150 years old")
+            return
     return age
 
