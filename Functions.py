@@ -17,7 +17,8 @@ def US03(birth_date, death_date):
         birth = datetime.strptime(birth_date, '%d %b %Y')
         death = datetime.strptime(death_date, '%d %b %Y')
         if death < birth:
-            print("Error - US03: Individuals's birth date ", str(birth_date), " occurs after death date ", str(death_date))
+            print("Error - US03: Individuals's birth date ", str(birth_date), " occurs after death date ",
+                  str(death_date))
         return death > birth
 
 
@@ -49,7 +50,6 @@ def US06(husband, wife, divorce_date):
         return False
 
 
-
 # User Story 08 - Madeline Rys: checks birth date of child to ensure it is after marriage of parents
 def birth_before_marriage(birthdate, marrdate):
     birth = datetime.strptime(birthdate, '%d %b %Y')
@@ -77,13 +77,15 @@ def birth_before_death(birthdate, momdeath, daddeath):
             dad = datetime.strptime(daddeath, '%d %b %Y')
             dad9months = dad - relativedelta(months=9)
             if dad9months < birth:
-                print("Error - US09: child's birth date ", str(birthdate) + " is after father's death date ", str(daddeath))
+                print("Error - US09: child's birth date ", str(birthdate) + " is after father's death date ",
+                      str(daddeath))
                 result = False
         elif daddeath == 'NA':
             mom = datetime.strptime(momdeath, '%d %b %Y')
             if mom < birth:
                 result = False
-                print("Error - US09: child's birth date ", str(birthdate) + " is after mother's death date ", str(momdeath))
+                print("Error - US09: child's birth date ", str(birthdate) + " is after mother's death date ",
+                      str(momdeath))
         else:
             dad = datetime.strptime(daddeath, '%d %b %Y')
             dad9months = dad - relativedelta(months=9)
@@ -92,11 +94,11 @@ def birth_before_death(birthdate, momdeath, daddeath):
                 result = False
                 print("Error - US09: child's birth date ", str(birthdate) + " is after parents' death dates ",
                       str(momdeath), str(daddeath))
-    
+
     except:
         print("Error - US09: one of the dates given was in the incorrect format")
         result = False
-    
+
     finally:
         return result
 
@@ -112,6 +114,7 @@ def US18(sibDad, sibMom, list_of_fams):
                 print("Error - US18: Siblings", sibDad, "and", sibMom, "should not be married.")
                 return True
             return False
+
 
 # User Story 10 - Madeline Rys: People should not marry before age 14
 def marriage_after_14(name, marrdate, birthdate):
@@ -148,11 +151,12 @@ def correct_gender_role(gender, husb, wife):
                 pass
 
 
-#US 15 Children Check
+# US 15 Children Check
 def children_limit(family_list):
     for kids in family_list:
         if len(kids.CHIL) >= 15:
             print("Error - US15: Family ", kids, " has 15 or more children.")
+
 
 # User Story 12 - Madeline Rys: Parents not too old
 # Mother should be less than 60 years older than her children and father should be less than 80 years older than his children
@@ -164,18 +168,21 @@ def parents_not_too_old(child_age, mom_age, dad_age):
         dad_diff = dad_age - child_age
         if mom_diff > 60:
             result = False
-            print("Error - US12: Mom's age of ", mom_age, " is more than 60 years older than her child's age of ", child_age, " making it impossible!")
+            print("Error - US12: Mom's age of ", mom_age, " is more than 60 years older than her child's age of ",
+                  child_age, " making it impossible!")
 
         if dad_diff > 80:
             result = False
-            print("Error - US12: Dad's age of ", dad_age, " is more than 80 years older than his child's age of ", child_age, " making it impossible!")
-    
+            print("Error - US12: Dad's age of ", dad_age, " is more than 80 years older than his child's age of ",
+                  child_age, " making it impossible!")
+
     except:
         # Will return false due to error in format
         result = False
-    
+
     finally:
         return result
+
 
 # User Story 28 - Madeline Rys: Order siblings by age
 # List siblings in families by decreasing age, i.e. oldest siblings first
@@ -192,8 +199,13 @@ def order_siblings_by_age(list_of_children, list_of_indis):
             for indi in list_of_indis:
                 if indi.INDI == chil:
                     children_and_ages.append((chil, indi.AGE))
+<<<<<<< HEAD
         #sort children_and_ages by age
         children_and_ages.sort(reverse= True, key=mySort)
+=======
+        # sort children_and_ages by age
+        children_and_ages.sort(key=mySort)
+>>>>>>> 1f294abc9cd02e206a8bac25d0c6dfbd38471214
         for child in children_and_ages:
             siblings_in_order.append(child[0])
     except error as e:
@@ -202,6 +214,17 @@ def order_siblings_by_age(list_of_children, list_of_indis):
         return siblings_in_order
 
 
+<<<<<<< HEAD
+
+=======
+def mySort(tup1, tup2):
+    if tup1[1] > tup2[1]:
+        return 1
+    elif tup1[1] < tup2[1]:
+        return -1
+    else:
+        return 0
+>>>>>>> 1f294abc9cd02e206a8bac25d0c6dfbd38471214
 
 
 # User Story 31 - Madeline Rys: List Living Single
@@ -218,3 +241,15 @@ def list_living_single(list_of_indis):
         print("Error while trying to list living single")
     finally:
         return living_single
+
+def recent_births(list_of_indis):
+    recent_birth = []
+    try:
+        for indi in list_of_indis:
+            if indi.BIRT
+
+def upcoming_birthdays(list_of_indis):
+    upcoming_birth = []
+    try:
+        for indi in list_of_indis:
+            if indi.BIRT
