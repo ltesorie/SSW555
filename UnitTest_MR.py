@@ -144,7 +144,7 @@ class TestsMarriageBefore14(unittest.TestCase):
 		self.assertTrue(marriage_after_14(name='Unmarried', marrdate='NA', birthdate='1 JAN 2000'))
 
 # Test US12
-from temp import parents_not_too_old
+from Functions import parents_not_too_old
 class TestParentsNotTooOld(unittest.TestCase):
 	# def parents_not_too_old(child_age, mom_age, dad_age):
 	# 	try:
@@ -196,9 +196,41 @@ class TestParentsNotTooOld(unittest.TestCase):
 		# should return false since arguments are not subtractable
 		self.assertFalse(parents_not_too_old(child_age = 'Hi', mom_age = "Bye", dad_age = 'Bad'))
 
+from Functions import order_siblings_by_age
+class TestOrderSiblingsByAge(unittest.TestCase):
+	 # def order_siblings_by_age(list_of_children, list_of_indis):
+	 #    siblings_in_order = []
+	 #    try:
+	 #        children_and_ages = []
+	 #        for chil in list_of_children:
+	 #            for indi in list_of_indis:
+	 #                if indi.INDI == chil:
+	 #                    children_and_ages.append((chil, indi.AGE))
+	 #        #sort children_and_ages by age
+	 #        children_and_ages.sort(key=mySort)
+	 #        for child in children_and_ages:
+	 #            siblings_in_order.append(child[0])
+	 #    except:
+	 #        print("Error when sorting siblings")
+	 #    finally:
+	 #        return siblings_in_order
+
+from Functions import list_living_single
+class TestListLivingSingle(unittest.TestCase):
+	 # def list_living_single(list_of_indis):
+	 #    living_single = []
+	 #    try:
+	 #        for indi in list_of_indis:
+	 #            if indi.AGE > 30:
+	 #                if indi.FAMS == 'NA':
+	 #                    living_single.append(indi.INDI)
+	 #    except:
+	 #        print("Error while trying to list living single")
+	 #    finally:
+	 #        return living_single
+
 
 
 # RUN TESTS
-
 if __name__ == '__main__':
     unittest.main()
