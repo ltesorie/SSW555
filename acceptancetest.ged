@@ -34,13 +34,13 @@ NOTE Demonstrations of User Stories
 1 BIRT
 2 DATE 1 JAN 1970
 1 DEAT
-2 DATE 1 JAN 2019
+2 DATE 1 APR 2019
 1 FAMS F@US04
 0 I@US04H INDI
 1 NAME US04 /HusbDivorceBeforeMarriage/
 1 SEX M
 1 BIRT
-2 DATE 1 JAN 1970
+2 DATE 1 MAR 1970
 1 DEAT
 2 DATE 1 JAN 2019
 1 FAMS F@US04
@@ -69,7 +69,7 @@ NOTE Demonstrations of User Stories
 1 NAME US08 /WifeBirthBeforeMarriage/
 1 SEX F
 1 BIRT
-2 DATE 1 JAN 1990
+2 DATE 1 APR 1990
 1 FAMS F@US08
 0 I@US08H INDI
 1 NAME US08 /HusbBirthBeforeMarriage/
