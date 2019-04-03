@@ -115,6 +115,7 @@ def US18(sibDad, sibMom, list_of_fams):
                 return True
             return False
 
+
 # User Story 29 - Alyson Randall: List Deceased
 def US29(list_of_indis):
     deceased_list = []
@@ -128,6 +129,7 @@ def US29(list_of_indis):
         print("Error: There are no deceased persons")
     finally:
         return deceased_list
+
 
 # User Story 36 - Alyson Randall: list recent deaths
 def US36(list_of_indis):
@@ -144,7 +146,6 @@ def US36(list_of_indis):
         print("Error: There are no recently deceased persons")
     finally:
         return recently_deceased
-
 
 
 # User Story 10 - Madeline Rys: People should not marry before age 14
@@ -221,6 +222,7 @@ def parents_not_too_old(child_age, mom_age, dad_age):
 def mySort(e):
     return e[1]
 
+
 def order_siblings_by_age(list_of_children, list_of_indis):
     siblings_in_order = []
 
@@ -230,8 +232,8 @@ def order_siblings_by_age(list_of_children, list_of_indis):
             for indi in list_of_indis:
                 if indi.INDI == chil:
                     children_and_ages.append((chil, indi.AGE))
-        #sort children_and_ages by age
-        children_and_ages.sort(reverse= True, key=mySort)
+        # sort children_and_ages by age
+        children_and_ages.sort(reverse=True, key=mySort)
         for child in children_and_ages:
             siblings_in_order.append(child[0])
     except error as e:
@@ -256,14 +258,37 @@ def list_living_single(list_of_indis):
     finally:
         return living_single
 
-# def recent_births(list_of_indis):
-#     recent_birth = []
-#     try:
-#         for indi in list_of_indis:
-#             if indi.BIRT:
-#
-# def upcoming_birthdays(list_of_indis):
-#     upcoming_birth = []
-#     try:
-#         for indi in list_of_indis:
-#             if indi.BIRT:
+
+# US 35
+def recent_births(list_of_indis):
+    recent_birth = []
+    try:
+        for indi in list_of_indis:
+            if indi.BIRT != 'NA' or indi.BIRT != ' ':
+                birth_date = datetime.strptime(indi.BIRT, '%d %b %Y')
+                today = datetime.today
+                if abs((today - birth_date).days) <= 30 & abs((today - birth_date).years) < 1:
+                    recent_birth.append(indi.INDI)
+        print(("US 35: Recent Birth") + str(recent_birth))
+    except:
+        print("Error while trying to list recent births")
+    finally:
+        return recent_birth
+
+
+# US 38
+def upcoming_birthdays(list_of_indis):
+    upcoming_birth = []
+    try:
+        for indi in list_of_indis:
+            if indi.BIRT != 'NA' or indi.BIRT != ' ':
+                birth_date = datetime.strptime(indi.BIRT, '%d %b %Y')
+                today = datetime.today
+                if abs((today - birth_date).days) <= 30 & abs((today - birth_date).years) >= 1:
+                    upcoming_birth.append(indi.INDI)
+        print(("US 38: Upcoming Birthday") + str(upcoming_birth))
+    except:
+        print("Error while trying to list upcoming birthdays")
+    finally:
+        return upcoming_birth
+
