@@ -300,6 +300,7 @@ def gedcom(ged_file):
         US04(fam.MARR, fam.DIV)
         deaths = fam.is_spouse_dead(list_of_indis)
         US06(husband=deaths, wife=deaths, divorce_date=fam.DIV)
+        fam.CHIL = order_siblings_by_age(list_of_children=fam.CHIL, list_of_indis=list_of_indis)
 
     US18(fam.HUSB, fam.WIFE, list_of_fams)
     correct_gender_role(indi.SEX, fam.HUSB, fam.WIFE)
@@ -307,6 +308,9 @@ def gedcom(ged_file):
 
     US29(list_of_indis)
     US36(list_of_indis)
+    print("US31 - List of all those living under age 30 who are unmarried: %s" % str(list_living_single(list_of_indis)))
+    
+
     # Prints out tables for individuals and families
     print_individual_table(list_of_indis)
     print_family_table(list_of_fams)

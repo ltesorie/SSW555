@@ -156,7 +156,7 @@ def marriage_after_14(name, marrdate, birthdate):
         if marrdate != 'NA':
             marr = datetime.strptime(marrdate, '%d %b %Y')
             marr_age = marr - birth
-            result = marr_age > (timedelta(days=5114))
+            result = marr_age > (timedelta(days=5115))
             if result == False:
                 print("Error - US10: ", name, " was married before age 14! ")
     except:
@@ -242,12 +242,13 @@ def order_siblings_by_age(list_of_children, list_of_indis):
 
 # User Story 31 - Madeline Rys: List Living Single
 # List all living people over 30 who have never been married in a GEDCOM file
+# Excludes people with incorrect ages, e.g. 0 or less than 0
 # Returns a list of the INDI ids of all those living single
-def list_living_single(death, list_of_indis):
+def list_living_single(list_of_indis):
     living_single = []
     try:
         for indi in list_of_indis:
-            if indi.AGE > 30:
+            if indi.AGE < 30 and indi.AGE > 0:
                 if indi.FAMS == 'NA' and indi.DEAT == 'NA':
                     living_single.append(indi.INDI)
     except:

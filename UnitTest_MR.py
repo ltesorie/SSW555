@@ -258,16 +258,24 @@ class TestListLivingSingle(unittest.TestCase):
 	 #        print("Error while trying to list living single")
 	 #    finally:
 	 #        return living_single
-	 def testNoLivingSingle(self):
-	 	pass
+	 def testAllTooOldUnmarried(self):
+	 	list_of_indis = [Individual(indi='01', age=45), Individual(indi='02', age=55), Individual(indi='03', age=65)]
+	 	self.assertListEqual(list_living_single(list_of_indis), [])
+	 def testAllRightAgeMarried(self):
+	 	list_of_indis = [Individual(indi='01', age=20, spouse='F01'), Individual(indi='02', age = 25, spouse='F02'), Individual(indi='03', age = 29, spouse='F03')]
+	 	self.assertListEqual(list_living_single(list_of_indis), [])
 	 def testAllLivingSingle(self):
-	 	pass
+	 	list_of_indis = [Individual(indi='01', age=20), Individual(indi='02', age = 25), Individual(indi='03', age = 29)]
+	 	self.assertEqual(len(list_living_single(list_of_indis)), 3)
 	 def testSomeLivingSingle(self):
-	 	pass
+	 	list_of_indis = [Individual(indi='01', age=20, spouse='F01'), Individual(indi='02', age = 25), Individual(indi='03', age = 29, birth='1 JAN 1990', death = '1 JAN 2019'), Individual(indi='04', age=65)]
+	 	self.assertListEqual(list_living_single(list_of_indis), ['02'])
 	 def testEmpty(self):
-	 	pass
+	 	list_of_indis = []
+	 	self.assertListEqual(list_living_single(list_of_indis), [])
 	 def testNoLiving(self):
-	 	pass
+	 	list_of_indis = [Individual(indi='01', age = 29, birth='1 JAN 1990', death = '1 JAN 2019'),Individual(indi='02', age = 49, birth='1 JAN 1970', death = '1 JAN 2019'), Individual(indi='03', age = 19, birth='1 JAN 2000', death = '1 JAN 2019')]
+	 	self.assertListEqual(list_living_single(list_of_indis), [])
 
 
 
