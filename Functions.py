@@ -122,7 +122,6 @@ def US29(list_of_indis):
         for indi in list_of_indis:
             if indi.DEAT != 'NA' and indi.DEAT != "":
                 deceased_list.append(indi.INDI)
-                # need to fix repetitive printing
         print("US29 - List of the deceased: " + str(deceased_list))
     except:
         print("Error: There are no deceased persons")

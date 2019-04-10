@@ -2,6 +2,8 @@
 # User Story Tests
 
 import unittest
+from datetime import datetime, timedelta
+from dateutil.relativedelta import relativedelta
 from Functions import US03, US04, US06, US18, US29, US36
 import Project03 as p3
 
@@ -53,11 +55,41 @@ class test(unittest.TestCase):
     def test_US18(self):
         print("**************TESTING US18**************")
 
-    def test_US29(self):
-        print("**************TESTING US29**************")
-
     def test_US36(self):
         print("**************TESTING US36**************")
+
+        date1 = "01 JAN 2019"
+        date2 = "02 FEB 1999"
+        date3 = "03 MAR 2011"
+
+        self.assertEqual(US36(date1), True)
+        self.assertEqual(US36(date2), False)
+        self.assertEqual(US36(date3), False)
+
+
+class testRecentDeath(unittest.TestCase):
+    print("**************TESTING US29**************")
+
+    def testNotRecentlyDeceased(self):
+        today = datetime.today()
+        fourHundredDays = timedelta(days=400)
+        fourHundredDaysAgo = today - fourHundredDays
+        str400DaysAgo = fourHundredDaysAgo.strftime('%d %b %Y')
+        individual = {'DEAT': str400DaysAgo}
+        self.assertFalse(US29(individual))
+
+    def testRecentlyDeceased(self):
+        today = datetime.today()
+        twoDays = timedelta(days=2)
+        twoDaysAgo = today - twoDays
+        str2DaysAgo = twoDaysAgo.strftime('%d %b %Y')
+        individual = {'DEAT': str2DaysAgo}
+        self.assertTrue(US29(individual))
+
+    def testLiving(self):
+        today = datetime.today()
+        individual = {'DEAT': "NA"}
+        self.assertFalse(US29(individual))
 
 
 
