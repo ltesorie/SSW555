@@ -115,6 +115,7 @@ def US18(sibDad, sibMom, list_of_fams):
                 return True
             return False
 
+
 # User Story 29 - Alyson Randall: List Deceased
 def US29(list_of_indis):
     deceased_list = []
@@ -127,6 +128,7 @@ def US29(list_of_indis):
         print("Error: There are no deceased persons")
     finally:
         return deceased_list
+
 
 # User Story 36 - Alyson Randall: list recent deaths
 def US36(list_of_indis):
@@ -145,7 +147,6 @@ def US36(list_of_indis):
         return recently_deceased
 
 
-
 # User Story 10 - Madeline Rys: People should not marry before age 14
 def marriage_after_14(name, marrdate, birthdate):
     # Known Bug: Does not account for Leap years!
@@ -155,7 +156,7 @@ def marriage_after_14(name, marrdate, birthdate):
         if marrdate != 'NA':
             marr = datetime.strptime(marrdate, '%d %b %Y')
             marr_age = marr - birth
-            result = marr_age > (timedelta(days=5114))
+            result = marr_age > (timedelta(days=5115))
             if result == False:
                 print("Error - US10: ", name, " was married before age 14! ")
     except:
@@ -182,10 +183,11 @@ def correct_gender_role(gender, husb, wife):
 
 
 # US 15 Children Check
-def children_limit(family_list):
-    for kids in family_list:
-        if len(kids.CHIL) >= 15:
-            print("Error - US15: Family ", kids, " has 15 or more children.")
+def children_limit(fam):
+    for indi in fam:
+        if len(indi.CHIL) >= 15:
+            indi.CHIL = "US 15 Error"
+            print("Error - US15: Family  has 15 or more children.")
 
 
 # User Story 12 - Madeline Rys: Parents not too old
@@ -220,6 +222,7 @@ def parents_not_too_old(child_age, mom_age, dad_age):
 def mySort(e):
     return e[1]
 
+
 def order_siblings_by_age(list_of_children, list_of_indis):
     siblings_in_order = []
 
@@ -229,8 +232,8 @@ def order_siblings_by_age(list_of_children, list_of_indis):
             for indi in list_of_indis:
                 if indi.INDI == chil:
                     children_and_ages.append((chil, indi.AGE))
-        #sort children_and_ages by age
-        children_and_ages.sort(reverse= True, key=mySort)
+        # sort children_and_ages by age
+        children_and_ages.sort(reverse=True, key=mySort)
         for child in children_and_ages:
             siblings_in_order.append(child[0])
     except error as e:
@@ -241,12 +244,13 @@ def order_siblings_by_age(list_of_children, list_of_indis):
 
 # User Story 31 - Madeline Rys: List Living Single
 # List all living people over 30 who have never been married in a GEDCOM file
+# Excludes people with incorrect ages, e.g. 0 or less than 0
 # Returns a list of the INDI ids of all those living single
-def list_living_single(death, list_of_indis):
+def list_living_single(list_of_indis):
     living_single = []
     try:
         for indi in list_of_indis:
-            if indi.AGE > 30:
+            if indi.AGE < 30 and indi.AGE > 0:
                 if indi.FAMS == 'NA' and indi.DEAT == 'NA':
                     living_single.append(indi.INDI)
     except:
@@ -254,14 +258,95 @@ def list_living_single(death, list_of_indis):
     finally:
         return living_single
 
-# def recent_births(list_of_indis):
-#     recent_birth = []
-#     try:
-#         for indi in list_of_indis:
-#             if indi.BIRT:
-#
-# def upcoming_birthdays(list_of_indis):
-#     upcoming_birth = []
-#     try:
-#         for indi in list_of_indis:
-#             if indi.BIRT:
+
+# US 35
+def recent_births(list_of_indis):
+    recent_birth = []
+    try:
+        for indi in list_of_indis:
+            if indi.BIRT != 'NA' and indi.BIRT != ' ':
+                birth_date = datetime.strptime(indi.BIRT, '%d %b %Y')
+                today = datetime.today()
+                past = today + timedelta(days=-30)
+                if past <= birth_date <= today:
+                    recent_birth.append(indi.INDI)
+            else:
+                continue
+        print("US 35: Recent Birth" + str(recent_birth))
+    except:
+        print("Error while trying to list recent births")
+    finally:
+        return recent_birth
+
+
+# US 38
+def upcoming_birthdays(list_of_indis):
+    upcoming_birth = []
+    try:
+        for indi in list_of_indis:
+            if indi.DEAT != 'NA' or indi.DEAT != ' ':
+                if indi.BIRT != 'NA' and indi.BIRT != ' ':
+                    birth_date = datetime.strptime(indi.BIRT, '%d %b %Y')
+                    today = datetime.today()
+                    futuredate = today + timedelta(days=30)
+                    if birth_date.month - today.month == 0 and birth_date.day - today.day >= 0:
+                        upcoming_birth.append(indi.INDI)
+                    elif birth_date.month - futuredate.month == 0 and birth_date.day - futuredate.day <= 0:
+                        upcoming_birth.append(indi.INDI)
+                    else:
+                        continue
+                else:
+                    continue
+            else:
+                continue
+        print("US 38: Upcoming Birthday" + str(upcoming_birth))
+    except:
+        print("Error while trying to list upcoming birthdays")
+    finally:
+        return upcoming_birth
+
+def US30(list_of_indis,list_of_fams):
+    living_married = []
+    living = []
+    married = []
+    try:
+        for indi in list_of_indis:
+            if indi.DEAT == 'NA' or indi.DEAT == ' ':
+                living.append(indi.INDI)
+        for fam in list_of_fams:
+            if fam.MARR != "NA" and fam.DIV == "NA":
+                married.append(fam.HUSB)
+                married.append(fam.WIFE)
+        for key in married:
+            if key in living:
+                living_married.append(key)
+        print("US 30 - List of living & married people:" + str(living_married))
+    except:
+        print("Error while trying to list living married")
+    finally:
+        return living_married
+
+def US27alive(date):
+    today_date = datetime.today()
+    birth_date = datetime.strptime(date, '%d %b %Y')
+    age = today_date.year - birth_date.year - ((today_date.month, today_date.day) < (birth_date.month, birth_date.day))
+    #US07
+    if age >= 150:
+        age = 'XX'
+        print("Error - US07 Error: Individual is over 150 years old")
+        return
+    return age
+
+def US27dead(BIRT,DEAT):
+    if DEAT == "NA":
+        return
+    else:
+        birth_date = datetime.strptime(BIRT, '%d %b %Y')
+        death_date = datetime.strptime(DEAT, '%d %b %Y')
+        age = death_date.year - birth_date.year - ((death_date.month, death_date.day) < (birth_date.month, birth_date.day))
+        if age >= 150:
+            age = 'XX'
+            print("Error - US07 Error: Individual is over 150 years old")
+            return
+    return age
+
