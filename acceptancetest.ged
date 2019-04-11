@@ -4,7 +4,7 @@ NOTE Good Indis and Fams
 1 NAME Alyson /Randall/
 1 SEX F
 1 BIRT
-2 DATE 1 NOV 1995
+2 DATE 31 NOV 1995
 0 I02 INDI
 1 NAME Laura /Tesoriero/
 1 SEX F
@@ -312,7 +312,7 @@ NOTE Demonstrations of User Stories
 1 CHIL I@US18H
 0 F@US21 FAM
 1 MARR
-2 DATE 1 JAN 2000
+2 DATE 16 APR 2000
 1 HUSB I@US21W
 1 WIFE I@US21H
 0 F@US15 FAM

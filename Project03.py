@@ -300,7 +300,8 @@ def gedcom(ged_file):
     upcoming_birthdays(list_of_indis)
     US30(list_of_indis, list_of_fams)
     print("US31 - List of all those living under age 30 who are unmarried: %s" % str(list_living_single(list_of_indis)))
-    
+    US39(list_of_fams);
+
 
     # Prints out tables for individuals and families
     print_individual_table(list_of_indis)
