@@ -372,8 +372,6 @@ def US39(list_of_fams):
     finally:
         return upcomingAnniversaries
 
-# User Story 42 - Alyson Randall: Reject illegitimate dates
-def US42(date):
 
 
 
