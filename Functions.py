@@ -123,7 +123,6 @@ def US29(list_of_indis):
         for indi in list_of_indis:
             if indi.DEAT != 'NA' and indi.DEAT != "":
                 deceased_list.append(indi.INDI)
-                # need to fix repetitive printing
         print("US29 - List of the deceased: " + str(deceased_list))
     except:
         print("Error: There are no deceased persons")
@@ -350,4 +349,32 @@ def US27dead(BIRT,DEAT):
             print("Error - US07 Error: Individual is over 150 years old")
             return
     return age
+
+
+
+# User Story 39 - Alyson Randall: List Upcoming Anniversaries
+def US39(list_of_fams):
+    upcomingAnniversaries = [];
+    try:
+        for fam in list_of_fams:
+            if fam.MARR !=  'NA' and fam.MARR != '':
+                marrDate = datetime.strptime(fam.MARR, '%d %b %Y');
+                today = datetime.today();
+                futureDate = today + timedelta(days=30)
+
+                if marrDate.month - today.month == 0 and marrDate.day - today.day >= 0:
+                    upcomingAnniversaries.append(fam.FAM)
+                elif marrDate.month - futureDate.month == 0 and marrDate.day - futureDate.day <= 0:
+                    upcomingAnniversaries.append(fam.FAM)
+        print("US39 - Upcoming Anniversaries (Within in the next 30 days): " + str(upcomingAnniversaries))
+    except:
+        print("US36 - There are no upcoming anniversaries.")
+    finally:
+        return upcomingAnniversaries
+
+
+
+
+
+
 
