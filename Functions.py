@@ -371,10 +371,3 @@ def US39(list_of_fams):
         print("US36 - There are no upcoming anniversaries.")
     finally:
         return upcomingAnniversaries
-
-
-
-
-
-
-
