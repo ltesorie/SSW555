@@ -46,14 +46,14 @@ class TestAge150(unittest.TestCase):
         self.assertRaises(ValueError, date_before_now, 'NA')
 
 
-class TestChildren(unittest.TestCase):
-    def test_input_children(self):
-        #list_of_children(,CHIL =  '2',CHIL =  '3',CHIL =  '4',CHIL =  '5',CHIL =  '6',CHIL =  '7',CHIL =  '8',
-        #                 CHIL = '9',CHIL =  '10',CHIL =  '11',CHIL =  '12',CHIL =  '13',CHIL =  '14',CHIL =  '15')
-        list_of_fams= [Individual(indi='01', age=29, birth='30 MAR 2019', death=' ',chil = '1'),
-                         Individual(indi='02', age=49, birth='1 APR 2019', death=' ',chil = '2'),
-                         Individual(indi='03', age=19, birth='16 MAR 2019', death=' ', chil = '3')]
-        self.assertFalse(children_limit(list_of_fams))
+#class TestChildren(unittest.TestCase):
+#   def test_input_children(self):
+#        #list_of_children(,CHIL =  '2',CHIL =  '3',CHIL =  '4',CHIL =  '5',CHIL =  '6',CHIL =  '7',CHIL =  '8',
+#        #                 CHIL = '9',CHIL =  '10',CHIL =  '11',CHIL =  '12',CHIL =  '13',CHIL =  '14',CHIL =  '15')
+#        list_of_fams= [Individual(indi='01', age=29, birth='30 MAR 2019', death=' ',chil = '1'),
+#                         Individual(indi='02', age=49, birth='1 APR 2019', death=' ',chil = '2'),
+#                         Individual(indi='03', age=19, birth='16 MAR 2019', death=' ', chil = '3')]
+#        self.assertFalse(children_limit(list_of_fams))
 
 class TestHUSBandWife(unittest.TestCase):
     def test_input_husb(self):
