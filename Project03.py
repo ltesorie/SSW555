@@ -196,6 +196,7 @@ def gedcom(ged_file):
     for line in ged_file:
         line_split = (line.rstrip()).split(' ')
 
+
         if len(line_split) > 2:
             if line_split[2] == "INDI":
                 line_ged = Gedcom(level=line_split[0], tag=line_split[2], ged_id=line_split[1])
@@ -205,6 +206,7 @@ def gedcom(ged_file):
                     curr_indi_ind = curr_indi_ind + 1;
                     on_indi = True
                     on_fam = False
+
 
 
             elif line_split[2] == "FAM":
@@ -222,6 +224,11 @@ def gedcom(ged_file):
                     if on_fam:
                         if line_ged.tag.upper() == 'DATE':
                             line_ged.tag = date_type
+                            try:
+                                datetime.strptime(line_ged.argument, '%d %b %Y')
+                            except ValueError:
+                                print("Error - US42:" + line_ged.argument + " is an illegitimate date.")
+                            line_ged.argument = "1 JAN 1970"
                         tag = line_ged.tag
 
                         if tag.upper() == 'HUSB':
@@ -241,6 +248,11 @@ def gedcom(ged_file):
                     elif on_indi:
                         if line_ged.tag.upper() == 'DATE':
                             line_ged.tag = date_type
+                            try:
+                                datetime.strptime(line_ged.argument, '%d %b %Y')
+                            except ValueError:
+                                print("Error - US42:" + line_ged.argument + " is an illegitimate date.")
+                            line_ged.argument = "1 JAN 1970"
                             if not date_before_now(line_ged.argument):
                                 line_ged.argument = "NA"
                         tag = line_ged.tag
