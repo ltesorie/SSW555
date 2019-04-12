@@ -60,14 +60,6 @@ class test_US39(unittest.TestCase):
 class test_US42(unittest.TestCase):
 
     def test_US42(self):
-        date1 = "1 JAN 2000"
-        date2 = "30 FEB 1995"
-        date3 = "11 APR 2019"
-        date4 = "32 DEC 2018"
-
-
-
-
 
 
 
