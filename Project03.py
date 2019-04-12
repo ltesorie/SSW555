@@ -1,3 +1,4 @@
+
 # I pledge my honor that I Have abided by the Stevens Honor System
 # Alyson Randall, Laura Tesoriero, Madeline Rys
 # Project 3
@@ -228,7 +229,7 @@ def gedcom(ged_file):
                                 datetime.strptime(line_ged.argument, '%d %b %Y')
                             except ValueError:
                                 print("Error - US42:" + line_ged.argument + " is an illegitimate date.")
-                            line_ged.argument = "1 JAN 1970"
+                                line_ged.argument = "1 JAN 1970"
                         tag = line_ged.tag
 
                         if tag.upper() == 'HUSB':
@@ -252,7 +253,7 @@ def gedcom(ged_file):
                                 datetime.strptime(line_ged.argument, '%d %b %Y')
                             except ValueError:
                                 print("Error - US42:" + line_ged.argument + " is an illegitimate date.")
-                            line_ged.argument = "1 JAN 1970"
+                                line_ged.argument = "1 JAN 1970"
                             if not date_before_now(line_ged.argument):
                                 line_ged.argument = "NA"
                         tag = line_ged.tag
