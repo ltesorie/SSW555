@@ -43,6 +43,15 @@ class Family:
                 wifeDeath = indi.DEAT
                 return wifeDeath
 
+    def get_gender(self, list_of_indis):
+        gender = ""
+        fams = ''
+        for indi in list_of_indis:
+            gender = indi.SEX
+            fams = indi.FAMS
+
+        return gender, fams
+
 
 # CREATES AN INDIVIDUAL BASED OFF OF TAGS
 class Individual:
@@ -121,18 +130,6 @@ class Individual:
                 dad = fam.get_death_by_id(list_of_indis)
 
         return [mom, dad]
-
-    def get_marriagetitle_by_id(self, list_of_fams):
-        marrtitle = ''
-
-        for fam in list_of_fams:
-            if fam.HUSB == "HUSB":
-                marrtitle = "HUSB"
-            elif fam.WIFE == "WIFE":
-                marrtitle = "WIFE"
-            else:
-                marrtitle = ''
-        return marrtitle
 
 class Gedcom:
     def __init__(self, level, tag, ged_id="", argument=""):
@@ -307,9 +304,6 @@ def gedcom(ged_file):
         par_ages = indi.get_parents_ages_by_id(list_of_fams, list_of_indis)
         parents_not_too_old(child_age=indi.AGE, mom_age=par_ages[0], dad_age=par_ages[1])
 
-        # check that husband and wife are the same gender
-        marrtitle = indi.get_marriagetitle_by_id(list_of_fams)
-        correct_gender_role(gender_of_person=indi.SEX, title=marrtitle)
 
     for fam in list_of_fams:
         fam.get_name_by_id(list_of_indis, )
@@ -317,6 +311,12 @@ def gedcom(ged_file):
         deaths = fam.is_spouse_dead(list_of_indis)
         US06(husband=deaths, wife=deaths, divorce_date=fam.DIV)
         fam.CHIL = order_siblings_by_age(list_of_children=fam.CHIL, list_of_indis=list_of_indis)
+
+        # check that husband and wife are the same gender
+        inditraits = fam.get_gender(list_of_indis)
+        print(inditraits)
+        print(list_of_fams)
+        #correct_gender_role(inditraits, list_of_fams)
 
     US18(fam.HUSB, fam.WIFE, list_of_fams)
     children_limit(list_of_fams)

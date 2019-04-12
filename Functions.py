@@ -167,13 +167,13 @@ def marriage_after_14(name, marrdate, birthdate):
 
 
 # US 21 - correct gender role
-def correct_gender_role(gender_of_person, title):
+def correct_gender_role(inditraits, list_of_fams):
     result = False
     try:
-        if gender_of_person == "M" and title == "WIFE":
+        if inditraits == "M" and list_of_fams == "WIFE":
             print("Error - US21: Incorrect gender for husband please correct")
             result = True
-        elif gender_of_person == "F" and title == "HUSB":
+        elif inditraits == "F" and list_of_fams == "HUSB":
             print("Error - US21: Incorrect gender for wife please correct")
             result = True
     except:
