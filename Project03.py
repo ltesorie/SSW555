@@ -1,4 +1,3 @@
-
 # I pledge my honor that I Have abided by the Stevens Honor System
 # Alyson Randall, Laura Tesoriero, Madeline Rys
 # Project 3
@@ -131,6 +130,10 @@ class Individual:
 
         return [mom, dad]
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> e366bf012e527a1fa021f7e11a99a7ffb5984afb
 class Gedcom:
     def __init__(self, level, tag, ged_id="", argument=""):
         self.level = level
@@ -233,11 +236,14 @@ def gedcom(ged_file):
                     if on_fam:
                         if line_ged.tag.upper() == 'DATE':
                             line_ged.tag = date_type
+
+                            # US42 - Reject illegitinate dates
                             try:
                                 datetime.strptime(line_ged.argument, '%d %b %Y')
                             except ValueError:
                                 print("Error - US42:" + line_ged.argument + " is an illegitimate date.")
                                 line_ged.argument = "1 JAN 1970"
+
                         tag = line_ged.tag
 
                         if tag.upper() == 'HUSB':
@@ -257,11 +263,14 @@ def gedcom(ged_file):
                     elif on_indi:
                         if line_ged.tag.upper() == 'DATE':
                             line_ged.tag = date_type
+
+                            # US42 - Reject illegitinate dates
                             try:
                                 datetime.strptime(line_ged.argument, '%d %b %Y')
                             except ValueError:
                                 print("Error - US42:" + line_ged.argument + " is an illegitimate date.")
                                 line_ged.argument = "1 JAN 1970"
+
                             if not date_before_now(line_ged.argument):
                                 line_ged.argument = "NA"
                         tag = line_ged.tag
@@ -304,7 +313,10 @@ def gedcom(ged_file):
         par_ages = indi.get_parents_ages_by_id(list_of_fams, list_of_indis)
         parents_not_too_old(child_age=indi.AGE, mom_age=par_ages[0], dad_age=par_ages[1])
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> e366bf012e527a1fa021f7e11a99a7ffb5984afb
     for fam in list_of_fams:
         fam.get_name_by_id(list_of_indis, )
         US04(fam.MARR, fam.DIV)
@@ -319,6 +331,7 @@ def gedcom(ged_file):
         #correct_gender_role(inditraits, list_of_fams)
 
     US18(fam.HUSB, fam.WIFE, list_of_fams)
+    correct_gender_role(indi.SEX, fam.HUSB, fam.WIFE)
     children_limit(list_of_fams)
 
     US29(list_of_indis)
