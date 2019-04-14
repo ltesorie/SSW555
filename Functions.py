@@ -170,13 +170,11 @@ def correct_gender_role(list_of_indis, list_of_fams):
     for fam in list_of_fams:
         for indi in list_of_indis:
             if indi.FAMS == fam.FAM:
-                if 'H' in fam.HUSB:
-                    if indi.SEX == 'F':
-                        print('US 21 Error please correct gender of husband ' + fam.HUSB)
-                elif 'W' in fam.WIFE:
-                    if indi.SEX == 'M':
-                        print('US 21 Error please correct gender of wife ' + fam.WIFE)
-                else: pass
+                if 'H' in fam.HUSB and indi.SEX == 'F':
+                        print('US 21 Error please correct gender of husband ' + fam.HUSB + " gender " + indi.SEX)
+                if 'W' in fam.WIFE and indi.SEX == 'M':
+                        print('US 21 Error please correct gender of wife ' + fam.WIFE + " gender " + indi.SEX)
+
 
 # US 15 Children Check
 def children_limit(fam):
