@@ -330,15 +330,16 @@ def US30(list_of_indis,list_of_fams):
         return living_married
 
 def US27alive(date):
-    today_date = datetime.today()
-    birth_date = datetime.strptime(date, '%d %b %Y')
-    age = today_date.year - birth_date.year - ((today_date.month, today_date.day) < (birth_date.month, birth_date.day))
-    #US07
-    if age >= 150:
-        age = 'XX'
-        print("Error - US07 Error: Individual is over 150 years old")
-        return
-    return age
+    if US42(date):
+        today_date = datetime.today()
+        birth_date = datetime.strptime(date, '%d %b %Y')
+        age = today_date.year - birth_date.year - ((today_date.month, today_date.day) < (birth_date.month, birth_date.day))
+        #US07
+        if age >= 150:
+            age = 'XX'
+            print("Error - US07 Error: Individual is over 150 years old")
+            return
+        return age
 
 def US27dead(BIRT,DEAT):
     if DEAT == "NA":
@@ -374,3 +375,13 @@ def US39(list_of_fams):
         print("US36 - There are no upcoming anniversaries.")
     finally:
         return upcomingAnniversaries
+
+# User Story 42 - Alyson Randall: Reject Illegitimate dates
+def US42(date):
+    try:
+        datetime.strptime(date, '%d %b %Y')
+    except ValueError:
+        print("Error - US42:" + date + " is an illegitimate date.")
+        date = "1 JAN 1970"
+        return False
+    return True

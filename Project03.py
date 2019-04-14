@@ -256,13 +256,10 @@ def gedcom(ged_file):
                     elif on_indi:
                         if line_ged.tag.upper() == 'DATE':
                             line_ged.tag = date_type
-                            try:
-                                datetime.strptime(line_ged.argument, '%d %b %Y')
-                            except ValueError:
-                                print("Error - US42:" + line_ged.argument + " is an illegitimate date.")
-                                line_ged.argument = "1 JAN 1970"
-                            if not date_before_now(line_ged.argument):
-                                line_ged.argument = "NA"
+
+                            if US42(line_ged.argument):
+                                if not date_before_now(line_ged.argument):
+                                    line_ged.argument = "NA"
                         tag = line_ged.tag
 
                         if tag.upper() == 'NAME':
