@@ -165,25 +165,18 @@ def marriage_after_14(name, marrdate, birthdate):
         return result
 
 
-
 # US 21 - correct gender role
-def correct_gender_role(inditraits, list_of_fams):
-    result = False
+def correct_gender_role(list_of_indis, list_of_fams):
     for fam in list_of_fams:
-        print(fam.FAM)
-    try:
-        if inditraits == "M" and list_of_fams == "WIFE":
-            print("Error - US21: Incorrect gender for husband please correct")
-            result = True
-        elif inditraits == "F" and list_of_fams == "HUSB":
-            print("Error - US21: Incorrect gender for wife please correct")
-            result = True
-    except:
-        result = False
-    finally:
-        return result
-
-
+        for indi in list_of_indis:
+            if indi.FAMS == fam.FAM:
+                if 'H' in fam.HUSB:
+                    if indi.SEX == 'F':
+                        print('US 21 Error please correct gender of husband ' + fam.HUSB)
+                elif 'W' in fam.WIFE:
+                    if indi.SEX == 'M':
+                        print('US 21 Error please correct gender of wife ' + fam.WIFE)
+                else: pass
 
 # US 15 Children Check
 def children_limit(fam):
