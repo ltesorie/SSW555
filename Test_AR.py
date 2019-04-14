@@ -4,8 +4,8 @@
 import unittest
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
-from Functions import US03, US04, US06, US18, US29, US36, US39
-from Project03 import *
+from Functions import US03, US04, US06, US18, US29, US36, US39, US42
+from Project03 import Family
 
 
 # class test(unittest.TestCase):
@@ -59,7 +59,20 @@ class test_US39(unittest.TestCase):
 
 class test_US42(unittest.TestCase):
 
+
     def test_US42(self):
+        date1 = "1 JAN 2000";
+        date2 = "30 FEB 2018";
+        date3 = "12 NOV 2013";
+        date4 = "0 DEC 2014";
+
+        self.assertEqual(US42(date1), True)
+
+        self.assertEqual(US42(date2), False)
+
+        self.assertEqual(US42(date3), True)
+
+        self.assertEqual(US42(date4), False)
 
 
 
